@@ -34,7 +34,7 @@ export default function App() {
         <h1 className='rounded-md bg-green-600 px-3.5 py-2 text-3xl font-bold text-white'>
           {projects.length} Days {projects.length} Projects
         </h1>
-        <p className='border-b border-double border-gray-200 text-lg text-gray-200'>
+        <p className='text-lg text-gray-200'>
           Happy Coding 😊 <span className='text-3xl'>:)</span>
         </p>
       </div>
@@ -42,8 +42,8 @@ export default function App() {
       <div className='absolute top-1/2 left-1/2 flex h-screen -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center'>
         <h2 className='mb-3.5 border-b border-double border-gray-200 pb-1.5 text-lg text-gray-200'>
           You have completed{' '}
-          <span className='text-2xl text-green-500'>{finishedProjects.length}</span> cases, keep it
-          up!
+          <span className='text-2xl text-green-500'>{finishedProjects.length}</span>{' '}
+          {finishedProjects.length < 2 ? 'case' : 'cases'}, keep it up!
         </h2>
         <section className='mx-auto flex w-[51vw] flex-col items-center justify-center gap-4'>
           <Card highlightedIndex={highlightedIndex} total={projects.length} />
