@@ -9,28 +9,43 @@ export default function App() {
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const [chooseStatus, setChooseStatus] = useState<ChooseStatus>('unchoosed')
 
+  /**
+   * 开始随机选择一个未完成的项目
+   * @param milliseconds {number} 选择的时间间隔，默认为 5000 毫秒
+   */
   function start(milliseconds: number = 5000) {
     setChooseStatus('choosing')
     const interval = setInterval(() => {
-      let randomIndex = -1
-      while (true) {
-        randomIndex = Math.floor(Math.random() * projects.length)
-        if (!projects[randomIndex].finished) {
-          break
-        }
-      }
-      setHighlightedIndex(randomIndex)
+      const chooseIndex = doChoose()
+      setHighlightedIndex(chooseIndex)
     }, 450)
 
     setTimeout(() => {
       clearInterval(interval)
+      // 确保最终选中的项目是未完成的
+      doChoose()
       setChooseStatus('choosed')
     }, milliseconds)
   }
 
+  /**
+   * 随机选择一个未完成的项目
+   * @returns {number} 返回未完成的项目的索引
+   */
+  function doChoose() {
+    let randomIndex = -1
+    while (true && finishedProjects.length < projects.length) {
+      randomIndex = Math.floor(Math.random() * projects.length)
+      if (!projects[randomIndex].finished) {
+        break
+      }
+    }
+    return randomIndex
+  }
+
   return (
     <>
-      <div className='flex w-screen flex-col items-center justify-center gap-3.5 pt-12'>
+      <div className='flex w-screen flex-col items-center justify-center gap-1.5 pt-8'>
         <h1 className='rounded-md bg-green-600 px-3.5 py-2 text-3xl font-bold text-white'>
           {projects.length} Days {projects.length} Projects
         </h1>
@@ -70,9 +85,9 @@ const Card: React.FC<CardProps> = ({ highlightedIndex, total = 50 }) => {
           {projects.map(project => (
             <li
               className={clsx(
-                'flex h-[50px] w-[50px] items-center justify-center rounded-full border-2 border-black bg-white text-black transition-all duration-500',
-                project.id == highlightedIndex && '!bg-yellow-600 text-white',
-                project.finished && '!bg-green-600 text-white'
+                'flex h-[45px] w-[45px] items-center justify-center rounded-full border-2 border-black bg-white text-black transition-all duration-500',
+                project.id == highlightedIndex && '!bg-yellow-500 text-white',
+                project.finished ? 'cursor-pointer !bg-green-600 text-white' : 'cursor-not-allowed'
               )}
               key={project.id}
             >
