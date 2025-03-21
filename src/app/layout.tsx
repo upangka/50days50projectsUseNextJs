@@ -24,7 +24,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body
+        className={`relative h-screen min-w-[1024px] overflow-x-auto ${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <main>{children}</main>
+        <footer className='absolute bottom-0 flex w-screen justify-center rounded-full border-t-2 border-gray-100 italic shadow-2xl shadow-amber-50'>
+          <div className='py-3'>
+            <a
+              href='https://gitee.com/pkmer/50days50projects-use-next-js'
+              className='font-bold text-green-600'
+            >
+              Pkmer
+            </a>{' '}
+            is built with{' '}
+            <a href='https://nextjs.org/' className='font-bold text-green-600'>
+              Next.js
+            </a>
+            , inspired by {''}
+            <a className='text-green-600' href='https://github.com/bradtraversy/50projects50days'>
+              50 Projects 50 Days
+            </a>
+          </div>
+        </footer>
+      </body>
     </html>
   )
 }

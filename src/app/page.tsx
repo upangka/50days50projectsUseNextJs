@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { Button } from '@/components/pkmer-button'
 import { projects, finishedProjects, unfinishedProjects } from '@/data/projects'
 import { getRandomInt } from '@/utils'
+import Image from 'next/image'
 export default function App() {
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const [chooseStatus, setChooseStatus] = useState<ChooseStatus>('unchoosed')
@@ -26,7 +27,7 @@ export default function App() {
     const interval = setInterval(() => {
       const chooseUnfinishedId = doChoose()
       setHighlightedIndex(chooseUnfinishedId)
-    }, 450)
+    }, 300)
 
     setTimeout(() => {
       clearInterval(interval)
@@ -52,14 +53,17 @@ export default function App() {
           {projects.length} Days {projects.length} Projects
         </h1>
         <p className='text-lg text-gray-200'>
-          Happy Coding 😊 <span className='text-3xl'>:)</span>
+          Happy Coding 😊<span className='text-2xl'> :)</span>
         </p>
+        <Image className='rounded-full' src='/pkmer.jpeg' width={39} height={39} alt='pkmer' />
       </div>
 
-      <div className='mt-15 flex flex-col items-center justify-center'>
-        <h2 className='mb-3.5 border-b border-double border-gray-200 pb-1.5 text-lg text-gray-200'>
-          You have completed{' '}
-          <span className='text-2xl text-green-500'>{finishedProjects.length}</span>{' '}
+      <div className='mt-4 flex flex-col items-center justify-center'>
+        <h2 className='mb-3.5 border-b border-double border-gray-200 pb-1.5 text-lg text-gray-200 italic'>
+          <a href='https://gitee.com/pkmer/50days50projects-use-next-js' className='font-bold'>
+            Pkmer
+          </a>{' '}
+          have completed <span className='text-2xl text-green-500'>{finishedProjects.length}</span>{' '}
           {finishedProjects.length < 2 ? 'case' : 'cases'}, keep it up!
         </h2>
         <section className='mx-auto flex w-[50vw] flex-col items-center justify-center gap-4'>
@@ -82,13 +86,13 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ highlightedIndex }) => {
   return (
     <>
-      <section className='mx-auto flex flex-col items-center justify-center gap-4'>
-        <ul className='mx-auto flex h-full w-full flex-wrap items-center justify-start gap-2'>
+      <section className='flex flex-col items-center justify-center gap-4'>
+        <ul className='flex h-full w-[51vw] flex-wrap items-center justify-start gap-2 overflow-hidden'>
           {projects.map(project => (
             <li
               className={clsx(
                 'flex h-[45px] w-[45px] items-center justify-center rounded-full border-2 border-black bg-white text-black transition-all duration-500',
-                project.id == highlightedIndex && '!bg-yellow-500 text-white',
+                project.id == highlightedIndex && '!bg-yellow-600 text-white',
                 project.finished ? 'cursor-pointer !bg-green-600 text-white' : 'cursor-not-allowed'
               )}
               key={project.id}
