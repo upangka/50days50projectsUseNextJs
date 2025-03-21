@@ -1,0 +1,6 @@
+$primary-color: #00a63e;
+
+// 对于变量需要导出
+:export {
+  primaryColor: $primary-color;
+}
