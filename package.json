@@ -1,5 +1,5 @@
 {
-  "name": "50days50projectsUseNextJs",
+  "name": "50days50projectsusenextjs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,6 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Pkmer",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^15.2.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
 }
