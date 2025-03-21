@@ -14,7 +14,7 @@ export default function App() {
    * 开始随机选择一个未完成的项目
    * @param milliseconds {number} 选择的时间长度，默认为 5000 毫秒
    */
-  function start(milliseconds: number = 5000) {
+  function start(milliseconds: number = 3000) {
     setChooseStatus('choosing')
 
     // 处理最后还剩最后一个未完成的项目的情况
@@ -27,7 +27,7 @@ export default function App() {
     const interval = setInterval(() => {
       const chooseUnfinishedId = doChoose()
       setHighlightedIndex(chooseUnfinishedId)
-    }, 300)
+    }, 250)
 
     setTimeout(() => {
       clearInterval(interval)
@@ -48,6 +48,7 @@ export default function App() {
 
   return (
     <>
+      {/* 标题start */}
       <div className='flex w-screen flex-col items-center justify-center gap-1.5 pt-8'>
         <h1 className='rounded-md bg-green-600 px-3.5 py-2 text-3xl font-bold text-white'>
           {projects.length} Days {projects.length} Projects
@@ -57,8 +58,10 @@ export default function App() {
         </p>
         <Image className='rounded-full' src='/pkmer.jpeg' width={39} height={39} alt='pkmer' />
       </div>
-
+      {/* 标题end */}
+      {/* 面板start */}
       <div className='mt-4 flex flex-col items-center justify-center'>
+        {/* 面板描述start */}
         <h2 className='mb-3.5 border-b border-double border-gray-200 pb-1.5 text-lg text-gray-200 italic'>
           <a href='https://gitee.com/pkmer/50days50projects-use-next-js' className='font-bold'>
             Pkmer
@@ -66,6 +69,8 @@ export default function App() {
           have completed <span className='text-2xl text-green-500'>{finishedProjects.length}</span>{' '}
           {finishedProjects.length < 2 ? 'case' : 'cases'}, keep it up!
         </h2>
+        {/* 面板描述end */}
+        {/* 面板选项start */}
         <section className='mx-auto flex w-[50vw] flex-col items-center justify-center gap-4'>
           <Card highlightedIndex={highlightedIndex} total={projects.length} />
           <ChooseBtn
@@ -74,7 +79,9 @@ export default function App() {
             onStart={start}
           />
         </section>
+        {/* 面板选项end */}
       </div>
+      {/* 面板end */}
     </>
   )
 }
