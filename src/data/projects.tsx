@@ -6,7 +6,7 @@ export interface ProjectDemo {
 }
 
 export const projects: ProjectDemo[] = [
-  { id: 1, title: 'Expanding Cards', route: 'expanding-cards', finished: true },
+  { id: 1, title: 'Expanding Cards', route: 'expanding-cards', finished: false },
   { id: 2, title: 'Progress Steps', route: 'progress-steps', finished: false },
   {
     id: 3,
@@ -30,7 +30,7 @@ export const projects: ProjectDemo[] = [
   { id: 17, title: 'Movie App', route: 'movie-app', finished: false },
   { id: 18, title: 'Background Slider', route: 'background-slider', finished: false },
   { id: 19, title: 'Theme Clock', route: 'theme-clock', finished: false },
-  { id: 20, title: 'Button Ripple Effect', route: 'button-ripple-effect', finished: true },
+  { id: 20, title: 'Button Ripple Effect', route: 'button-ripple-effect', finished: false },
   { id: 21, title: 'Drag N Drop', route: 'drag-n-drop', finished: false },
   { id: 22, title: 'Drawing App', route: 'drawing-app', finished: false },
   { id: 23, title: 'Kinetic Loader', route: 'kinetic-loader', finished: false },
@@ -74,4 +74,11 @@ export const projects: ProjectDemo[] = [
   { id: 51, title: 'Simple Timer', route: 'simple-timer', finished: false }
 ]
 
+/**
+ * 已完成的项目
+ */
 export const finishedProjects = projects.filter(project => project.finished)
+/**
+ * 未完成的项目
+ */
+export const unfinishedProjects = projects.filter(project => !project.finished)

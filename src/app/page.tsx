@@ -1,23 +1,31 @@
 'use client'
 
 import clsx from 'clsx'
-import { use, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/pkmer-button'
-import { projects, finishedProjects } from '@/data/projects'
-
+import { projects, finishedProjects, unfinishedProjects } from '@/data/projects'
+import { getRandomInt } from '@/utils'
 export default function App() {
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const [chooseStatus, setChooseStatus] = useState<ChooseStatus>('unchoosed')
 
   /**
    * 开始随机选择一个未完成的项目
-   * @param milliseconds {number} 选择的时间间隔，默认为 5000 毫秒
+   * @param milliseconds {number} 选择的时间长度，默认为 5000 毫秒
    */
   function start(milliseconds: number = 5000) {
     setChooseStatus('choosing')
+
+    // 处理最后还剩最后一个未完成的项目的情况
+    if (unfinishedProjects.length === 1) {
+      setHighlightedIndex(unfinishedProjects[0].id)
+      setChooseStatus('choosed')
+      return
+    }
+
     const interval = setInterval(() => {
-      const chooseIndex = doChoose()
-      setHighlightedIndex(chooseIndex)
+      const chooseUnfinishedId = doChoose()
+      setHighlightedIndex(chooseUnfinishedId)
     }, 450)
 
     setTimeout(() => {
@@ -33,14 +41,8 @@ export default function App() {
    * @returns {number} 返回未完成的项目的索引
    */
   function doChoose() {
-    let randomIndex = -1
-    while (true && finishedProjects.length < projects.length) {
-      randomIndex = Math.floor(Math.random() * projects.length)
-      if (!projects[randomIndex].finished) {
-        break
-      }
-    }
-    return randomIndex
+    const randomIndex = getRandomInt(unfinishedProjects.length)
+    return unfinishedProjects[randomIndex].id
   }
 
   return (
@@ -54,13 +56,13 @@ export default function App() {
         </p>
       </div>
 
-      <div className='absolute top-1/2 left-1/2 flex h-screen -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center'>
+      <div className='mt-15 flex flex-col items-center justify-center'>
         <h2 className='mb-3.5 border-b border-double border-gray-200 pb-1.5 text-lg text-gray-200'>
           You have completed{' '}
           <span className='text-2xl text-green-500'>{finishedProjects.length}</span>{' '}
           {finishedProjects.length < 2 ? 'case' : 'cases'}, keep it up!
         </h2>
-        <section className='mx-auto flex w-[51vw] flex-col items-center justify-center gap-4'>
+        <section className='mx-auto flex w-[50vw] flex-col items-center justify-center gap-4'>
           <Card highlightedIndex={highlightedIndex} total={projects.length} />
           <ChooseBtn
             chooseStatus={chooseStatus}
@@ -77,7 +79,7 @@ interface CardProps {
   highlightedIndex: number
   total?: number
 }
-const Card: React.FC<CardProps> = ({ highlightedIndex, total = 50 }) => {
+const Card: React.FC<CardProps> = ({ highlightedIndex }) => {
   return (
     <>
       <section className='mx-auto flex flex-col items-center justify-center gap-4'>
@@ -115,7 +117,11 @@ const ChooseBtn: React.FC<ChooseBtnProps> = ({ highlightedIndex, chooseStatus, o
     <div>
       {isChoosed ? (
         <div className='flex items-center justify-center gap-4'>
-          <p className='rounded-md border border-green-400 bg-green-600 px-3.5 py-2 font-bold text-white shadow-2xs shadow-green-300'>
+          <p
+            className={clsx(
+              'w-[130px] rounded-md border border-green-400 bg-green-600 px-3.5 py-2 font-bold text-white shadow-2xs shadow-green-300'
+            )}
+          >
             选中的是：{highlightedIndex <= 0 ? '' : highlightedIndex}
           </p>
           <Button onClick={() => onStart()} isEnable={!(chooseStatus == 'choosing')}>
