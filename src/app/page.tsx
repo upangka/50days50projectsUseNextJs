@@ -1,8 +1,9 @@
 'use client'
 
 import clsx from 'clsx'
-import { useState } from 'react'
+import { use, useState } from 'react'
 import { Button } from '@/components/pkmer-button'
+import { projects, finishedProjects } from '@/data/projects'
 
 export default function App() {
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
@@ -11,9 +12,15 @@ export default function App() {
   function start(milliseconds: number = 5000) {
     setChooseStatus('choosing')
     const interval = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * 50)
+      let randomIndex = -1
+      while (true) {
+        randomIndex = Math.floor(Math.random() * projects.length)
+        if (!projects[randomIndex].finished) {
+          break
+        }
+      }
       setHighlightedIndex(randomIndex)
-    }, 500)
+    }, 450)
 
     setTimeout(() => {
       clearInterval(interval)
@@ -25,14 +32,21 @@ export default function App() {
     <>
       <div className='flex w-screen flex-col items-center justify-center gap-3.5 pt-12'>
         <h1 className='rounded-md bg-green-600 px-3.5 py-2 text-3xl font-bold text-white'>
-          50 Days 50 Projects
+          {projects.length} Days {projects.length} Projects
         </h1>
-        <p className='text-lg text-gray-200'>Happy Coding 😊 :)</p>
+        <p className='border-b border-double border-gray-200 text-lg text-gray-200'>
+          Happy Coding 😊 <span className='text-3xl'>:)</span>
+        </p>
       </div>
 
       <div className='absolute top-1/2 left-1/2 flex h-screen -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center'>
+        <h2 className='mb-3.5 border-b border-double border-gray-200 pb-1.5 text-lg text-gray-200'>
+          You have completed{' '}
+          <span className='text-2xl text-green-500'>{finishedProjects.length}</span> cases, keep it
+          up!
+        </h2>
         <section className='mx-auto flex w-[51vw] flex-col items-center justify-center gap-4'>
-          <Card highlightedIndex={highlightedIndex} />
+          <Card highlightedIndex={highlightedIndex} total={projects.length} />
           <ChooseBtn
             chooseStatus={chooseStatus}
             highlightedIndex={highlightedIndex}
@@ -53,15 +67,16 @@ const Card: React.FC<CardProps> = ({ highlightedIndex, total = 50 }) => {
     <>
       <section className='mx-auto flex flex-col items-center justify-center gap-4'>
         <ul className='mx-auto flex h-full w-full flex-wrap items-center justify-start gap-2'>
-          {Array.from({ length: total }).map((_, index) => (
+          {projects.map(project => (
             <li
               className={clsx(
-                'flex h-[50px] w-[50px] items-center justify-center rounded-full border-2 border-black bg-white text-black',
-                index == highlightedIndex && '!bg-green-600 text-white transition-all duration-500'
+                'flex h-[50px] w-[50px] items-center justify-center rounded-full border-2 border-black bg-white text-black transition-all duration-500',
+                project.id == highlightedIndex && '!bg-yellow-600 text-white',
+                project.finished && '!bg-green-600 text-white'
               )}
-              key={index}
+              key={project.id}
             >
-              {index}
+              {project.id}
             </li>
           ))}
         </ul>
@@ -86,7 +101,7 @@ const ChooseBtn: React.FC<ChooseBtnProps> = ({ highlightedIndex, chooseStatus, o
       {isChoosed ? (
         <div className='flex items-center justify-center gap-4'>
           <p className='rounded-md border border-green-400 bg-green-600 px-3.5 py-2 font-bold text-white shadow-2xs shadow-green-300'>
-            选中的是：{highlightedIndex}
+            选中的是：{highlightedIndex <= 0 ? '' : highlightedIndex}
           </p>
           <Button onClick={() => onStart()} isEnable={!(chooseStatus == 'choosing')}>
             重新开始
