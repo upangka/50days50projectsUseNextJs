@@ -50,7 +50,7 @@ export default function App() {
   return (
     <>
       {/* 标题start */}
-      <div className='flex w-screen flex-col items-center justify-center gap-1.5 pt-8'>
+      <div className='flex w-screen flex-col items-center justify-center gap-1.5 pt-8 select-none'>
         <h1 className='rounded-md bg-green-600 px-3.5 py-2 text-3xl font-bold text-white'>
           {projects.length} Days {projects.length} Projects
         </h1>
@@ -63,7 +63,7 @@ export default function App() {
       {/* 面板start */}
       <div className='mt-4 flex flex-col items-center justify-center'>
         {/* 面板描述start */}
-        <h2 className='mb-3.5 border-b border-double border-gray-200 pb-1.5 text-lg text-gray-200 italic'>
+        <h2 className='mb-3.5 border-b border-double border-gray-200 pb-1.5 text-lg text-gray-200 italic select-none'>
           <a href='https://gitee.com/pkmer/50days50projects-use-next-js' className='font-bold'>
             Pkmer
           </a>{' '}
@@ -96,7 +96,7 @@ const Card: React.FC<CardProps> = ({ highlightedIndex }) => {
   return (
     <>
       <section className='flex flex-col items-center justify-center gap-4'>
-        <ul className='flex h-full w-[51vw] flex-wrap items-center justify-start gap-2 overflow-hidden'>
+        <ul className='flex h-full w-[51vw] flex-wrap items-center justify-start gap-2 overflow-hidden select-none'>
           {projects.map(project => (
             <li
               className={clsx(
@@ -133,7 +133,7 @@ const ChooseBtn: React.FC<ChooseBtnProps> = ({ highlightedIndex, chooseStatus, o
         <div className='flex items-center justify-center gap-4'>
           <p
             className={clsx(
-              'w-[130px] rounded-md border border-green-400 bg-green-600 px-3.5 py-2 font-bold text-white shadow-2xs shadow-green-300'
+              'w-[130px] rounded-md border border-green-400 bg-green-600 px-3.5 py-2 font-bold text-white shadow-2xs shadow-green-300 select-none'
             )}
           >
             选中的是：{highlightedIndex <= 0 ? '' : highlightedIndex}

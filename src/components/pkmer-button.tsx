@@ -17,7 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
         disabled={!isEnable}
         className={clsx(
           className,
-          'rounded-md px-3 py-2 font-bold text-white shadow-2xs',
+          'rounded-md px-3 py-2 font-bold text-white shadow-2xs select-none',
           isEnable
             ? 'border border-green-400 bg-green-600 shadow-green-300'
             : 'border border-gray-400 bg-gray-600 shadow-gray-300'

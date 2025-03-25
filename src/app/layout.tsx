@@ -28,7 +28,7 @@ export default function RootLayout({
         className={`relative h-screen min-w-[1024px] overflow-x-auto ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <main>{children}</main>
-        <footer className='absolute bottom-0 flex w-screen justify-center rounded-full border-t-2 border-gray-100 bg-black italic shadow-2xl shadow-amber-50'>
+        <footer className='absolute bottom-0 flex w-screen justify-center rounded-full border-t-2 border-gray-100 bg-black italic shadow-2xl shadow-amber-50 select-none'>
           <div className='py-3'>
             <a
               href='https://gitee.com/pkmer/50days50projects-use-next-js'
