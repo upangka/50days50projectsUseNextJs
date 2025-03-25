@@ -6,6 +6,7 @@ import { Button } from '@/components/pkmer-button'
 import { projects, finishedProjects, unfinishedProjects } from '@/data/projects'
 import { getRandomInt } from '@/utils'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 export default function App() {
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const [chooseStatus, setChooseStatus] = useState<ChooseStatus>('unchoosed')
@@ -91,6 +92,7 @@ interface CardProps {
   total?: number
 }
 const Card: React.FC<CardProps> = ({ highlightedIndex }) => {
+  const router = useRouter()
   return (
     <>
       <section className='flex flex-col items-center justify-center gap-4'>
@@ -103,6 +105,7 @@ const Card: React.FC<CardProps> = ({ highlightedIndex }) => {
                 project.finished ? 'cursor-pointer !bg-green-600 text-white' : 'cursor-not-allowed'
               )}
               key={project.id}
+              onClick={() => project.finished && router.push(`/${project.route}`)}
             >
               {project.id}
             </li>
