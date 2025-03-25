@@ -16,7 +16,7 @@ const GithubProfiles: React.FC<GithubProfilesProps> = async props => {
         {/* 输入框end */}
         {/* 用户信息start */}
         {!!username && (
-          <Suspense fallback={<UserCardLoading />}>
+          <Suspense key={username} fallback={<UserCardLoading />}>
             <UserCard username={username} />
           </Suspense>
         )}
