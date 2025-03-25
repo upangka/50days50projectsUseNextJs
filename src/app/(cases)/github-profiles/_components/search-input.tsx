@@ -7,7 +7,7 @@ const SearchInput: React.FC<SearchInputProps> = () => {
   const handleFormSubmit = (formData: FormData) => {
     const username = formData.get('username')
     if (!username) {
-      return
+      router.push(`/github-profiles`)
     } else {
       router.push(`/github-profiles?username=${username}`)
     }
@@ -20,7 +20,7 @@ const SearchInput: React.FC<SearchInputProps> = () => {
       >
         <div className='relative w-full'>
           <input
-            className='w-full rounded-md border-2 border-gray-300 px-5 py-2 focus:border-blue-400 focus:outline-none'
+            className='mr-0.5 w-full rounded-md border-2 border-gray-300 px-5 py-2 focus:border-blue-400 focus:outline-none'
             type='text'
             name='username'
             placeholder='搜索Github用户'
