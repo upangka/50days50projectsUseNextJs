@@ -4,6 +4,13 @@
 
 ![projects](./attachments/images/image.png)
 
-# TODO
+# case列表
 
-- [] 已完成的，有跳转
+## Github Profiles
+
+1. [Github Profiles](<"./src/app/(cases)/github-profiles">)
+
+   - <img src="./attachments/images/githubprofiles.gif" alt="示例图片" width="150">
+
+2. [Clock](<./src/app/(cases)/theme-clock>)
+   - <img src="./attachments/images/theme-clock.gif" alt="示例图片" width="150">
