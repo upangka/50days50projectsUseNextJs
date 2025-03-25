@@ -5,11 +5,26 @@ interface UserCardProps {
 }
 export const UserCard: React.FC<UserCardProps> = async ({ username }) => {
   const [githubUser, repos] = await Promise.all([getGithubUser(username), getRepos(username)])
+
+  //处理api限流的问题
+  if (!!githubUser.message) {
+    return (
+      <section className='flex w-full flex-col items-center justify-start gap-5 rounded-md bg-blue-800 p-10 px-20 text-white shadow-md shadow-blue-500'>
+        <h1 className='flex w-full items-center justify-center text-2xl text-red-500 italic'>
+          API限流提示
+        </h1>
+        <p className='flex w-full items-center justify-center text-xl text-red-200'>
+          {githubUser.message}
+        </p>
+      </section>
+    )
+  }
+
   const name = githubUser.name || githubUser.login || username
 
   return (
     <>
-      <section className='flex w-full items-center justify-start gap-5 rounded-md bg-blue-800 p-10 px-20 text-white shadow-md shadow-blue-500'>
+      <section className='flex w-full items-center justify-start gap-5 rounded-xl bg-blue-800 p-10 px-20 text-white shadow-md shadow-blue-500'>
         <div className='flex-1/3'>
           <Image
             className='rounded-full border-4 border-gray-500'

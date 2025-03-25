@@ -7,9 +7,9 @@ const SearchInput: React.FC<SearchInputProps> = () => {
   const handleFormSubmit = (formData: FormData) => {
     const username = formData.get('username')
     if (!username) {
-      router.push(`/github-profiles`)
+      router.replace(`/github-profiles`)
     } else {
-      router.push(`/github-profiles?username=${username}`)
+      router.replace(`/github-profiles?username=${username}`)
     }
   }
   return (

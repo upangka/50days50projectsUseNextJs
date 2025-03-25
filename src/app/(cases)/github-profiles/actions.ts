@@ -10,6 +10,7 @@ interface GitHubUser {
   public_repos: number
   followers: number
   following: number
+  message: string | null // 可能为 null
 }
 
 interface GitHubRepos {
