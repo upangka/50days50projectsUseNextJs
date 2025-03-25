@@ -16,3 +16,17 @@ export function getRandomInt(max: number): number {
     return crypto.randomInt(0, max)
   }
 }
+
+/**
+ * 打乱数组
+ * @param array 数组
+ * @returns
+ */
+export function shuffleArray<T>(array: T[]): T[] {
+  const newArray = [...array] // 创建副本以避免修改原数组
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(getRandomInt(i + 1))
+    ;[newArray[i], newArray[j]] = [newArray[j], newArray[i]] // 交换元素
+  }
+  return newArray
+}

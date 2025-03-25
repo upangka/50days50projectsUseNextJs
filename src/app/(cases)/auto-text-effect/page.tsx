@@ -1,7 +1,9 @@
 'use client'
-import { useRef, useState, useLayoutEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { useTextEffect } from './useTextEffect'
+import { shuffleArray } from '@/utils'
 const msg = 'I Love Next.js And React'
-const colors = [
+const originColors = [
   '#3A7B9F',
   '#E1C340',
   '#6D8F42',
@@ -24,38 +26,19 @@ const colors = [
   '#9C27B0'
 ]
 export default function AutoTextEffectPage() {
-  const [letterIndex, setLetterIndex] = useState(0)
-  const timerRef = useRef<number | null>(null)
-
-  const animateText = () => {
-    if (timerRef.current)
-      return // 防止多次启动
-    else if (letterIndex + 1 <= msg.length) {
-      timerRef.current = window.setTimeout(() => {
-        setLetterIndex(letterIndex + 1)
-        timerRef.current = null // 清空定时器引用
-      }, 100)
-    } else {
-      timerRef.current = window.setTimeout(() => {
-        setLetterIndex(0)
-        timerRef.current = null // 清空定时器引用
-      }, 1000)
+  const [letterIndex, timeGap, setTimeGap] = useTextEffect(msg)
+  const [colors, setColors] = useState(originColors)
+  useEffect(() => {
+    // 新的一轮的时候重新打乱颜色数组
+    if (letterIndex === 0) {
+      setColors(shuffleArray(originColors))
     }
-  }
-
-  useLayoutEffect(() => {
-    animateText()
-    return () => {
-      if (timerRef.current) {
-        window.clearTimeout(timerRef.current)
-      }
-    }
-  }, [letterIndex]) // 依赖 letterIndex，使其更新时重新触发
+  }, [letterIndex])
 
   const showText = msg.slice(0, letterIndex)
 
   return (
-    <section className='flex h-screen w-screen items-center justify-center'>
+    <section className='relative flex h-screen w-screen flex-col items-center justify-center'>
       <div className='text-4xl font-bold'>
         {showText.split('').map((letter, index) => {
           return (
@@ -70,6 +53,15 @@ export default function AutoTextEffectPage() {
           )
         })}
       </div>
+
+      <input
+        type='number'
+        step={1}
+        min={1}
+        value={timeGap}
+        onChange={e => setTimeGap(parseInt(e.target.value) || 100)}
+        className='absolute bottom-52 ml-4 w-fit rounded-2xl border-2 border-green-600 px-3 py-2 text-center text-xl font-bold text-white focus:border-green-600 focus:outline-none'
+      />
     </section>
   )
 }
