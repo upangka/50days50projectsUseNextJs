@@ -1,9 +1,17 @@
 'use client'
 import { useRouter } from 'next/navigation'
+import { useEffect, useRef } from 'react'
 
 interface SearchInputProps {}
 const SearchInput: React.FC<SearchInputProps> = () => {
   const router = useRouter()
+
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    inputRef?.current?.focus()
+  }, [])
+
   const handleFormSubmit = (formData: FormData) => {
     const username = formData.get('username')
     if (!username) {
@@ -20,6 +28,7 @@ const SearchInput: React.FC<SearchInputProps> = () => {
       >
         <div className='relative w-full'>
           <input
+            ref={inputRef}
             className='mr-0.5 w-full rounded-md border-2 border-gray-300 px-5 py-2 focus:border-blue-400 focus:outline-none'
             type='text'
             name='username'
