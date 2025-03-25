@@ -1,7 +1,8 @@
 'use server'
 import type { SearchParams } from '@/types'
 import SearchInput from './_components/search-input'
-import { UserCard } from './_components/user-card'
+import { UserCard, UserCardLoading } from './_components/user-card'
+import { Suspense } from 'react'
 interface GithubProfilesProps extends SearchParams {}
 
 const GithubProfiles: React.FC<GithubProfilesProps> = async props => {
@@ -14,7 +15,11 @@ const GithubProfiles: React.FC<GithubProfilesProps> = async props => {
         <SearchInput />
         {/* 输入框end */}
         {/* 用户信息start */}
-        {!!username && <UserCard username={username} />}
+        {!!username && (
+          <Suspense fallback={<UserCardLoading />}>
+            <UserCard username={username} />
+          </Suspense>
+        )}
         {/* 用户信息end */}
       </div>
     </section>

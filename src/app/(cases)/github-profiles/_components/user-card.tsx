@@ -1,7 +1,5 @@
-'use server'
-
 import Image from 'next/image'
-
+import { delay } from '@/utils'
 interface UserCardProps {
   username: string
 }
@@ -27,14 +25,13 @@ const APIURL = 'https://api.github.com/users/'
 
 export const UserCard: React.FC<UserCardProps> = async ({ username }) => {
   const githubUser = await (async (username: string): Promise<GitHubUser> => {
-    'use server'
     try {
-      const response = await fetch(APIURL + username) // 等待 fetch 完成
-      const data = await response.json() // 等待 JSON 解析完成
-      // console.log(data) // 输出数据
+      await delay(1000) // 模拟延迟
+      const response = await fetch(APIURL + username)
+      const data = await response.json()
       return data
     } catch (error) {
-      console.error('Error fetching data:', error) // 捕获并处理错误
+      console.error('Error fetching data:', error)
       throw error
     }
   })(username)
@@ -90,6 +87,16 @@ export const UserCard: React.FC<UserCardProps> = async ({ username }) => {
             ))}
           </ul>
         </div>
+      </section>
+    </>
+  )
+}
+
+export const UserCardLoading: React.FC = () => {
+  return (
+    <>
+      <section className='flex w-full items-center justify-start gap-5 rounded-md bg-blue-800 p-10 px-20 text-white shadow-md shadow-blue-500'>
+        <p className='flex w-full items-center justify-center text-2xl text-gray-200'>Loading...</p>
       </section>
     </>
   )
