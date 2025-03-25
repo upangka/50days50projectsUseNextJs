@@ -1,5 +1,5 @@
 'use client'
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { mapRange } from '@/utils'
 
 type ClockIndicator = {
@@ -13,14 +13,6 @@ interface ClockProps {
   hourDegree: number
 }
 export const Clock: React.FC<ClockProps> = ({ secondDegree, minuteDegree, hourDegree }) => {
-  const clockIndicators: ClockIndicator[] = useMemo(() => {
-    const indicators: ClockIndicator[] = []
-    for (let i = 0; i < 12; i++) {
-      indicators.push({ index: i, degree: mapRange(i, 0, 12) })
-    }
-    return indicators
-  }, [])
-
   return (
     <div className='relative h-[410px] w-[410px]'>
       {/* 圆圈start */}
@@ -69,7 +61,25 @@ export const Clock: React.FC<ClockProps> = ({ secondDegree, minuteDegree, hourDe
         {/* 时钟中心圆圈end */}
       </div>
       {/* 圆圈end */}
+      <ClockNumebr />
+    </div>
+  )
+}
 
+/**
+ * 数字显示UI组件
+ */
+const ClockNumebr = memo(function ClockNumber() {
+  const clockIndicators: ClockIndicator[] = useMemo(() => {
+    const indicators: ClockIndicator[] = []
+    for (let i = 0; i < 12; i++) {
+      indicators.push({ index: i, degree: mapRange(i, 0, 12) })
+    }
+    return indicators
+  }, [])
+
+  return (
+    <>
       {/* 数字start */}
       <ul className='relative z-10 h-[400px] w-[400px] rounded-full'>
         {clockIndicators.map(indicator => {
@@ -96,6 +106,6 @@ export const Clock: React.FC<ClockProps> = ({ secondDegree, minuteDegree, hourDe
         })}
       </ul>
       {/* 数字end */}
-    </div>
+    </>
   )
-}
+})
