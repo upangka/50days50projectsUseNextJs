@@ -29,7 +29,7 @@ export const projects: ProjectDemo[] = [
   { id: 16, title: 'Drink Water', route: 'drink-water', finished: false },
   { id: 17, title: 'Movie App', route: 'movie-app', finished: false },
   { id: 18, title: 'Background Slider', route: 'background-slider', finished: false },
-  { id: 19, title: 'Theme Clock', route: 'theme-clock', finished: false },
+  { id: 19, title: 'Theme Clock', route: 'theme-clock', finished: true },
   { id: 20, title: 'Button Ripple Effect', route: 'button-ripple-effect', finished: false },
   { id: 21, title: 'Drag N Drop', route: 'drag-n-drop', finished: false },
   { id: 22, title: 'Drawing App', route: 'drawing-app', finished: false },
