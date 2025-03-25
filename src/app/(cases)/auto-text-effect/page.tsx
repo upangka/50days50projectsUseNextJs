@@ -1,8 +1,8 @@
 'use client'
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useTextEffect } from './useTextEffect'
 import { shuffleArray } from '@/utils'
-const msg = 'I Love Next.js And React'
+const msg = 'I Love Next.js And React 😊: )'
 const originColors = [
   '#3A7B9F',
   '#E1C340',
@@ -39,7 +39,7 @@ export default function AutoTextEffectPage() {
 
   return (
     <section className='relative flex h-screen w-screen flex-col items-center justify-center'>
-      <div className='text-4xl font-bold'>
+      <div className='border-b border-white pb-2 text-4xl font-bold italic'>
         {showText.split('').map((letter, index) => {
           return (
             <span

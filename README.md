@@ -6,11 +6,13 @@
 
 # case列表
 
-## Github Profiles
-
 1. [Github Profiles](<"./src/app/(cases)/github-profiles">)
 
    - <img src="./attachments/images/githubprofiles.gif" alt="示例图片">
 
 2. [Clock](<./src/app/(cases)/theme-clock>)
+
    - <img src="./attachments/images/theme-clock.gif" alt="示例图片">
+
+3. [Auto Text Effect](<./src/app/(cases)/auto-text-effect>)
+   - <img src="./attachments/images/text-effect.gif" alt="示例图片">
