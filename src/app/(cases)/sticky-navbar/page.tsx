@@ -1,6 +1,8 @@
 'use client'
 import { useState } from 'react'
 import clsx from 'clsx'
+import { PostDemoA, PostDemoB } from './_components/post-demo'
+
 export default function StickyNavbarPage() {
   const [isSticky, setIsSticky] = useState(false)
   return (
@@ -48,7 +50,10 @@ export default function StickyNavbarPage() {
       {/* banner end */}
 
       {/* content start */}
-      <main></main>
+      <main className='bg-white pb-32 text-black select-none'>
+        <PostDemoA />
+        <PostDemoB />
+      </main>
       {/* content end */}
     </section>
   )
