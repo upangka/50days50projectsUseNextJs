@@ -1,31 +1,10 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useTextEffect } from './useTextEffect'
-import { shuffleArray } from '@/utils'
+import { shuffleArray, originColors, toColorsWords } from '@/utils'
 import { useConfetti } from '@/hooks'
 const msg = 'I Love Next.js And React 😊: )'
-const originColors = [
-  '#3A7B9F',
-  '#E1C340',
-  '#6D8F42',
-  '#B45A12',
-  '#9F3D7B',
-  '#42C5F0',
-  '#8E24AA',
-  '#1F6E43',
-  '#F0B723',
-  '#7C4DFF',
-  '#388E3C',
-  '#FF5722',
-  '#607D8B',
-  '#E91E63',
-  '#009688',
-  '#795548',
-  '#CDDC39',
-  '#2196F3',
-  '#FF9800',
-  '#9C27B0'
-]
+
 export default function AutoTextEffectPage() {
   const { showConfetti } = useConfetti()
   const [letterIndex, timeGap, setTimeGap] = useTextEffect(msg, showConfetti)
@@ -43,18 +22,7 @@ export default function AutoTextEffectPage() {
   return (
     <section className='relative flex h-screen w-screen flex-col items-center justify-center'>
       <div className='absolute top-1/2 -translate-y-1/2 border-b border-white pb-2 text-6xl font-bold italic select-none'>
-        {showText.split('').map((letter, index) => {
-          return (
-            <span
-              key={index}
-              style={{
-                color: colors[index % colors.length]
-              }}
-            >
-              {letter}
-            </span>
-          )
-        })}
+        {toColorsWords(showText, colors)}
       </div>
 
       {/* 通过绝对定位固定相对位置 */}

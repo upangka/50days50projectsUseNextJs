@@ -15,7 +15,9 @@ const NavBar: React.FC<{ isSticky: boolean }> = ({ isSticky }) => {
       )}
     >
       <h1 className='flex items-center gap-1'>
-        <span className='text-md text-green-500'>L</span>
+        <span className={clsx('text-md text-green-500', isSticky && 'font-bold !text-green-700')}>
+          L
+        </span>
         <span
           style={{
             transition: StickNavStyle.transition
@@ -24,12 +26,14 @@ const NavBar: React.FC<{ isSticky: boolean }> = ({ isSticky }) => {
         >
           棧深
         </span>
-        <span className='text-md text-green-500'>⅂</span>{' '}
+        <span className={clsx('text-md text-green-500', isSticky && 'font-bold !text-green-700')}>
+          ⅂
+        </span>{' '}
       </h1>
       <ul className='flex items-center justify-center gap-4'>
         <li
           className={clsx(
-            'cursor-pointerhover:underline',
+            'cursor-pointerhover:underline font-bold',
             isSticky ? 'text-red-700' : 'text-red-400'
           )}
         >
