@@ -20,7 +20,7 @@ export const projects: ProjectDemo[] = [
   { id: 7, title: 'Split Landing Page', route: 'split-landing-page', finished: false },
   { id: 8, title: 'Form Wave', route: 'form-wave', finished: false },
   { id: 9, title: 'Sound Board', route: 'sound-board', finished: false },
-  { id: 10, title: 'Dad Jokes', route: 'dad-jokes', finished: false },
+  { id: 10, title: 'Dad Jokes', route: 'jokes', finished: true },
   { id: 11, title: 'Event Keycodes', route: 'event-keycodes', finished: false },
   { id: 12, title: 'Faq Collapse', route: 'faq-collapse', finished: false },
   { id: 13, title: 'Random Choice Picker', route: 'random-choice-picker', finished: false },

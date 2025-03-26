@@ -12,7 +12,7 @@ export const Button: React.FC<ButtonProps> = ({ children }) => {
 
   return (
     <button
-      className='rounded-md bg-blue-500 px-3 py-2 text-white hover:scale-105 hover:bg-blue-700'
+      className='rounded-md bg-blue-500 px-3 py-2 text-white shadow-md shadow-blue-400 hover:scale-105 hover:bg-blue-700'
       onClick={handleClick}
     >
       {children}
