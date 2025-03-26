@@ -36,7 +36,7 @@ const NavBar: React.FC<{ isSticky: boolean; ref?: Ref<HTMLElement> }> = ({ isSti
         <li
           className={clsx(
             'cursor-pointerhover:underline font-bold',
-            isSticky ? 'text-red-700' : 'text-red-400'
+            isSticky ? 'text-green-700' : 'text-green-400'
           )}
         >
           首页
