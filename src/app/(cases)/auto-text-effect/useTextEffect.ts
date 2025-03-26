@@ -1,5 +1,13 @@
 import { useRef, useState, useLayoutEffect } from 'react'
-export function useTextEffect(msg: string) {
+import { noop } from '@/utils'
+
+/**
+ * 自动展示文本效果
+ * @param msg 需要展示的文本
+ * @param cb 回调函数
+ * @returns
+ */
+export function useTextEffect(msg: string, cb: Function = noop) {
   const [letterIndex, setLetterIndex] = useState(0)
   const [timeGap, setTimeGap] = useState(100)
   const timerRef = useRef<number | null>(null)
@@ -13,6 +21,8 @@ export function useTextEffect(msg: string) {
         timerRef.current = null // 清空定时器引用
       }, timeGap)
     } else {
+      // 调用回调函数
+      cb()
       timerRef.current = window.setTimeout(() => {
         setLetterIndex(0)
         timerRef.current = null // 清空定时器引用

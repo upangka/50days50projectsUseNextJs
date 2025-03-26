@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { useTextEffect } from './useTextEffect'
 import { shuffleArray } from '@/utils'
+import { useConfetti } from '@/hooks'
 const msg = 'I Love Next.js And React 😊: )'
 const originColors = [
   '#3A7B9F',
@@ -26,8 +27,10 @@ const originColors = [
   '#9C27B0'
 ]
 export default function AutoTextEffectPage() {
-  const [letterIndex, timeGap, setTimeGap] = useTextEffect(msg)
+  const { showConfetti } = useConfetti()
+  const [letterIndex, timeGap, setTimeGap] = useTextEffect(msg, showConfetti)
   const [colors, setColors] = useState(originColors)
+
   useEffect(() => {
     // 新的一轮的时候重新打乱颜色数组
     if (letterIndex === 0) {
