@@ -39,7 +39,7 @@ export default function AutoTextEffectPage() {
 
   return (
     <section className='relative flex h-screen w-screen flex-col items-center justify-center'>
-      <div className='border-b border-white pb-2 text-4xl font-bold italic'>
+      <div className='absolute top-1/2 -translate-y-1/2 border-b border-white pb-2 text-6xl font-bold italic select-none'>
         {showText.split('').map((letter, index) => {
           return (
             <span
@@ -54,13 +54,14 @@ export default function AutoTextEffectPage() {
         })}
       </div>
 
+      {/* 通过绝对定位固定相对位置 */}
       <input
         type='number'
         step={1}
         min={1}
         value={timeGap}
         onChange={e => setTimeGap(parseInt(e.target.value) || 100)}
-        className='absolute bottom-52 ml-4 w-fit rounded-2xl border-2 border-green-600 px-3 py-2 text-center text-xl font-bold text-white focus:border-green-600 focus:outline-none'
+        className='absolute top-1/2 ml-4 w-1/12 translate-y-28 rounded-2xl border-2 border-green-600 px-3 py-2 text-center text-xl font-bold text-white focus:border-green-600 focus:outline-none'
       />
     </section>
   )
