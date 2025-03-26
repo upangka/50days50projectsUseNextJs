@@ -19,4 +19,8 @@
    - <img src="./attachments/images/text-effect.gif" alt="示例图片">
 
 4. [Jokes](<./src/app/(cases)/jokes>)
+
    - <img src="./attachments/images/jokes.gif" alt="示例图片">
+
+5. [movie app](<./src/app/(cases)/movie-app>)
+   - <img src="./attachments/images/movie-app.gif" alt="示例图片">
