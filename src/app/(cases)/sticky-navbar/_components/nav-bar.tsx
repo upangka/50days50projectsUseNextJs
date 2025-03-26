@@ -1,11 +1,13 @@
 import StickNavStyle from '../stick-navbar.module.scss'
 import clsx from 'clsx'
+import type { Ref } from 'react'
 /**
  * 导航栏
  */
-const NavBar: React.FC<{ isSticky: boolean }> = ({ isSticky }) => {
+const NavBar: React.FC<{ isSticky: boolean; ref?: Ref<HTMLElement> }> = ({ isSticky, ref }) => {
   return (
     <nav
+      ref={ref}
       style={{
         transition: StickNavStyle.transition
       }}
