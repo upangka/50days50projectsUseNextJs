@@ -5,7 +5,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'avatars.githubusercontent.com',
+        hostname: 'avatars.githubusercontent.com', // github头像服务器
+        port: '',
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'image.tmdb.org', // 电影海报服务器
         port: '',
         pathname: '/**'
       }

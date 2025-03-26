@@ -23,12 +23,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' className='relative h-fit w-auto'>
       <body
-        className={`relative h-screen min-w-[1024px] overflow-x-auto ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`h-fit min-w-[1024px] overflow-x-auto ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <main>{children}</main>
-        <footer className='absolute bottom-0 flex w-screen justify-center rounded-full border-t-2 border-gray-100 bg-black italic shadow-2xl shadow-amber-50 select-none'>
+        <footer className='fixed bottom-0 flex w-screen justify-center rounded-full border-t-2 border-gray-100 bg-black italic shadow-2xl shadow-amber-50 select-none'>
           <div className='py-3'>
             <a
               href='https://gitee.com/pkmer/50days50projects-use-next-js'

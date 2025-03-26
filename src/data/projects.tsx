@@ -27,7 +27,7 @@ export const projects: ProjectDemo[] = [
   { id: 14, title: 'Animated Navigation', route: 'animated-navigation', finished: false },
   { id: 15, title: 'Incrementing Counter', route: 'incrementing-counter', finished: false },
   { id: 16, title: 'Drink Water', route: 'drink-water', finished: false },
-  { id: 17, title: 'Movie App', route: 'movie-app', finished: false },
+  { id: 17, title: 'Movie App', route: 'movie-app', finished: true },
   { id: 18, title: 'Background Slider', route: 'background-slider', finished: false },
   { id: 19, title: 'Theme Clock', route: 'theme-clock', finished: true },
   { id: 20, title: 'Button Ripple Effect', route: 'button-ripple-effect', finished: false },
