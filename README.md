@@ -8,20 +8,24 @@
 
 ## [01 Github Profiles](<"./src/app/(cases)/github-profiles">)
 
-<img src="./attachments/images/githubprofiles.gif" alt="示例图片">
+<img src="./attachments/images/githubprofiles.gif" alt="示例图片" />
 
 ## [02 Clock](<./src/app/(cases)/theme-clock>)
 
-<img src="./attachments/images/theme-clock.gif" alt="示例图片">
+<img src="./attachments/images/theme-clock.gif" alt="示例图片" />
 
 ## [03 Auto Text Effect](<./src/app/(cases)/auto-text-effect>)
 
-<img src="./attachments/images/text-effect.gif" alt="示例图片">
+<img src="./attachments/images/text-effect.gif" alt="示例图片" />
 
 ## [04 Jokes](<./src/app/(cases)/jokes>)
 
-<img src="./attachments/images/jokes.gif" alt="示例图片">
+<img src="./attachments/images/jokes.gif" alt="示例图片" />
 
 ## [05 movie app](<./src/app/(cases)/movie-app>)
 
-<img src="./attachments/images/movie-app.gif" alt="示例图片">
+<img src="./attachments/images/movie-app.gif" alt="示例图片" />
+
+## [06 sticky navbar]
+
+<img src="./attachments/images/sticky-navbar.gif" alt="示例图片" />
