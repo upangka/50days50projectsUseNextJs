@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
         hostname: 'image.tmdb.org', // 电影海报服务器
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'randomuser.me', // 随机用户头像服务器
+        port: '',
+        pathname: '/**'
       }
     ]
   }
