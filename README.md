@@ -6,21 +6,22 @@
 
 # case列表
 
-1. [Github Profiles](<"./src/app/(cases)/github-profiles">)
+## [01 Github Profiles](<"./src/app/(cases)/github-profiles">)
 
-   - <img src="./attachments/images/githubprofiles.gif" alt="示例图片">
+<img src="./attachments/images/githubprofiles.gif" alt="示例图片">
 
-2. [Clock](<./src/app/(cases)/theme-clock>)
+## [02 Clock](<./src/app/(cases)/theme-clock>)
 
-   - <img src="./attachments/images/theme-clock.gif" alt="示例图片">
+<img src="./attachments/images/theme-clock.gif" alt="示例图片">
 
-3. [Auto Text Effect](<./src/app/(cases)/auto-text-effect>)
+## [03 Auto Text Effect](<./src/app/(cases)/auto-text-effect>)
 
-   - <img src="./attachments/images/text-effect.gif" alt="示例图片">
+<img src="./attachments/images/text-effect.gif" alt="示例图片">
 
-4. [Jokes](<./src/app/(cases)/jokes>)
+## [04 Jokes](<./src/app/(cases)/jokes>)
 
-   - <img src="./attachments/images/jokes.gif" alt="示例图片">
+<img src="./attachments/images/jokes.gif" alt="示例图片">
 
-5. [movie app](<./src/app/(cases)/movie-app>)
-   - <img src="./attachments/images/movie-app.gif" alt="示例图片">
+## [05 movie app](<./src/app/(cases)/movie-app>)
+
+<img src="./attachments/images/movie-app.gif" alt="示例图片">
