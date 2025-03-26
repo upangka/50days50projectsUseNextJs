@@ -15,4 +15,8 @@
    - <img src="./attachments/images/theme-clock.gif" alt="示例图片">
 
 3. [Auto Text Effect](<./src/app/(cases)/auto-text-effect>)
+
    - <img src="./attachments/images/text-effect.gif" alt="示例图片">
+
+4. [Jokes](<./src/app/(cases)/jokes>)
+   - <img src="./attachments/images/jokes.gif" alt="示例图片">
