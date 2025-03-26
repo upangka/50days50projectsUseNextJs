@@ -29,3 +29,7 @@
 ## [06 sticky navbar](<./src/app/(cases)/sticky-navbar>)
 
 <img src="./attachments/images/sticky-navbar.gif" alt="示例图片" />
+
+## [07 kinetic-loader](<./src/app/(cases)/kinetic-loader>)
+
+<img src="./attachments/images/kinetic-loader.gif" alt="示例图片" />
