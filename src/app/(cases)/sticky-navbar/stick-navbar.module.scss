@@ -1,0 +1,6 @@
+$duration: 0.3s;
+$transition: all $duration ease-in-out;
+
+:export {
+  transition: $transition;
+}
