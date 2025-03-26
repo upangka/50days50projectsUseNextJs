@@ -1,0 +1,26 @@
+$duration: 2s;
+$delay: 0.5s;
+
+.TriangleA {
+  animation: rotateCircle $duration linear infinite;
+}
+
+.TriangleB {
+  animation: rotateCircle $duration linear infinite $delay * 1;
+}
+
+@keyframes rotateCircle {
+  0%,
+  25% {
+    transform: rotate(0deg);
+  }
+
+  50%,
+  75% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

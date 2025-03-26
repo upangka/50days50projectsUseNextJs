@@ -33,7 +33,7 @@ export const projects: ProjectDemo[] = [
   { id: 20, title: 'Button Ripple Effect', route: 'button-ripple-effect', finished: false },
   { id: 21, title: 'Drag N Drop', route: 'drag-n-drop', finished: false },
   { id: 22, title: 'Drawing App', route: 'drawing-app', finished: false },
-  { id: 23, title: 'Kinetic Loader', route: 'kinetic-loader', finished: false },
+  { id: 23, title: 'Kinetic Loader', route: 'kinetic-loader', finished: true },
   { id: 24, title: 'Content Placeholder', route: 'content-placeholder', finished: false },
   { id: 25, title: 'Sticky Navbar', route: 'sticky-navbar', finished: true },
   { id: 26, title: 'Double Vertical Slider', route: 'double-vertical-slider', finished: false },
