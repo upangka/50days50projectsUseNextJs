@@ -26,6 +26,6 @@
 
 <img src="./attachments/images/movie-app.gif" alt="示例图片" />
 
-## [06 sticky navbar]
+## [06 sticky navbar](<./src/app/(cases)/sticky-navbar>)
 
 <img src="./attachments/images/sticky-navbar.gif" alt="示例图片" />
