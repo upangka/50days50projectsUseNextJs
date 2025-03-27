@@ -38,3 +38,7 @@
 ## [07 kinetic-loader](<./src/app/(cases)/kinetic-loader>)
 
 <img src="./attachments/images/kinetic-loader.gif" alt="示例图片" />
+
+## [08 live user filter](<./src/app/(cases)/live-user-filter>)
+
+<img src="./attachments/images/live-user-filter.gif" alt="示例图片" />
