@@ -32,4 +32,6 @@ const User: React.FC<UserProps> = memo(({ user }) => {
   )
 })
 
+User.displayName = 'Live User Filter User' // for debugging purposes
+
 export default User
