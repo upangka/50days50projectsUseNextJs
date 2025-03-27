@@ -102,10 +102,13 @@ const Card: React.FC<CardProps> = ({ highlightedIndex }) => {
               className={clsx(
                 'flex h-[45px] w-[45px] items-center justify-center rounded-full border-2 border-black bg-white text-black transition-all duration-500',
                 project.id == highlightedIndex && '!bg-yellow-600 text-white',
-                project.finished ? 'cursor-pointer !bg-green-600 text-white' : 'cursor-not-allowed'
+                project.finished
+                  ? 'cursor-pointer !bg-green-600 text-white hover:scale-105 hover:!bg-green-700'
+                  : 'cursor-not-allowed'
               )}
               key={project.id}
               onClick={() => project.finished && router.push(`/${project.route}`)}
+              title={project.finished ? project.title : ''}
             >
               {project.id}
             </li>
