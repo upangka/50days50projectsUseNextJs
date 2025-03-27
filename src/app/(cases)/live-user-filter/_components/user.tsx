@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import clsx from 'clsx'
 import type { User } from '../types'
 interface UserProps {
   user: User
@@ -10,9 +9,7 @@ const User: React.FC<UserProps> = memo(({ user }) => {
     <>
       <li
         key={user.login.uuid}
-        className={clsx(
-          'transition-duration-300 flex items-center gap-4 border-b border-gray-400 p-2 transition-all last:border-b-0 hover:bg-gray-100'
-        )}
+        className='transition-duration-300 flex items-center gap-4 border-b border-gray-400 p-2 transition-all last:border-b-0 hover:bg-gray-100'
       >
         <img
           src={user.picture.large}
