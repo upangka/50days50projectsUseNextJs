@@ -12,7 +12,8 @@ const KineticLoading: React.FC<KineticLoadingProps> = ({
   triangleBColor = '#00a63e'
 }) => {
   return (
-    <>
+    // 外层容器 主要用来居中
+    <div className='relative h-full w-full'>
       {/* 三角形1 向上 start */}
       <div
         style={{
@@ -38,7 +39,7 @@ const KineticLoading: React.FC<KineticLoadingProps> = ({
         className={clsx(LoaderStyles.TriangleB, 'absolute top-1/2 left-1/2 h-0 w-0 -translate-1/2')}
       ></div>
       {/* 三角形2 end */}
-    </>
+    </div>
   )
 }
 
