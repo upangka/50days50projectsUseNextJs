@@ -4,6 +4,11 @@
 
 ![projects](./attachments/images/image.png)
 
+# 相关技术说明
+
+1. 服务端请求数据统一使用next.js内置的fetch 有缓存的功能
+2. 客户端请求数据（因为有些api是国外的需要科学上网，我的vscode获取不到api请求，所以只能在浏览器端处理），此时使用react query（缓存）
+
 # case列表
 
 ## [01 Github Profiles](<"./src/app/(cases)/github-profiles">)

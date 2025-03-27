@@ -1,27 +1,23 @@
 'use client'
-import { useEffect, useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import type { User } from './types'
 import { debounce } from '@/utils'
-import clsx from 'clsx'
 import LiUser from './_components/user'
 import Header from './_components/header'
+import { useData } from './use-data'
 const API = 'https://randomuser.me/api?results=50'
 /**
  * 这个API是国外站点，这里为了方便不使用服务端组件渲染
  * @returns
  */
 export default function LiveUserFilterPage() {
-  const [users, setUsers] = useState<User[]>([])
   const [search, setSearch] = useState('')
+  const { data: users, loading } = useData<User[]>(API, [])
 
   const handleSearch = useCallback(
     debounce((e: React.ChangeEvent<HTMLInputElement>) => {
       const term = e.target.value.trim()
-      if (term.length > 0) {
-        setSearch(term)
-      } else {
-        setSearch('')
-      }
+      setSearch(term)
     }),
     []
   )
@@ -36,19 +32,6 @@ export default function LiveUserFilterPage() {
       )
     )
   }, [users, search])
-
-  async function getUsers() {
-    const res = await fetch(API)
-    const data = await res.json()
-    return data.results
-  }
-
-  useEffect(() => {
-    ;(async () => {
-      const users = await getUsers()
-      setUsers(users)
-    })()
-  }, [])
 
   return (
     <section className='flex h-screen w-screen items-center justify-center'>
