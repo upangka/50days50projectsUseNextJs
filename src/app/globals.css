@@ -21,6 +21,11 @@
 
 body {
   background: var(--background);
+  background-image:
+    linear-gradient(to right, #f6f4f419 1px, transparent 1px, transparent 9px, transparent 10px),
+    linear-gradient(to bottom, #f6f4f419 1px, transparent 1px, transparent 9px, transparent 10px);
+
+  background-size: 200px 200px; /* 控制方格大小 */
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
