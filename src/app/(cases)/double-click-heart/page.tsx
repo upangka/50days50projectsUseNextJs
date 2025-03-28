@@ -3,7 +3,7 @@ import { useState, useRef, useCallback } from 'react'
 import { getRandomInt } from '@/utils'
 import HeartStyle from './double-click-heart.module.scss'
 import { clsx } from 'clsx'
-const DOUBLE_CLICK_TIME = 300 // ms
+const DOUBLE_CLICK_TIME = 500 // ms
 
 interface Heart {
   id: number
