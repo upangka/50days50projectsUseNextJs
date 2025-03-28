@@ -2,16 +2,11 @@
 import { useState, useRef, useCallback } from 'react'
 import { getRandomInt } from '@/utils'
 import HeartStyle from './double-click-heart.module.scss'
-import { clsx } from 'clsx'
+import clsx from 'clsx'
+import type { Heart } from './types'
+import CountDisplay from './_components/count-display'
+import IconShow from './_components/icon-show'
 const DOUBLE_CLICK_TIME = 500 // ms
-
-interface Heart {
-  id: number
-  x: number
-  y: number
-  originX: number
-  icon: string
-}
 
 const icons = ['🔥', '❤️', '😽', '😘', '🥳']
 
@@ -20,13 +15,10 @@ export default function DoubleClickHeartPage() {
   const [count, setCount] = useState(0)
   const clickTime = useRef(0)
 
-  const countStyle =
+  const lastHeartPosition =
     hearts.length > 0
-      ? {
-          left: `${hearts[hearts.length - 1].originX}px`,
-          top: `${hearts[hearts.length - 1].y - 60}px`
-        }
-      : {}
+      ? { x: hearts[hearts.length - 1].originX, y: hearts[hearts.length - 1].y }
+      : { x: -100, y: -100 }
 
   const handleDoubleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const currentTime = Date.now()
@@ -80,34 +72,9 @@ export default function DoubleClickHeartPage() {
           className={clsx(HeartStyle.Image, 'h-full w-full object-cover')}
         />
         {/* 大于5的时候显示 */}
-        {count > 5 && (
-          <p
-            style={countStyle}
-            key={count}
-            className={clsx(
-              HeartStyle.Count,
-              'absolute -top-1 z-20 text-lg font-bold select-none',
-              count < 10 ? 'text-white' : 'text-yellow-500'
-            )}
-          >
-            +{count}
-          </p>
-        )}
+        {count > 5 && <CountDisplay key={count} count={count} position={lastHeartPosition} />}
         {hearts.map(heart => (
-          <div
-            style={{
-              left: `${heart.x}px`,
-              top: `${heart.y}px`
-            }}
-            key={heart.id}
-            className={clsx(
-              HeartStyle.Love,
-              'absolute z-20 -translate-x-1/2 -translate-y-full text-3xl text-white select-none'
-            )}
-          >
-            {' '}
-            {heart.icon}{' '}
-          </div>
+          <IconShow heart={heart} key={heart.id} />
         ))}
       </div>
     </section>
