@@ -1,7 +1,9 @@
 'use client'
 import { useState, useRef, useCallback } from 'react'
 import { getRandomInt } from '@/utils'
-const DOUBLE_CLICK_TIME = 800 // ms
+import HeartStyle from './double-click-heart.module.scss'
+import { clsx } from 'clsx'
+const DOUBLE_CLICK_TIME = 300 // ms
 
 interface Heart {
   id: number
@@ -27,9 +29,12 @@ export default function DoubleClickHeartPage() {
       clickTime.current = 0
 
       // 计算坐标
-      const x = e.clientX - e.currentTarget.offsetLeft
+      let x = e.clientX - e.currentTarget.offsetLeft
+      // 随机偏移
+      x = Math.random() > 0.5 ? getRandomInt(15) + x : x - getRandomInt(15)
       const y = e.clientY - e.currentTarget.offsetTop
 
+      console.log({ x: x, originX: e.clientX - e.currentTarget.offsetLeft })
       setHearts(prev => [
         ...prev,
         { id: currentTime, x, y, icon: icons[getRandomInt(icons.length)] }
@@ -37,7 +42,7 @@ export default function DoubleClickHeartPage() {
       setTimeout(() => {
         // 直接闭包的方式记录要删除的值
         setHearts(prev => prev.filter(heart => heart.id !== currentTime))
-      }, 2000)
+      }, 1000)
     } else {
       // 超过DOUBLE_CLICK_TIME时间，则重置
       clickTime.current = currentTime
@@ -57,7 +62,10 @@ export default function DoubleClickHeartPage() {
               top: `${heart.y}px`
             }}
             key={heart.id}
-            className='absolute -translate-1/2 text-3xl text-white select-none'
+            className={clsx(
+              HeartStyle.Love,
+              'absolute -translate-x-1/2 -translate-y-full text-3xl text-white select-none'
+            )}
           >
             {' '}
             {heart.icon}{' '}
