@@ -9,6 +9,7 @@ interface Heart {
   id: number
   x: number
   y: number
+  originX: number
   icon: string
 }
 
@@ -16,8 +17,16 @@ const icons = ['🔥', '❤️', '😽', '😘', '🥳']
 
 export default function DoubleClickHeartPage() {
   const [hearts, setHearts] = useState<Heart[]>([])
-
+  const [count, setCount] = useState(0)
   const clickTime = useRef(0)
+
+  const countStyle =
+    hearts.length > 0
+      ? {
+          left: `${hearts[hearts.length - 1].originX}px`,
+          top: `${hearts[hearts.length - 1].y - 60}px`
+        }
+      : {}
 
   const handleDoubleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const currentTime = Date.now()
@@ -29,23 +38,32 @@ export default function DoubleClickHeartPage() {
       clickTime.current = 0
 
       // 计算坐标
-      let x = e.clientX - e.currentTarget.offsetLeft
+      const x = e.clientX - e.currentTarget.offsetLeft
       // 随机偏移
-      x = Math.random() > 0.5 ? getRandomInt(15) + x : x - getRandomInt(15)
+      const randomX = Math.random() > 0.5 ? getRandomInt(15) + x : x - getRandomInt(15)
       const y = e.clientY - e.currentTarget.offsetTop
 
-      console.log({ x: x, originX: e.clientX - e.currentTarget.offsetLeft })
+      setCount(prev => prev + 1)
       setHearts(prev => [
         ...prev,
-        { id: currentTime, x, y, icon: icons[getRandomInt(icons.length)] }
+        { id: currentTime, originX: x, x: randomX, y, icon: icons[getRandomInt(icons.length)] }
       ])
+
       setTimeout(() => {
         // 直接闭包的方式记录要删除的值
-        setHearts(prev => prev.filter(heart => heart.id !== currentTime))
+        setHearts(prev => {
+          const arr = prev.filter(heart => heart.id !== currentTime)
+          // 当没有爱心时，重置计数
+          if (arr.length === 0) {
+            setCount(0)
+          }
+          return arr
+        })
       }, 1000)
     } else {
       // 超过DOUBLE_CLICK_TIME时间，则重置
       clickTime.current = currentTime
+      setCount(0)
     }
   }, [])
 
@@ -55,6 +73,19 @@ export default function DoubleClickHeartPage() {
         onClick={handleDoubleClick}
         className='relative h-[530px] w-[300px] border-2 border-white'
       >
+        {/* 大于5的时候显示 */}
+        {count > 5 && (
+          <p
+            style={countStyle}
+            className={clsx(
+              HeartStyle.Count,
+              'absolute -top-1 text-lg select-none',
+              count < 10 ? 'text-white' : 'text-yellow-400'
+            )}
+          >
+            +{count}
+          </p>
+        )}
         {hearts.map(heart => (
           <div
             style={{

@@ -6,12 +6,33 @@
       transform: scale(1) rotate(-30deg);
       opacity: 0;
     }
-    50% {
+    25% {
       transform: scale(1.5) rotate(0deg);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.5) rotate(-30deg);
       opacity: 1;
+    }
+    75% {
+      transform: scale(1.5) rotate(0deg);
+      opacity: 0.6;
     }
     100% {
       transform: scale(1) rotate(30deg);
+      opacity: 0;
+    }
+  }
+}
+
+.Count {
+  animation: countmove 0.5s linear infinite;
+  @keyframes countmove {
+    from {
+      transform: translateY(0px) scale(1.5);
+    }
+    to {
+      transform: translateY(-25px);
       opacity: 0;
     }
   }
