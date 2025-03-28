@@ -11,7 +11,7 @@
 
 # case列表
 
-## [01 Github Profiles](<"./src/app/(cases)/github-profiles">)
+## [01 Github Profiles](<./src/app/(cases)/github-profiles>)
 
 <img src="./attachments/images/githubprofiles.gif" alt="示例图片" />
 
