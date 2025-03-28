@@ -71,16 +71,23 @@ export default function DoubleClickHeartPage() {
     <section className='flex h-screen w-screen items-center justify-center'>
       <div
         onClick={handleDoubleClick}
-        className='relative h-[530px] w-[300px] border-2 border-white'
+        className='relative h-[530px] w-[300px] overflow-hidden rounded-lg border-2 border-white shadow-lg shadow-gray-500/50'
       >
+        <div className='absolute top-0 right-0 bottom-0 left-0 z-10 bg-black opacity-50'></div>
+        <img
+          src='/landscape.jpg'
+          alt='girls'
+          className={clsx(HeartStyle.Image, 'h-full w-full object-cover')}
+        />
         {/* 大于5的时候显示 */}
         {count > 5 && (
           <p
             style={countStyle}
+            key={count}
             className={clsx(
               HeartStyle.Count,
-              'absolute -top-1 text-lg select-none',
-              count < 10 ? 'text-white' : 'text-yellow-400'
+              'absolute -top-1 z-20 text-lg font-bold select-none',
+              count < 10 ? 'text-white' : 'text-yellow-500'
             )}
           >
             +{count}
@@ -95,7 +102,7 @@ export default function DoubleClickHeartPage() {
             key={heart.id}
             className={clsx(
               HeartStyle.Love,
-              'absolute -translate-x-1/2 -translate-y-full text-3xl text-white select-none'
+              'absolute z-20 -translate-x-1/2 -translate-y-full text-3xl text-white select-none'
             )}
           >
             {' '}

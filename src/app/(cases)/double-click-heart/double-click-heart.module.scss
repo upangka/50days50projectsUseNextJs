@@ -26,14 +26,28 @@
 }
 
 .Count {
-  animation: countmove 0.5s linear infinite;
+  animation: countmove 0.5s linear;
+  opacity: 0;
   @keyframes countmove {
     from {
       transform: translateY(0px) scale(1.5);
+      opacity: 1;
     }
     to {
       transform: translateY(-25px);
       opacity: 0;
+    }
+  }
+}
+
+.Image {
+  animation: image 30s linear infinite;
+  @keyframes image {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.5);
     }
   }
 }
