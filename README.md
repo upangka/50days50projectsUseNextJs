@@ -50,3 +50,7 @@
 ## [09 Double Click Heart](<./src/app/(cases)/double-click-heart>)
 
 <img src="./attachments/images/double-click-heart.gif" alt="" />
+
+## [10 testimonial box switcher](<./src/app/(cases)/testimonial-box-switcher>)
+
+<img src="./attachments/images/testimonial-box-switcher.gif" alt="" />
