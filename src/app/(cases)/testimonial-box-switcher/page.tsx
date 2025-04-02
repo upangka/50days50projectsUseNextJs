@@ -1,12 +1,11 @@
 'use client'
 import { ZCOOL_KuaiLe } from 'next/font/google'
-
 import Image from 'next/image'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import TestimonialBoxSwitherStyle from './testimonial-box-switcher.module.scss'
 import { testimonials, type Testimonial } from './data'
-
+import { Icon } from '@iconify/react'
 const zcoolKuaiLe = ZCOOL_KuaiLe({
   weight: '400', // 该字体只有一个权重
   subsets: ['latin']
@@ -31,13 +30,24 @@ export default function TestimonialBoxSwitcher() {
         <div
           className={clsx(
             TestimonialBoxSwitherStyle.ProgressBar,
-            'my-2.5 h-[5px] w-full rounded-2xl bg-white'
+            'my-2.5 h-[8px] w-full rounded-2xl bg-white'
           )}
         ></div>
         {/* progress bar end */}
-        <p className={`flex-1 px-3 text-xl ${zcoolKuaiLe.className}`}>
-          {/* <Icon icon='pixel:quote-left-solid' width={50} height={50} /> */}
+        <p className={`px-3 text-xl ${zcoolKuaiLe.className}`}>
+          <Icon
+            icon='pixel:quote-left-solid'
+            className='mr-2 inline-block'
+            width={20}
+            height={20}
+          />
           {currentTestimonial.text}
+          <Icon
+            icon='pixel:quote-right-solid'
+            className='ml-2 inline-block'
+            width={20}
+            height={20}
+          />
         </p>
         <div className='flex items-center justify-center gap-4'>
           <Image
@@ -52,7 +62,7 @@ export default function TestimonialBoxSwitcher() {
             <h1 className={`text-lg ${zcoolKuaiLe.className}`}>
               {currentTestimonial.playlistName}
             </h1>
-            <p className={`text-md text-gray-200 ${zcoolKuaiLe.className}`}>
+            <p className={`text-md text-gray-100 ${zcoolKuaiLe.className}`}>
               {currentTestimonial.description}
             </p>
           </div>
