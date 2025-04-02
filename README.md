@@ -4,6 +4,10 @@
 
 ![projects](./attachments/images/image.png)
 
+# Icon
+
+- [iconify](https://iconify.design/docs/icon-components/react/#ssr)
+
 # 相关技术说明
 
 1. 服务端请求数据统一使用next.js内置的fetch 有缓存的功能

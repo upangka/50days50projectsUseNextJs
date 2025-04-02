@@ -20,6 +20,24 @@ const nextConfig: NextConfig = {
         hostname: 'randomuser.me', // 随机用户头像服务器
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com', // 随机用户头像服务器
+        port: '',
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'music-file.y.qq.com', // QQ音乐服务器
+        port: '',
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'y.qq.com', // QQ音乐服务器
+        port: '',
+        pathname: '/**'
       }
     ]
   }

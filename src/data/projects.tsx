@@ -67,7 +67,7 @@ export const projects: ProjectDemo[] = [
     finished: false
   },
   { id: 46, title: 'Quiz App', route: 'quiz-app', finished: false },
-  { id: 47, title: 'Testimonial Box Switcher', route: 'testimonial-box-switcher', finished: false },
+  { id: 47, title: 'Testimonial Box Switcher', route: 'testimonial-box-switcher', finished: true },
   { id: 48, title: 'Random Image Feed', route: 'random-image-feed', finished: false },
   { id: 49, title: 'Todo List', route: 'todo-list', finished: false },
   { id: 50, title: 'Insect Catch Game', route: 'insect-catch-game', finished: false },

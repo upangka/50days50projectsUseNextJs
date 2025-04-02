@@ -1,0 +1,19 @@
+$timer: 10s;
+
+:export {
+  timer: $timer;
+}
+.ProgressBar {
+  animation: strecher $timer linear infinite;
+  transform-origin: left;
+
+  @keyframes strecher {
+    from {
+      transform: scaleX(0);
+    }
+
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
