@@ -10,6 +10,9 @@ const zcoolKuaiLe = ZCOOL_KuaiLe({
   weight: '400', // 该字体只有一个权重
   subsets: ['latin']
 })
+// 保持与scss中定义的时间一致
+const timerInMs = parseInt(TestimonialBoxSwitherStyle.timer) * 1000
+
 export default function TestimonialBoxSwitcher() {
   const [currentActiveIndex, setCurrentActiveIndex] = useState(0)
 
@@ -18,14 +21,14 @@ export default function TestimonialBoxSwitcher() {
   useEffect(() => {
     const interval = window.setInterval(() => {
       setCurrentActiveIndex(prev => (prev + 1) % testimonials.length)
-    }, 10000)
+    }, timerInMs)
 
     return () => clearInterval(interval)
   }, [])
 
   return (
     <section className='flex h-screen w-screen items-center justify-center'>
-      <div className='flex w-[768px] flex-col gap-3 rounded-2xl bg-green-500 px-2 py-10 text-white shadow-md shadow-green-400/50'>
+      <div className='flex w-[768px] flex-col gap-3 rounded-2xl bg-green-500 px-2 py-10 text-white shadow-lg shadow-green-400/50'>
         {/* progress bar start */}
         <div
           className={clsx(
@@ -34,24 +37,26 @@ export default function TestimonialBoxSwitcher() {
           )}
         ></div>
         {/* progress bar end */}
+        {/* text start */}
         <p className={`px-3 text-xl ${zcoolKuaiLe.className}`}>
           <Icon
             icon='pixel:quote-left-solid'
-            className='mr-2 inline-block'
+            className='mr-2 inline-block -translate-y-2 text-gray-200'
             width={20}
             height={20}
           />
           {currentTestimonial.text}
           <Icon
             icon='pixel:quote-right-solid'
-            className='ml-2 inline-block'
+            className='ml-2 inline-block -translate-y-2 text-gray-200'
             width={20}
             height={20}
           />
         </p>
+        {/* text end */}
         <div className='flex items-center justify-center gap-4'>
           <Image
-            className='rounded-full'
+            className={clsx('rounded-full', TestimonialBoxSwitherStyle.Image)}
             key={currentActiveIndex}
             src={currentTestimonial.photo}
             width={75}

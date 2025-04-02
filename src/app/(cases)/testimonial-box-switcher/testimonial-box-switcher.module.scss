@@ -1,4 +1,4 @@
-$timer: 10s;
+$timer: 5s;
 
 :export {
   timer: $timer;
@@ -14,6 +14,21 @@ $timer: 10s;
 
     to {
       transform: scaleX(1);
+    }
+  }
+}
+
+.Image {
+  animation: route $timer linear infinite;
+  transform-origin: center;
+
+  @keyframes route {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
     }
   }
 }
