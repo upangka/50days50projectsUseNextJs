@@ -54,3 +54,7 @@
 ## [10 testimonial box switcher](<./src/app/(cases)/testimonial-box-switcher>)
 
 <img src="./attachments/images/testimonial-box-switcher.gif" alt="" />
+
+## [11 Animated Countdown](<./src/app/(cases)/animated-countdown>)
+
+<img src="./attachments/images/animated-countdown.gif" alt="" />
