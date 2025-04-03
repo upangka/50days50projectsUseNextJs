@@ -1,0 +1,46 @@
+$time: 0.5s;
+.Number {
+  transform: rotate(120deg);
+  display: none;
+  transform-origin: bottom center;
+}
+
+.GoIn {
+  display: block;
+  animation: goIn $time linear both;
+  @keyframes goIn {
+    0% {
+      transform: rotate(120deg);
+    }
+
+    30% {
+      transform: rotate(-20deg);
+    }
+
+    60% {
+      transform: rotate(10deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+}
+
+.GoOut {
+  display: block;
+  animation: goOut $time linear both;
+  @keyframes goOut {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    60% {
+      transform: rotate(20deg);
+    }
+
+    100% {
+      transform: rotate(-120deg);
+    }
+  }
+}

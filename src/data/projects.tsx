@@ -44,7 +44,7 @@ export const projects: ProjectDemo[] = [
   { id: 31, title: 'Password Generator', route: 'password-generator', finished: false },
   { id: 32, title: 'Good Cheap Fast', route: 'good-cheap-fast', finished: false },
   { id: 33, title: 'Notes App', route: 'notes-app', finished: false },
-  { id: 34, title: 'Animated Countdown', route: 'animated-countdown', finished: false },
+  { id: 34, title: 'Animated Countdown', route: 'animated-countdown', finished: true },
   { id: 35, title: 'Image Carousel', route: 'image-carousel', finished: false },
   { id: 36, title: 'Hoverboard', route: 'hoverboard', finished: false },
   { id: 37, title: 'Pokedex', route: 'pokedex', finished: false },
