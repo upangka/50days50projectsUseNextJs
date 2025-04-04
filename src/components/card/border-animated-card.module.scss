@@ -1,0 +1,17 @@
+.CardContainer {
+  //   outline: 4px solid white;
+  //   overflow: hidden;
+}
+
+.LineBg {
+  animation: rotate var(--animation-duration, 3s) linear infinite both;
+  transform-origin: left top;
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

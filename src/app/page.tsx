@@ -3,6 +3,7 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import { Button } from '@/components/pkmer-button'
+import BorderAnimatedCard from '@/components/card/border-animated-card'
 import { projects, finishedProjects, unfinishedProjects } from '@/data/projects'
 import { getRandomInt } from '@/utils'
 import Image from 'next/image'
@@ -63,7 +64,7 @@ export default function App() {
       {/* 面板start */}
       <div className='mt-4 flex flex-col items-center justify-center'>
         {/* 面板描述start */}
-        <h2 className='mb-3.5 border-b border-double border-gray-200 pb-1.5 text-lg text-gray-200 italic select-none'>
+        <h2 className='mb-3.5 border-b border-dashed border-gray-200 pb-1.5 text-lg text-gray-200 italic select-none'>
           <a href='https://gitee.com/pkmer/50days50projects-use-next-js' className='font-bold'>
             Pkmer
           </a>{' '}
@@ -73,7 +74,7 @@ export default function App() {
         {/* 面板描述end */}
         {/* 面板选项start */}
         <section className='mx-auto flex w-[50vw] flex-col items-center justify-center gap-4'>
-          <Card highlightedIndex={highlightedIndex} total={projects.length} />
+          <BoardCard highlightedIndex={highlightedIndex} total={projects.length} />
           <ChooseBtn
             chooseStatus={chooseStatus}
             highlightedIndex={highlightedIndex}
@@ -91,11 +92,11 @@ interface CardProps {
   highlightedIndex: number
   total?: number
 }
-const Card: React.FC<CardProps> = ({ highlightedIndex }) => {
+const BoardCard: React.FC<CardProps> = ({ highlightedIndex }) => {
   const router = useRouter()
   return (
-    <>
-      <section className='flex flex-col items-center justify-center gap-4'>
+    <BorderAnimatedCard duration={5}>
+      <section className='flex flex-col items-center justify-center gap-4 p-10'>
         <ul className='flex h-full w-[51vw] flex-wrap items-center justify-start gap-2 overflow-hidden select-none'>
           {projects.map(project => (
             <li
@@ -115,7 +116,7 @@ const Card: React.FC<CardProps> = ({ highlightedIndex }) => {
           ))}
         </ul>
       </section>
-    </>
+    </BorderAnimatedCard>
   )
 }
 

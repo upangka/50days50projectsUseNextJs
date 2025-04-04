@@ -71,7 +71,8 @@ export const projects: ProjectDemo[] = [
   { id: 48, title: 'Random Image Feed', route: 'random-image-feed', finished: false },
   { id: 49, title: 'Todo List', route: 'todo-list', finished: false },
   { id: 50, title: 'Insect Catch Game', route: 'insect-catch-game', finished: false },
-  { id: 51, title: 'Simple Timer', route: 'simple-timer', finished: false }
+  { id: 51, title: 'Simple Timer', route: 'simple-timer', finished: false },
+  { id: 52, title: 'Border Line Animated', route: 'border-line-animated', finished: true }
 ]
 
 /**
