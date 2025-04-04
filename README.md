@@ -62,3 +62,7 @@
 ## [12 Border lineanimated](<./src/app/(cases)/border-line-animated>)
 
 <img src="./attachments/images/border-line-animated.gif" alt="示例图片" />
+
+## [13 Hoverboard](<./src/app/(cases)/hoverboard>)
+
+<img src="./attachments/images/hoverboard.gif" alt="示例图片" />
