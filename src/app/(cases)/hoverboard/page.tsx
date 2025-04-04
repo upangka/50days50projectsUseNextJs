@@ -57,7 +57,7 @@ export default function HoverBoardPage() {
   return (
     <section className='flex h-screen w-full items-center justify-center'>
       <div className='max-w-[1024px] min-w-[1024px] rounded-lg border-4 border-green-600/50 p-4 pr-3 shadow-lg shadow-green-600/50'>
-        <HoverBoard count={570} hoverColors={['red']} size={22} hoverColorDuration={1} />
+        <HoverBoard count={570} hoverColors={hoverColors} size={22} hoverColorDuration={1} />
       </div>
     </section>
   )

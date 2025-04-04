@@ -1,0 +1,25 @@
+.Item {
+  display: flex;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow:
+    0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  &:hover {
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.15);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.Choose {
+  transform: scale(1.15);
+  background-color: rgb(238, 223, 246);
+  color: black;
+}

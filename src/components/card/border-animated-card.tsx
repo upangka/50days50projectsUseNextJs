@@ -2,9 +2,23 @@ import clsx from 'clsx'
 import Styles from './border-animated-card.module.scss'
 
 interface BorderAnimatedCardProps extends React.PropsWithChildren {
+  /**
+   * 边框颜色
+   * @default 'green'
+   */
   borderColor?: string
+
+  /**
+   * 背景颜色
+   * @default 'black'
+   */
   backgroundColor?: string
-  duration?: number // 动画持续时间 s为单位
+
+  /**
+   * 动画持续时间（秒为单位）
+   * @default 3
+   */
+  duration?: number
 }
 
 const BorderAnimatedCard: React.FC<BorderAnimatedCardProps> = ({
