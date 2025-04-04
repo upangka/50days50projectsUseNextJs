@@ -66,3 +66,7 @@
 ## [13 Hoverboard](<./src/app/(cases)/hoverboard>)
 
 <img src="./attachments/images/hoverboard.gif" alt="示例图片" />
+
+## [14 Feedback UI Design](<./src/app/(cases)/feedback-ui-design>)
+
+<img src="./attachments/images/feedback-ui-design.gif" alt="示例图片" />
