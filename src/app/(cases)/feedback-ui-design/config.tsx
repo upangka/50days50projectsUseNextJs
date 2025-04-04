@@ -1,4 +1,9 @@
-import type { SatisfactionOption } from './types'
+export type SatisfactionOption = {
+  icon: string
+  text: string
+  color: string
+}
+
 /**
  * 用户满意度评价选项配置
  */

@@ -20,6 +20,11 @@ interface FeedbackUiDesignProps {
   iconSize?: number
 }
 
+/**
+ * 用户满意度评价管理父组件
+ * 1. 用户满意度评价UI组件
+ * 2. 反馈结果UI组件
+ */
 const FeedbackUiDesign: React.FC<FeedbackUiDesignProps> = ({ iconSize = 50 }) => {
   const [selectedOption, setSelectedOption] = useState<number>(-1)
   const [isSubmitted, setIsSubmitted] = useState(false)
