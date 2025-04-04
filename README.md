@@ -57,4 +57,8 @@
 
 ## [11 Animated Countdown](<./src/app/(cases)/animated-countdown>)
 
-<img src="./attachments/images/animated-countdown.gif" alt="" />
+<img src="./attachments/images/animated-countdown.gif" alt="示例图片" />
+
+## [12 Border lineanimated](<./src/app/(cases)/border-line-animated>)
+
+<img src="./attachments/images/border-line-animated.gif" alt="示例图片" />
