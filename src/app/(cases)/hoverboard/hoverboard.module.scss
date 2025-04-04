@@ -1,0 +1,7 @@
+.Square {
+  transition: all 1s ease-in-out;
+
+  &:hover {
+    transition-duration: 0s;
+  }
+}
