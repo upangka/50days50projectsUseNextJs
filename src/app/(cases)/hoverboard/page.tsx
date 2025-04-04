@@ -1,4 +1,4 @@
-import HoverBoard from './hoverborder'
+import HoverBoard from '@/components/hoverboard/hoverborder'
 
 const hoverColors = [
   '#DAE56D',
