@@ -1,5 +1,6 @@
 .Square {
-  transition: all 1s ease-in-out;
+  // 不在style做的原因是因为style的权重太高了
+  transition: all var(--transition-duration, 1s) ease-in-out;
 
   &:hover {
     transition-duration: 0s;
