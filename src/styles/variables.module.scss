@@ -1,6 +1,7 @@
 $primary-color: #00a63e;
-
+$primary-bg-color: #011627;
 // 对于变量需要导出
 :export {
   primaryColor: $primary-color;
+  primaryBgColor: $primary-bg-color;
 }
