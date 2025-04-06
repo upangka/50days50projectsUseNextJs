@@ -70,3 +70,7 @@
 ## [14 Feedback UI Design](<./src/app/(cases)/feedback-ui-design>)
 
 <img src="./attachments/images/feedback-ui-design.gif" alt="示例图片" />
+
+## [15 Rotating navigation animation](<./src/app/(cases)/rotating-navigation-animation>)
+
+<img src="./attachments/images/rotating-navigation-animation.gif" alt="示例图片" />
