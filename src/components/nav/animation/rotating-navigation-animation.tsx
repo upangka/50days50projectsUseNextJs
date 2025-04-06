@@ -76,7 +76,7 @@ const RotatingBtnCircle: React.FC<{
       {/* circle menu部分start */}
       <div
         className={clsx(
-          isMenuOpen ? '-rotate-90 bg-red-500' : 'bg-green-500',
+          isMenuOpen ? '-rotate-90 bg-blue-500' : 'bg-green-500',
           'relative h-[200px] w-[200px] rounded-full transition-all duration-500'
         )}
       >
@@ -84,7 +84,7 @@ const RotatingBtnCircle: React.FC<{
           onClick={onOpen}
           className='absolute right-1/4 bottom-1/4 translate-x-1/3 translate-y-1/3 cursor-pointer'
         >
-          <Icon icon='bytesize:menu' {...size} className='text-white hover:text-red-500' />
+          <Icon icon='bytesize:menu' {...size} className='text-gray-300 hover:text-white' />
         </button>
 
         <button
@@ -94,7 +94,7 @@ const RotatingBtnCircle: React.FC<{
           <Icon
             icon='flowbite:close-outline'
             {...size}
-            className='text-white hover:text-green-500'
+            className='text-gray-300 hover:text-white'
           />
         </button>
       </div>
