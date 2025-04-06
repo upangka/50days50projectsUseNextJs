@@ -10,8 +10,9 @@ export default function RotatingNavigationAnimationPage() {
   }
 
   return (
-    <section className='flex h-screen w-screen items-center justify-center'>
-      <div className='fixed top-0 left-0 -translate-1/2'>
+    <section className='overflow-hidden bg-black'>
+      {/* memu start */}
+      <div className='fixed top-0 left-0 z-50 -translate-1/2'>
         {/* circle menu部分start */}
         <div
           className={clsx(
@@ -39,6 +40,20 @@ export default function RotatingNavigationAnimationPage() {
         </div>
         {/* circle menu部分end */}
       </div>
+      {/* memu end */}
+
+      {/* content start */}
+      <main
+        style={{
+          transformOrigin: 'top left'
+        }}
+        className={clsx(
+          isMenuOpen &&
+            '-rotate-10 rounded-lg border-4 border-green-500/50 shadow-lg shadow-green-500/50',
+          'relative z-10 h-screen w-screen bg-white transition-all duration-500'
+        )}
+      ></main>
+      {/* content end */}
     </section>
   )
 }
