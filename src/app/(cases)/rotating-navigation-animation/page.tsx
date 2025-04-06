@@ -1,4 +1,4 @@
-import { navList } from './config'
+import { navList } from '@/data/config'
 import RotatingNavigationAnimation from '@/components/nav/animation/rotating-navigation-animation'
 import { PostDemoA, PostDemoB } from '@/components/post/post-demo'
 export default function RotatingNavigationAnimationPage() {

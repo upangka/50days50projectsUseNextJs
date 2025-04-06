@@ -42,7 +42,7 @@ const RotatingNavigationAnimation: React.FC<Props> = memo(
           className={clsx(
             isMenuOpen &&
               '-rotate-12 rounded-lg border-4 border-green-500/50 shadow-lg shadow-green-500/50',
-            'relative z-10 w-screen overflow-auto bg-white transition-all duration-500'
+            'relative z-10 w-screen overflow-x-hidden overflow-y-auto bg-white transition-all duration-500'
           )}
         >
           {children}

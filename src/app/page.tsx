@@ -2,8 +2,10 @@
 
 import clsx from 'clsx'
 import { useState } from 'react'
+import { navList } from '@/data/config'
 import { Button } from '@/components/pkmer-button'
 import BorderAnimatedCard from '@/components/card/border-animated-card'
+import RotatingNavigationAnimation from '@/components/nav/animation/rotating-navigation-animation'
 import { projects, finishedProjects, unfinishedProjects } from '@/data/projects'
 import { getRandomInt } from '@/utils'
 import Image from 'next/image'
@@ -49,42 +51,45 @@ export default function App() {
   }
 
   return (
-    <>
-      {/* 标题start */}
-      <div className='flex w-screen flex-col items-center justify-center gap-1.5 pt-8 select-none'>
-        <h1 className='rounded-md bg-green-600 px-3.5 py-2 text-3xl font-bold text-white'>
-          {projects.length} Days {projects.length} Projects
-        </h1>
-        <p className='text-lg text-gray-200'>
-          Happy Coding 😊<span className='text-2xl'> :)</span>
-        </p>
-        <Image className='rounded-full' src='/pkmer.jpeg' width={39} height={39} alt='pkmer' />
-      </div>
-      {/* 标题end */}
-      {/* 面板start */}
-      <div className='mt-4 flex flex-col items-center justify-center'>
-        {/* 面板描述start */}
-        <h2 className='mb-3.5 border-b border-dashed border-gray-200 pb-1.5 text-lg text-gray-200 italic select-none'>
-          <a href='https://gitee.com/pkmer/50days50projects-use-next-js' className='font-bold'>
-            Pkmer
-          </a>{' '}
-          have completed <span className='text-2xl text-green-500'>{finishedProjects.length}</span>{' '}
-          {finishedProjects.length < 2 ? 'case' : 'cases'}, keep it up!
-        </h2>
-        {/* 面板描述end */}
-        {/* 面板选项start */}
-        <section className='mx-auto flex w-[50vw] flex-col items-center justify-center gap-4'>
-          <BoardCard highlightedIndex={highlightedIndex} total={projects.length} />
-          <ChooseBtn
-            chooseStatus={chooseStatus}
-            highlightedIndex={highlightedIndex}
-            onStart={start}
-          />
-        </section>
-        {/* 面板选项end */}
-      </div>
-      {/* 面板end */}
-    </>
+    <RotatingNavigationAnimation navList={navList}>
+      <section className='h-screen w-screen overflow-x-hidden bg-black'>
+        {/* 标题start */}
+        <div className='flex w-screen flex-col items-center justify-center gap-1.5 pt-8 select-none'>
+          <h1 className='rounded-md bg-green-600 px-3.5 py-2 text-3xl font-bold text-white'>
+            {projects.length} Days {projects.length} Projects
+          </h1>
+          <p className='text-lg text-gray-200'>
+            Happy Coding 😊<span className='text-2xl'> :)</span>
+          </p>
+          <Image className='rounded-full' src='/pkmer.jpeg' width={39} height={39} alt='pkmer' />
+        </div>
+        {/* 标题end */}
+        {/* 面板start */}
+        <div className='mt-4 flex flex-col items-center justify-center'>
+          {/* 面板描述start */}
+          <h2 className='mb-3.5 border-b border-dashed border-gray-200 pb-1.5 text-lg text-gray-200 italic select-none'>
+            <a href='https://gitee.com/pkmer/50days50projects-use-next-js' className='font-bold'>
+              Pkmer
+            </a>{' '}
+            have completed{' '}
+            <span className='text-2xl text-green-500'>{finishedProjects.length}</span>{' '}
+            {finishedProjects.length < 2 ? 'case' : 'cases'}, keep it up!
+          </h2>
+          {/* 面板描述end */}
+          {/* 面板选项start */}
+          <section className='mx-auto flex w-[50vw] flex-col items-center justify-center gap-4'>
+            <BoardCard highlightedIndex={highlightedIndex} total={projects.length} />
+            <ChooseBtn
+              chooseStatus={chooseStatus}
+              highlightedIndex={highlightedIndex}
+              onStart={start}
+            />
+          </section>
+          {/* 面板选项end */}
+        </div>
+        {/* 面板end */}
+      </section>
+    </RotatingNavigationAnimation>
   )
 }
 
