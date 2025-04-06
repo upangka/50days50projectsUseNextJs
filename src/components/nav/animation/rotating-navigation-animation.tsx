@@ -149,7 +149,7 @@ const RotatingNav: React.FC<{ navList: NavItem[]; isMenuOpen: boolean }> = memo(
  */
 const RotatingFooter: React.FC<{ isMenuOpen: boolean }> = memo(({ isMenuOpen }) => {
   return (
-    <footer className='absolute right-1/12 bottom-1/12 flex flex-col gap-2'>
+    <footer className='absolute right-1/12 bottom-[80px] flex flex-col gap-2'>
       <p
         style={{
           transform: isMenuOpen ? `translateY(0)` : 'translateY(200%)',
