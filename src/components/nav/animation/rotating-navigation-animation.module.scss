@@ -1,0 +1,8 @@
+@use '@/styles/variables.module.scss' as V;
+
+.Icon {
+  color: white;
+  &:hover {
+    color: V.$primary-color;
+  }
+}
