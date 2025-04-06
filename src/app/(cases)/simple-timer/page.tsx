@@ -1,8 +1,8 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
-import { Icon } from '@iconify/react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { mapRange } from '@/utils'
 import CircleClock from './_components/circle-clock'
+import ControlBtnBoard from './_components/control-btn-board'
 const totalCount = 60
 export default function SimpleTimerPage() {
   const [currentDegree, setCurrentDegree] = useState(0)
@@ -10,39 +10,18 @@ export default function SimpleTimerPage() {
   const timer = useRef<number | null>(null)
   const [isStarted, setIsStarted] = useState(false)
 
-  /**
-   * 暂停
-   */
-  function toggleStopAndResume() {
-    if (isStarted) {
-      // 处理正在记时间的情况
-      setIsStarted(false)
-      if (timer.current) {
-        clearInterval(timer.current)
-      }
-    } else {
-      // 继续运行
-      startTimer()
-      setIsStarted(true)
-    }
-  }
-
-  /**
-   * 重置
-   */
-  function resetTimer() {
+  // 清除定时器的通用函数
+  const clearTimer = useCallback(() => {
     if (timer.current) {
       clearInterval(timer.current)
+      timer.current = null
     }
-    totalTime.current = 0
-    setCurrentDegree(0)
-    setIsStarted(false)
-  }
+  }, [])
 
   /**
    * 开始
    */
-  function startTimer() {
+  const startTimer = useCallback(() => {
     timer.current = window.setInterval(() => {
       if (totalTime.current >= totalCount && timer.current) {
         clearInterval(timer.current)
@@ -54,7 +33,33 @@ export default function SimpleTimerPage() {
         setCurrentDegree(degree)
       }
     }, 1000)
-  }
+  }, [])
+  /**
+   * 暂停
+   */
+  const toggleStopAndResume = useCallback(() => {
+    if (isStarted) {
+      // 处理正在记时间的情况
+      setIsStarted(false)
+      clearTimer()
+    } else {
+      // 继续运行
+      startTimer()
+      setIsStarted(true)
+    }
+  }, [clearTimer, isStarted, startTimer]) // 要依赖isStarted，不然总是snapshot快照
+
+  /**
+   * 重置
+   */
+  const resetTimer = useCallback(() => {
+    if (timer.current) {
+      clearInterval(timer.current)
+    }
+    totalTime.current = 0
+    setCurrentDegree(0)
+    setIsStarted(false)
+  }, [])
 
   useEffect(() => {
     return () => {
@@ -87,41 +92,3 @@ export default function SimpleTimerPage() {
     </section>
   )
 }
-
-interface ControlBtnBoardProps {
-  isStarted: boolean
-  onReset: () => void
-  toggleStopAndResume: () => void
-}
-
-/**
- * 控制按钮面板
- */
-const ControlBtnBoard: React.FC<ControlBtnBoardProps> = ({
-  isStarted,
-  onReset,
-  toggleStopAndResume
-}) => {
-  return (
-    <section className='absolute bottom-0 left-0 flex w-full justify-around pb-5'>
-      <button onClick={onReset}>
-        <Icon
-          icon='ic:outline-refresh'
-          className='text-white hover:text-green-500'
-          width={30}
-          height={30}
-        />
-      </button>
-      <button onClick={toggleStopAndResume}>
-        <Icon
-          icon={isStarted ? 'carbon:pause-outline' : 'iconamoon:player-play-fill'}
-          className='text-white hover:text-green-500'
-          width={30}
-          height={30}
-        />
-      </button>
-    </section>
-  )
-}
-
-ControlBtnBoard.displayName = 'ControlBtnBoard'
