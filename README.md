@@ -74,3 +74,7 @@
 ## [15 Rotating navigation animation](<./src/app/(cases)/rotating-navigation-animation>)
 
 <img src="./attachments/images/rotating-navigation-animation.gif" alt="示例图片" />
+
+## [16 Simple Timer](<./src/app/(cases)/simple-timer>)
+
+<img src="./attachments/images/simple-timer.gif" alt="示例图片" />
