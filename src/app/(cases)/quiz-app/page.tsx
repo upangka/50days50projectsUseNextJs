@@ -32,6 +32,7 @@ export default function QuizAppPage() {
           total={quizData.length}
           onReset={() => {
             setCurrentQuizIndex(0)
+            setAnswers([])
           }}
         />
       ) : (
