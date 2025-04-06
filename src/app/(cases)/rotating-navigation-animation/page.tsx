@@ -26,7 +26,7 @@ export default function RotatingNavigationAnimationPage() {
   }
 
   return (
-    <section className='overflow-hidden bg-black'>
+    <section className='relative overflow-hidden bg-black'>
       {/* memu start */}
       <div className='fixed top-0 left-0 z-50 -translate-1/2'>
         {/* circle menu部分start */}
@@ -101,6 +101,35 @@ export default function RotatingNavigationAnimationPage() {
         )}
       ></main>
       {/* content end */}
+
+      {/* footer description start */}
+      <footer className='absolute right-1/12 bottom-1/12 flex flex-col gap-2'>
+        <p
+          style={{
+            transform: isMenuOpen ? `translateY(0)` : 'translateY(200%)',
+            transition: 'transform 0.5s ease-in-out',
+            transitionDelay: isMenuOpen ? `${1 * 0.1}s` : '0s'
+          }}
+          className='text-left text-xl'
+        >
+          I Love <span className='text-green-500'>React</span> And{' '}
+          <span className='text-green-500'>Next.js</span>
+        </p>
+        <p
+          style={{
+            transform: isMenuOpen ? `translateY(0)` : 'translateY(200%)',
+            transition: 'transform 0.5s ease-in-out',
+            transitionDelay: isMenuOpen ? `${2 * 0.1}s` : '0s'
+          }}
+          className='text-left text-xl'
+        >
+          Happy Coding <span className='text-2xl text-yellow-500'>:)</span>🥳 from{' '}
+          <a href='https://gitee.com/pkmer/50days50projects-use-next-js' className='text-green-500'>
+            Pkmer
+          </a>
+        </p>
+      </footer>
+      {/* footer description end */}
     </section>
   )
 }
