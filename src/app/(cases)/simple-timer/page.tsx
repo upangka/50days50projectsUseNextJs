@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Icon } from '@iconify/react'
 import { mapRange } from '@/utils'
 import CircleClock from './_components/circle-clock'
-const totalCount = 10
+const totalCount = 60
 export default function SimpleTimerPage() {
   const [currentDegree, setCurrentDegree] = useState(0)
   const totalTime = useRef(0)
