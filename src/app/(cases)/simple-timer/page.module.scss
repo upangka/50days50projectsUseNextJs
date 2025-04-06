@@ -1,0 +1,9 @@
+.Conic {
+  background: conic-gradient(
+    transparent 0deg,
+    transparent var(--rotate-degree),
+    white var(--rotate-degree),
+    white 360deg
+  );
+  transition: background 0.5s linear;
+}

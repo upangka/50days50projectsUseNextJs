@@ -13,3 +13,8 @@ export const mapRange = (
 ) => {
   return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
 }
+
+/**
+ * 添加0
+ */
+export const addLeadingZero = (num: number) => (num < 10 ? `0${num}` : String(num))
