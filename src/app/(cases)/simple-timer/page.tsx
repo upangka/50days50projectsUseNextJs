@@ -10,6 +10,9 @@ export default function SimpleTimerPage() {
   const timer = useRef<number | null>(null)
   const [isStarted, setIsStarted] = useState(false)
 
+  // 是否完成
+  const isOver = currentDegree >= 360
+
   // 清除定时器的通用函数
   const clearTimer = useCallback(() => {
     if (timer.current) {
@@ -24,7 +27,7 @@ export default function SimpleTimerPage() {
   const startTimer = useCallback(() => {
     timer.current = window.setInterval(() => {
       if (totalTime.current >= totalCount && timer.current) {
-        clearInterval(timer.current)
+        clearTimer() // 暂停
       } else {
         // 计数+1
         totalTime.current += 1
@@ -53,13 +56,11 @@ export default function SimpleTimerPage() {
    * 重置
    */
   const resetTimer = useCallback(() => {
-    if (timer.current) {
-      clearInterval(timer.current)
-    }
+    clearTimer()
     totalTime.current = 0
     setCurrentDegree(0)
     setIsStarted(false)
-  }, [])
+  }, [clearTimer])
 
   useEffect(() => {
     return () => {
@@ -82,6 +83,7 @@ export default function SimpleTimerPage() {
 
         {/* 按钮start */}
         <ControlBtnBoard
+          isOver={isOver}
           isStarted={isStarted}
           onReset={resetTimer}
           toggleStopAndResume={toggleStopAndResume}

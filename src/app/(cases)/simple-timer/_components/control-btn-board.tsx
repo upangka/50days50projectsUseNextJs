@@ -1,8 +1,22 @@
 'use client'
 import { Icon } from '@iconify/react'
+import clsx from 'clsx'
 interface ControlBtnBoardProps {
+  /**
+   * 是否运行结束
+   */
+  isOver: boolean
+  /**
+   * 是否开始
+   */
   isStarted: boolean
+  /**
+   * 重置
+   */
   onReset: () => void
+  /**
+   * 切换停止和恢复
+   */
   toggleStopAndResume: () => void
 }
 
@@ -10,6 +24,7 @@ interface ControlBtnBoardProps {
  * 控制按钮面板
  */
 const ControlBtnBoard: React.FC<ControlBtnBoardProps> = ({
+  isOver,
   isStarted,
   onReset,
   toggleStopAndResume
@@ -19,15 +34,18 @@ const ControlBtnBoard: React.FC<ControlBtnBoardProps> = ({
       <button onClick={onReset}>
         <Icon
           icon='ic:outline-refresh'
-          className='text-white hover:text-green-500'
+          className='cursor-pointer text-white hover:text-green-500'
           width={30}
           height={30}
         />
       </button>
-      <button onClick={toggleStopAndResume}>
+      <button disabled={isOver} onClick={toggleStopAndResume}>
         <Icon
           icon={isStarted ? 'carbon:pause-outline' : 'iconamoon:player-play-fill'}
-          className='text-white hover:text-green-500'
+          className={clsx(
+            !isOver && 'cursor-pointer text-white hover:text-green-500',
+            isOver && 'cursor-not-allowed text-gray-500'
+          )}
           width={30}
           height={30}
         />
