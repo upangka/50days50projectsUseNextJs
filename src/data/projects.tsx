@@ -56,7 +56,7 @@ export const projects: ProjectDemo[] = [
     finished: false
   },
   { id: 40, title: '3d Background Boxes', route: '3d-background-boxes', finished: false },
-  { id: 41, title: 'Verify Account Ui', route: 'verify-account-ui', finished: false },
+  { id: 41, title: 'Verify Account Ui', route: 'verify-account-ui', finished: true },
   { id: 42, title: 'Live User Filter', route: 'live-user-filter', finished: true },
   { id: 43, title: 'Feedback Ui Design', route: 'feedback-ui-design', finished: true },
   { id: 44, title: 'Custom Range Slider', route: 'custom-range-slider', finished: false },
