@@ -12,7 +12,7 @@ export const projects: ProjectDemo[] = [
     id: 3,
     title: 'Rotating Navigation Animation',
     route: 'rotating-navigation-animation',
-    finished: false
+    finished: true
   },
   { id: 4, title: 'Hidden Search Widget', route: 'hidden-search-widget', finished: false },
   { id: 5, title: 'Blurry Loading', route: 'blurry-loading', finished: false },
