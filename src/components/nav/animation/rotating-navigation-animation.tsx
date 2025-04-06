@@ -1,4 +1,5 @@
 'use client'
+import { useRouter } from 'next/navigation'
 import { useState, memo } from 'react'
 import { clsx } from 'clsx'
 import type { NavItem } from './types'
@@ -107,11 +108,15 @@ const RotatingBtnCircle: React.FC<{
  */
 const RotatingNav: React.FC<{ navList: NavItem[]; isMenuOpen: boolean }> = memo(
   ({ navList, isMenuOpen }) => {
+    const router = useRouter()
+
     return (
       <nav className='fixed bottom-0 left-2 -translate-y-3/4'>
         <ul className='flex flex-col items-center gap-4'>
           {navList.map((item, index) => (
             <li
+              key={index}
+              onClick={() => router.push(item.link)}
               style={{
                 transform: isMenuOpen
                   ? `translateX(${(index / 2) * (1 / 2) * 100}%)`
@@ -119,7 +124,6 @@ const RotatingNav: React.FC<{ navList: NavItem[]; isMenuOpen: boolean }> = memo(
                 transition: 'transform 0.5s ease-in-out',
                 transitionDelay: isMenuOpen ? `${index * 0.1}s` : '0s'
               }}
-              key={index}
               className='flex items-center gap-1 border-b-2 border-gray-50 pb-2 hover:border-green-500 hover:text-green-500'
             >
               <Icon
