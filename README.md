@@ -78,3 +78,7 @@
 ## [16 Simple Timer](<./src/app/(cases)/simple-timer>)
 
 <img src="./attachments/images/simple-timer.gif" alt="示例图片" />
+
+## [17 Verify Account UI](<./src/app/(cases)/verify-account-ui>)
+
+<img src="./attachments/images/verify-account-ui.gif" alt="示例图片" />
