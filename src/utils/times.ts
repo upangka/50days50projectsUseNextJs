@@ -15,6 +15,22 @@ export const mapRange = (
 }
 
 /**
- * 添加0
+ * 将秒数转换为 MM:SS 格式
+ * @param totalSeconds 总秒数
+ * @returns
  */
-export const addLeadingZero = (num: number) => (num < 10 ? `0${num}` : String(num))
+export function formatSecondsToMMSS(totalSeconds: number) {
+  // 计算分钟和秒数
+  const minutes = Math.floor(totalSeconds / 60)
+  const seconds = totalSeconds % 60
+
+  // 使用 padStart 确保两位数格式
+  const formattedMinutes = String(minutes).padStart(2, '0')
+  const formattedSeconds = String(seconds).padStart(2, '0')
+
+  return {
+    minutes: formattedMinutes,
+    seconds: formattedSeconds,
+    full: `${formattedMinutes}:${formattedSeconds}`
+  }
+}
