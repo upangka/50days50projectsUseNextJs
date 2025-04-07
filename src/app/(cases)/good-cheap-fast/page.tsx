@@ -6,7 +6,7 @@ import { msgs, projectPriorities } from './config'
 
 export default function GoodCheapFastPage() {
   const [chooseStates, setChooseStates] = useState(Array(projectPriorities.length).fill(false))
-  /** 用队列来实现会比较简单点: 记录为true的下标队列 */
+  /** 用队列来实现会比较简单点: 记录为true的下标队列,用于处理最先为true的index */
   const indexQueue = useRef<number[]>([])
   const history = useRef<string[]>([])
 

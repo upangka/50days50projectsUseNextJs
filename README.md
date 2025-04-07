@@ -86,3 +86,7 @@
 ## [18 Quiz App](<./src/app/(cases)/quiz-app>)
 
 <img src="./attachments/images/quiz-app.gif" alt="示例图片" />
+
+## [19 Good Cheap Fast](<./src/app/(cases)/good-cheap-fast>)
+
+<img src="./attachments/images/good-cheap-fast.gif" alt="示例图片" />
