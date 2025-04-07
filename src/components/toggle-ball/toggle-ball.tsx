@@ -16,21 +16,29 @@ interface ToggleBallProps {
    * 球的颜色
    */
   ballColor?: string
+  /**
+   * 开关是否打开
+   */
+  isOpen: boolean
+  /**
+   * 开关状态改变
+   */
   onChange: (isOpen: boolean) => void
 }
 const ToggleBall: React.FC<ToggleBallProps> = ({
   bgColorOpen = AppVariables.primaryColor,
   bgColorClose = AppVariables.primaryGray,
   ballColor = 'white',
+  isOpen,
   onChange
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  // const [isOpen, setIsOpen] = useState(false)
   // 控制动画的开关，避免初始加载就运行动画
   const openAnimation = useRef(false)
 
-  function handleChange() {
-    setIsOpen(prev => !prev)
-    onChange(!isOpen)
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const isOpen = e.target.checked
+    onChange(isOpen)
     openAnimation.current = true
   }
 
@@ -45,7 +53,8 @@ const ToggleBall: React.FC<ToggleBallProps> = ({
       )}
     >
       <input
-        onChange={handleChange}
+        onChange={e => handleChange(e)}
+        defaultChecked={isOpen}
         type='checkbox'
         className={clsx(Styles.CheckedBox, 'hidden')}
       />
