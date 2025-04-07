@@ -2,7 +2,8 @@
 import { useState, useRef, useEffect, type Ref } from 'react'
 import ToggleBall from '@/components/toggle-ball/toggle-ball'
 import clsx from 'clsx'
-import Styles from './styles.module.scss'
+import HistoryStyles from './_components/history-terminal.module.scss'
+import HistoryTerminal from './_components/history-terminal'
 import { ZCOOL_KuaiLe } from 'next/font/google'
 const zcoolKuaiLe = ZCOOL_KuaiLe({
   weight: '400', // 该字体只有一个权重
@@ -75,7 +76,7 @@ export default function GoodCheapFastPage() {
         // 加入此时的true下标
         indexQueue.current.push(index)
         history.current.push(
-          `移除 ${firstIndex} ,并更新队列 <span class='${Styles.HistoryText}'>[ ${indexQueue.current} ] </span>`
+          `移除 ${firstIndex} ,并更新队列 <span class='${HistoryStyles.HistoryText}'>[ ${indexQueue.current} ] </span>`
         )
 
         setChooseStates(prevStates => {
@@ -93,7 +94,7 @@ export default function GoodCheapFastPage() {
         })
         indexQueue.current.push(index)
         history.current.push(
-          `新增 ${index} , 此时队列 <span class='${Styles.HistoryText}'>[ ${indexQueue.current} ]</span> `
+          `新增 ${index} , 此时队列 <span class='${HistoryStyles.HistoryText}'>[ ${indexQueue.current} ]</span> `
         )
       }
     } else {
@@ -107,7 +108,7 @@ export default function GoodCheapFastPage() {
         return newStates
       })
       history.current.push(
-        `移除 ${index} 此时队列 <span class='${Styles.HistoryText}'>[ ${indexQueue.current} ]</span>`
+        `移除 ${index} 此时队列 <span class='${HistoryStyles.HistoryText}'>[ ${indexQueue.current} ]</span>`
       )
     }
   }
@@ -191,58 +192,3 @@ const ProjectMsgPrompt: React.FC<ProjectMsgPromptProps> = ({ msg }) => {
   )
 }
 ProjectMsgPrompt.displayName = 'ProjectMsgPrompt'
-// ==========History terminal================
-interface HistoryTerminalProps {
-  ref?: Ref<HTMLUListElement>
-  history: string[]
-}
-const HistoryTerminal: React.FC<HistoryTerminalProps> = ({ ref, history }) => {
-  return (
-    <section
-      className={clsx(
-        Styles.HistoryContainer,
-        'absolute top-0 -right-[130%] flex h-full w-full flex-col border border-white shadow-md shadow-white'
-      )}
-    >
-      {/* 头部start */}
-      <ul className='flex w-full items-center justify-start gap-1 p-3.5'>
-        <li className='h-[15px] w-[15px] rounded-full bg-red-500'></li>
-        <li className='h-[15px] w-[15px] rounded-full bg-green-500'></li>
-        <li className='h-[15px] w-[15px] rounded-full bg-blue-500'></li>
-        <li className='text-md flex-1 text-center text-white'>操作日志</li>
-      </ul>
-      {/* 头部end */}
-      <hr className='text-white' />
-      {/* 日志start */}
-      <HistoryTerminalContent ref={ref} history={history} />
-      {/* 日志end */}
-    </section>
-  )
-}
-
-HistoryTerminal.displayName = 'HistoryTerminal'
-
-const HistoryTerminalContent: React.FC<HistoryTerminalProps> = ({ ref, history }) => {
-  return (
-    <ul
-      ref={ref}
-      style={{
-        scrollbarColor: '#10b981 #000' // 滚动条颜色
-      }}
-      className='text-md flex flex-col items-start justify-start gap-1 overflow-y-auto rounded-lg p-3 text-white'
-    >
-      {history.map((item, index) => (
-        <li key={index} className='flex gap-2'>
-          <span>{'>'}</span>
-          <p
-            dangerouslySetInnerHTML={{
-              __html: item
-            }}
-          ></p>
-        </li>
-      ))}
-    </ul>
-  )
-}
-
-HistoryTerminalContent.displayName = 'HistoryTerminal'
