@@ -111,7 +111,7 @@ export default function GoodCheapFastPage() {
             <ul
               ref={ulRef}
               style={{
-                scrollbarColor: '#10b981 #000'
+                scrollbarColor: '#10b981 #000' // 滚动条颜色
               }}
               className='text-md flex flex-col items-start justify-start gap-1 overflow-y-auto rounded-lg p-3 text-white'
             >

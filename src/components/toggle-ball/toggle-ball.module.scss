@@ -3,7 +3,7 @@ $slide-left: slide-left;
 
 // 使用Sass的mixin定义动画
 @mixin slide($direction) {
-  @if $direction == 'right' {
+  @if $direction == #{$slide-right} {
     @keyframes #{$slide-right} {
       0% {
         transform: translateX(0) scale(1);
@@ -16,7 +16,7 @@ $slide-left: slide-left;
         transform: translateX(148%) scale(1);
       }
     }
-  } @else if $direction == 'left' {
+  } @else if $direction == #{$slide-left} {
     @keyframes #{$slide-left} {
       0% {
         transform: translateX(148%) scale(1);
@@ -39,11 +39,11 @@ $slide-left: slide-left;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
     animation-name: $slide-left;
-    @include slide('right');
+    @include slide($slide-left);
   }
 
   .CheckedBox:checked + .Ball {
     animation-name: $slide-right;
-    @include slide('left');
+    @include slide($slide-right);
   }
 }
