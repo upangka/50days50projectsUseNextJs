@@ -38,12 +38,15 @@ $slide-left: slide-left;
     animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
-    animation-name: $slide-left;
-    @include slide($slide-left);
-  }
 
-  .CheckedBox:checked + .Ball {
-    animation-name: $slide-right;
-    @include slide($slide-right);
+    &.ToLeft {
+      animation-name: $slide-left;
+      @include slide($slide-left);
+    }
+
+    &.ToRight {
+      animation-name: $slide-right;
+      @include slide($slide-right);
+    }
   }
 }

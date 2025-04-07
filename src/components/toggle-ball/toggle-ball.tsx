@@ -51,6 +51,7 @@ const ToggleBall: React.FC<ToggleBallProps> = ({
         'relative inline-block aspect-[2/1] w-[80px] rounded-3xl'
       )}
     >
+      {/* 隐藏input用于无障碍，但不作为动画触发依据,这里只作为事件的触发，不在css使用:checked处理样式 */}
       <input
         onChange={e => handleChange(e)}
         type='checkbox'
@@ -62,7 +63,8 @@ const ToggleBall: React.FC<ToggleBallProps> = ({
           backgroundColor: ballColor
         }}
         className={clsx(
-          openAnimation.current && Styles.Ball,
+          openAnimation.current && Styles.Ball, // 控制是否允许动画
+          isOpen ? Styles.ToRight : Styles.ToLeft, // 前提是要有Ball父类，控制左移动，右移动动画
           'absolute top-1/2 aspect-square w-2/5 -translate-y-1/2 rounded-full'
         )}
       ></div>
