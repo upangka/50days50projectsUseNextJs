@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, type Ref } from 'react'
 import ToggleBall from '@/components/toggle-ball/toggle-ball'
 import clsx from 'clsx'
 import Styles from './styles.module.scss'
@@ -40,7 +40,7 @@ export default function GoodCheapFastPage() {
   const msgsSumkey = indexQueue.current.reduce((prev, item) => prev + item, 0)
   // 找到对应的msg
   const msg = msgs.find(msg => msg.sum === msgsSumkey)
-  console.log({ msgsSumkey, msg })
+  const isShowMsgPrompt = msg && indexQueue.current.length >= 2
 
   /**
    * 在 history 添加新数据后，让滚动条自动滚动到底部
@@ -114,7 +114,7 @@ export default function GoodCheapFastPage() {
       )}
     >
       {/* msg start */}
-      {msg && (
+      {isShowMsgPrompt && (
         <div className='flex w-fit flex-col items-center justify-center gap-3.5'>
           <h1 className='text-2xl font-bold'>{msg.mark}</h1>
           <p className='text-xl text-green-500'>{msg.description}</p>
@@ -158,24 +158,7 @@ export default function GoodCheapFastPage() {
             {/* 头部end */}
             <hr className='text-white' />
             {/* 日志start */}
-            <ul
-              ref={ulRef}
-              style={{
-                scrollbarColor: '#10b981 #000' // 滚动条颜色
-              }}
-              className='text-md flex flex-col items-start justify-start gap-1 overflow-y-auto rounded-lg p-3 text-white'
-            >
-              {history.current.map((item, index) => (
-                <li key={index} className='flex gap-2'>
-                  <span>{'>'}</span>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: item
-                    }}
-                  ></p>
-                </li>
-              ))}
-            </ul>
+            <HistoryTerminal ref={ulRef} history={history.current} />
             {/* 日志end */}
           </section>
         )}
@@ -184,3 +167,33 @@ export default function GoodCheapFastPage() {
     </section>
   )
 }
+
+interface HistoryTerminalProps {
+  ref?: Ref<HTMLUListElement>
+  history: string[]
+}
+
+const HistoryTerminal: React.FC<HistoryTerminalProps> = ({ ref, history }) => {
+  return (
+    <ul
+      ref={ref}
+      style={{
+        scrollbarColor: '#10b981 #000' // 滚动条颜色
+      }}
+      className='text-md flex flex-col items-start justify-start gap-1 overflow-y-auto rounded-lg p-3 text-white'
+    >
+      {history.map((item, index) => (
+        <li key={index} className='flex gap-2'>
+          <span>{'>'}</span>
+          <p
+            dangerouslySetInnerHTML={{
+              __html: item
+            }}
+          ></p>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+HistoryTerminal.displayName = 'HistoryTerminal'
