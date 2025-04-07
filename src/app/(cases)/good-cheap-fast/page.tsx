@@ -37,6 +37,11 @@ export default function GoodCheapFastPage() {
   const history = useRef<string[]>([])
   const ulRef = useRef<HTMLUListElement | null>(null)
 
+  const msgsSumkey = indexQueue.current.reduce((prev, item) => prev + item, 0)
+  // 找到对应的msg
+  const msg = msgs.find(msg => msg.sum === msgsSumkey)
+  console.log({ msgsSumkey, msg })
+
   /**
    * 在 history 添加新数据后，让滚动条自动滚动到底部
    */
@@ -95,13 +100,27 @@ export default function GoodCheapFastPage() {
         newStates[index] = isOpen
         return newStates
       })
+      history.current.push(
+        `移除 ${index} 此时队列 <span class='${Styles.HistoryText}'>[ ${indexQueue.current} ]</span>`
+      )
     }
   }
 
   return (
     <section
-      className={clsx(zcoolKuaiLe.className, 'flex h-screen w-screen items-center justify-center')}
+      className={clsx(
+        zcoolKuaiLe.className,
+        'flex h-screen w-screen flex-col items-center justify-center gap-10'
+      )}
     >
+      {/* msg start */}
+      {msg && (
+        <div className='flex w-fit flex-col items-center justify-center gap-3.5'>
+          <h1 className='text-2xl font-bold'>{msg.mark}</h1>
+          <p className='text-xl'>{msg.description}</p>
+        </div>
+      )}
+      {/* msg end */}
       <div className='relative -translate-x-1/2 rounded-lg bg-white p-10 text-black shadow-lg shadow-white'>
         <h1 className='mb-3 text-xl font-bold'>
           甲方の终极难题：
