@@ -117,7 +117,7 @@ export default function GoodCheapFastPage() {
       {msg && (
         <div className='flex w-fit flex-col items-center justify-center gap-3.5'>
           <h1 className='text-2xl font-bold'>{msg.mark}</h1>
-          <p className='text-xl'>{msg.description}</p>
+          <p className='text-xl text-green-500'>{msg.description}</p>
         </div>
       )}
       {/* msg end */}
