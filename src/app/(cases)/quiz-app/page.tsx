@@ -52,6 +52,10 @@ export default function QuizAppPage() {
   )
 }
 
+/**
+ * 问题卡片组件
+ */
+
 interface QuizCardProps {
   question: Question
   onSubmit: (choosed: string) => void
@@ -144,6 +148,10 @@ const RadioOption: React.FC<RadioOptionProps> = ({ id, name, value, checked, onC
     </li>
   )
 }
+
+/**
+ * 结束总结组件
+ */
 
 interface OverCard {
   answers: Answer[]

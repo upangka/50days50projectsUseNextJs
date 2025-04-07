@@ -82,3 +82,7 @@
 ## [17 Verify Account UI](<./src/app/(cases)/verify-account-ui>)
 
 <img src="./attachments/images/verify-account-ui.gif" alt="示例图片" />
+
+## [18 Quiz App](<./src/app/(cases)/quiz-app>)
+
+<img src="./attachments/images/quiz-app.gif" alt="示例图片" />
