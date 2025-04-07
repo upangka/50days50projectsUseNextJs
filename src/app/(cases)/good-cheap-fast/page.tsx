@@ -12,7 +12,13 @@ const projectPriorities = ['快', '好', '省']
 /**
  * 对应翻译，sum代表组合的projectPriorities的下表和
  */
-const msgs = [
+
+type Msg = {
+  sum: number
+  mark: string
+  description: string
+}
+const msgs: Msg[] = [
   {
     sum: 1,
     mark: '好 + 快 → 成本高',
@@ -114,12 +120,7 @@ export default function GoodCheapFastPage() {
       )}
     >
       {/* msg start */}
-      {isShowMsgPrompt && (
-        <div className='flex w-fit flex-col items-center justify-center gap-3.5'>
-          <h1 className='text-2xl font-bold'>{msg.mark}</h1>
-          <p className='text-xl text-green-500'>{msg.description}</p>
-        </div>
-      )}
+      {isShowMsgPrompt && <ProjectMsgPrompt msg={msg} />}
       {/* msg end */}
       <div className='relative -translate-x-1/2 rounded-lg bg-white p-10 text-black shadow-lg shadow-white'>
         <h1 className='mb-3 text-xl font-bold'>
@@ -167,6 +168,23 @@ export default function GoodCheapFastPage() {
     </section>
   )
 }
+
+// ============Project Msg Prompt=============================
+
+interface ProjectMsgPromptProps {
+  msg: Msg
+}
+
+const ProjectMsgPrompt: React.FC<ProjectMsgPromptProps> = ({ msg }) => {
+  return (
+    <div className='flex w-fit flex-col items-center justify-center gap-3.5'>
+      <h1 className='text-2xl font-bold'>{msg.mark}</h1>
+      <p className='text-xl text-green-500'>{msg.description}</p>
+    </div>
+  )
+}
+ProjectMsgPrompt.displayName = 'ProjectMsgPrompt'
+// ==========History terminal================
 
 interface HistoryTerminalProps {
   ref?: Ref<HTMLUListElement>
