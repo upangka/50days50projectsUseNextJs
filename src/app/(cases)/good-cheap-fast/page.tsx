@@ -76,7 +76,7 @@ export default function GoodCheapFastPage() {
     <section
       className={clsx(zcoolKuaiLe.className, 'flex h-screen w-screen items-center justify-center')}
     >
-      <div className='relative rounded-lg bg-white p-10 text-black shadow-lg shadow-white'>
+      <div className='relative -translate-x-1/2 rounded-lg bg-white p-10 text-black shadow-lg shadow-white'>
         <h1 className='mb-3 text-2xl font-bold'>
           甲方の终极难题：
           <br /> 快、好、省，您想放弃哪一个？
@@ -97,7 +97,7 @@ export default function GoodCheapFastPage() {
 
         {/* 操作日志start */}
         {history.current.length >= 0 && (
-          <section className='absolute top-0 -right-[130%] flex h-full w-full flex-col border border-white'>
+          <section className='absolute top-0 -right-[130%] flex h-full w-full flex-col border border-white shadow-md shadow-white'>
             {/* 头部start */}
             <ul className='flex w-full items-center justify-start gap-1 p-3.5'>
               <li className='h-[15px] w-[15px] rounded-full bg-red-500'></li>
