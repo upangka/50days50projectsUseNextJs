@@ -1,21 +1,34 @@
-import type { Ref } from 'react'
+'use client'
+import { useRef, useEffect, type Ref } from 'react'
 import { HistoryTerminal } from './history-terminal'
 import ToggleBall from '@/components/toggle-ball/toggle-ball'
 
 interface ProjectOperationBoardProps {
   chooseStates: boolean[]
-  history: string[]
   projectPriorities: string[]
+  history: string[]
   ref?: Ref<HTMLUListElement>
   onToggleBallChange: (isOpen: boolean, index: number) => void
 }
 const ProjectOperationBoard: React.FC<ProjectOperationBoardProps> = ({
   chooseStates,
-  history,
   projectPriorities,
+  history,
   ref,
   onToggleBallChange
 }) => {
+  const ulRef = useRef<HTMLUListElement | null>(null)
+
+  /**
+   * 在 history 添加新数据后，让滚动条自动滚动到底部
+   */
+  useEffect(() => {
+    const ul = ulRef.current
+    if (ul) {
+      ul.scrollTop = ul.scrollHeight
+    }
+  }, [history.length]) // 每次新增时触发
+
   return (
     <div className='relative -translate-x-1/2 rounded-lg bg-white p-10 text-black shadow-lg shadow-white'>
       <h1 className='mb-3 text-xl font-bold'>

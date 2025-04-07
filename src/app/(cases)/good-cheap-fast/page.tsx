@@ -1,15 +1,14 @@
 'use client'
-import { useState, useRef, useEffect, type Ref } from 'react'
+import { useState, useRef, useMemo, type Ref } from 'react'
 import clsx from 'clsx'
 import HistoryStyles from './_components/history-terminal/history-terminal.module.scss'
 import { ProjectMsgPrompt, ProjectOperationBoard } from './_components'
-import { msgs } from './config'
+import { msgs, projectPriorities } from './config'
 import { ZCOOL_KuaiLe } from 'next/font/google'
 const zcoolKuaiLe = ZCOOL_KuaiLe({
   weight: '400', // 该字体只有一个权重
   subsets: ['latin']
 })
-const projectPriorities = ['快', '好', '省']
 /**
  * 对应翻译，sum代表组合的projectPriorities的下表和
  */
@@ -19,22 +18,12 @@ export default function GoodCheapFastPage() {
   /** 用队列来实现会比较简单点: 记录为true的下标队列 */
   const indexQueue = useRef<number[]>([])
   const history = useRef<string[]>([])
-  const ulRef = useRef<HTMLUListElement | null>(null)
 
+  // 计算队列和，找到对应的msg
   const msgsSumkey = indexQueue.current.reduce((prev, item) => prev + item, 0)
   // 找到对应的msg
   const msg = msgs.find(msg => msg.sum === msgsSumkey)
   const isShowMsgPrompt = msg && indexQueue.current.length >= 2
-
-  /**
-   * 在 history 添加新数据后，让滚动条自动滚动到底部
-   */
-  useEffect(() => {
-    const ul = ulRef.current
-    if (ul) {
-      ul.scrollTop = ul.scrollHeight
-    }
-  }, [history.current.length]) // 每次新增时触发
 
   /**
    * true情况分析
@@ -104,9 +93,8 @@ export default function GoodCheapFastPage() {
       {/* 操作面板start */}
       <ProjectOperationBoard
         chooseStates={chooseStates}
-        history={history.current}
         projectPriorities={projectPriorities}
-        ref={ulRef}
+        history={history.current}
         onToggleBallChange={handleChange}
       />
       {/* 操作面板end */}
