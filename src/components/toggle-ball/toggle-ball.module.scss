@@ -9,21 +9,21 @@ $slide-left: slide-left;
         transform: translateX(0) scale(1);
       }
       50% {
-        transform: translateX(100%) scale(1.2);
+        transform: translateX(74%) scale(1.2);
       }
 
       100% {
-        transform: translateX(200%) scale(1);
+        transform: translateX(148%) scale(1);
       }
     }
   } @else if $direction == 'left' {
     @keyframes #{$slide-left} {
       0% {
-        transform: translateX(200%) scale(1);
+        transform: translateX(148%) scale(1);
       }
 
       50% {
-        transform: translateX(100%) scale(1.2);
+        transform: translateX(74%) scale(1.2);
       }
 
       100% {

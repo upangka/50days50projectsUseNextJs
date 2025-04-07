@@ -1,47 +1,61 @@
 'use client'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import clsx from 'clsx'
 import Styles from './toggle-ball.module.scss'
-
+import AppVariables from '@/styles/variables.module.scss'
 interface ToggleBallProps {
-  bgColor?: string
+  /**
+   * 打开背景颜色
+   */
+  bgColorOpen?: string
+  /**
+   * 关闭背景颜色
+   */
+  bgColorClose?: string
+  /**
+   * 球的颜色
+   */
   ballColor?: string
   onChange: (isOpen: boolean) => void
 }
 const ToggleBall: React.FC<ToggleBallProps> = ({
-  bgColor = 'green',
+  bgColorOpen = AppVariables.primaryColor,
+  bgColorClose = AppVariables.primaryGray,
   ballColor = 'white',
   onChange
 }) => {
   const [isOpen, setIsOpen] = useState(false)
+  // 控制动画的开关，避免初始加载就运行动画
+  const openAnimation = useRef(false)
 
   function handleChange() {
     setIsOpen(prev => !prev)
     onChange(!isOpen)
-    console.log('Click Me')
+    openAnimation.current = true
   }
 
-  const animationName = isOpen ? Styles.slideRight : Styles.slideLeft
-  console.log({ animationName })
   return (
     <label
-      onClick={handleChange}
       style={{
-        backgroundColor: bgColor
+        backgroundColor: isOpen ? bgColorOpen : bgColorClose
       }}
       className={clsx(
         Styles.ToggleBallContainer,
         'relative inline-block aspect-[2/1] w-[80px] rounded-3xl'
       )}
     >
-      <input type='checkbox' className={clsx(Styles.CheckedBox, 'hidden')} />
+      <input
+        onChange={handleChange}
+        type='checkbox'
+        className={clsx(Styles.CheckedBox, 'hidden')}
+      />
       <div
         style={{
           backgroundColor: ballColor
         }}
         className={clsx(
-          Styles.Ball,
-          'absolute top-1/2 aspect-square w-1/3 -translate-y-1/2 rounded-full'
+          openAnimation.current && Styles.Ball,
+          'absolute top-1/2 aspect-square w-2/5 -translate-y-1/2 rounded-full'
         )}
       ></div>
     </label>
