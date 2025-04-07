@@ -1,9 +1,9 @@
 'use client'
 import { useState, useRef, useEffect, type Ref } from 'react'
-import ToggleBall from '@/components/toggle-ball/toggle-ball'
 import clsx from 'clsx'
-import HistoryStyles from './_components/history-terminal.module.scss'
-import HistoryTerminal from './_components/history-terminal'
+import HistoryStyles from './_components/history-terminal/history-terminal.module.scss'
+import { ProjectMsgPrompt, ProjectOperationBoard } from './_components'
+import { msgs } from './config'
 import { ZCOOL_KuaiLe } from 'next/font/google'
 const zcoolKuaiLe = ZCOOL_KuaiLe({
   weight: '400', // 该字体只有一个权重
@@ -13,29 +13,6 @@ const projectPriorities = ['快', '好', '省']
 /**
  * 对应翻译，sum代表组合的projectPriorities的下表和
  */
-
-type Msg = {
-  sum: number
-  mark: string
-  description: string
-}
-const msgs: Msg[] = [
-  {
-    sum: 1,
-    mark: '好 + 快 → 成本高',
-    description: '五星级服务+加急专送？准备好掏空钱包吧！'
-  },
-  {
-    sum: 2,
-    mark: '好 + 便宜 → 速度慢',
-    description: '物美价廉？等货等到海枯石烂……'
-  },
-  {
-    sum: 3,
-    mark: '快 + 便宜 → 质量差',
-    description: '9块9包邮次日达?拆开一看是 [ 废渣 ] ！'
-  }
-]
 
 export default function GoodCheapFastPage() {
   const [chooseStates, setChooseStates] = useState(Array(projectPriorities.length).fill(false))
@@ -128,6 +105,7 @@ export default function GoodCheapFastPage() {
       <ProjectOperationBoard
         chooseStates={chooseStates}
         history={history.current}
+        projectPriorities={projectPriorities}
         ref={ulRef}
         onToggleBallChange={handleChange}
       />
@@ -135,60 +113,3 @@ export default function GoodCheapFastPage() {
     </section>
   )
 }
-
-// ============ProjectOperationBoard=======================
-interface ProjectOperationBoardProps {
-  chooseStates: boolean[]
-  history: string[]
-  ref?: Ref<HTMLUListElement>
-  onToggleBallChange: (isOpen: boolean, index: number) => void
-}
-const ProjectOperationBoard: React.FC<ProjectOperationBoardProps> = ({
-  chooseStates,
-  history,
-  ref,
-  onToggleBallChange
-}) => {
-  return (
-    <div className='relative -translate-x-1/2 rounded-lg bg-white p-10 text-black shadow-lg shadow-white'>
-      <h1 className='mb-3 text-xl font-bold'>
-        甲方の终极难题：
-        <br /> 快、好、省，您想放弃哪一个？
-      </h1>
-      <ul className='flex flex-col items-start justify-start gap-2.5'>
-        {projectPriorities.map((project, index) => (
-          <li key={index} className='flex items-center gap-2'>
-            <ToggleBall
-              isOpen={chooseStates[index]}
-              onChange={isOpen => {
-                onToggleBallChange(isOpen, index)
-              }}
-            />
-            <span className='text-xl'>{project}</span>
-          </li>
-        ))}
-      </ul>
-
-      {/* 操作日志start */}
-      {history.length >= 0 && <HistoryTerminal ref={ref} history={history} />}
-      {/* 操作日志end */}
-    </div>
-  )
-}
-
-ProjectOperationBoard.displayName = 'ProjectOperationBoard'
-// ============Project Msg Prompt=============================
-
-interface ProjectMsgPromptProps {
-  msg: Msg
-}
-
-const ProjectMsgPrompt: React.FC<ProjectMsgPromptProps> = ({ msg }) => {
-  return (
-    <div className='flex w-fit flex-col items-center justify-center gap-3.5'>
-      <h1 className='text-2xl font-bold'>{msg.mark}</h1>
-      <p className='text-xl text-green-500'>{msg.description}</p>
-    </div>
-  )
-}
-ProjectMsgPrompt.displayName = 'ProjectMsgPrompt'
