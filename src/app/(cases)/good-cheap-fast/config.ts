@@ -5,7 +5,9 @@ export type Msg = {
 }
 
 export const projectPriorities = ['快', '好', '便宜']
-
+/**
+ * 对应翻译，sum代表组合的projectPriorities的下表和
+ */
 export const msgs: Msg[] = [
   {
     sum: 1,

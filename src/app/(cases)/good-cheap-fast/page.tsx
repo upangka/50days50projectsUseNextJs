@@ -1,17 +1,8 @@
 'use client'
-import { useState, useRef, useMemo, type Ref } from 'react'
-import clsx from 'clsx'
+import { useState, useRef } from 'react'
 import HistoryStyles from './_components/history-terminal/history-terminal.module.scss'
 import { ProjectMsgPrompt, ProjectOperationBoard } from './_components'
 import { msgs, projectPriorities } from './config'
-import { ZCOOL_KuaiLe } from 'next/font/google'
-const zcoolKuaiLe = ZCOOL_KuaiLe({
-  weight: '400', // 该字体只有一个权重
-  subsets: ['latin']
-})
-/**
- * 对应翻译，sum代表组合的projectPriorities的下表和
- */
 
 export default function GoodCheapFastPage() {
   const [chooseStates, setChooseStates] = useState(Array(projectPriorities.length).fill(false))
@@ -80,12 +71,7 @@ export default function GoodCheapFastPage() {
   }
 
   return (
-    <section
-      className={clsx(
-        zcoolKuaiLe.className,
-        'flex h-screen w-screen flex-col items-center justify-center gap-10'
-      )}
-    >
+    <>
       {/* msg start */}
       {isShowMsgPrompt && <ProjectMsgPrompt msg={msg} />}
       {/* msg end */}
@@ -98,6 +84,6 @@ export default function GoodCheapFastPage() {
         onToggleBallChange={handleChange}
       />
       {/* 操作面板end */}
-    </section>
+    </>
   )
 }
