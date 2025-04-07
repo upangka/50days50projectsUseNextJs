@@ -32,7 +32,6 @@ const ToggleBall: React.FC<ToggleBallProps> = ({
   isOpen,
   onChange
 }) => {
-  // const [isOpen, setIsOpen] = useState(false)
   // 控制动画的开关，避免初始加载就运行动画
   const openAnimation = useRef(false)
 
@@ -54,8 +53,8 @@ const ToggleBall: React.FC<ToggleBallProps> = ({
     >
       <input
         onChange={e => handleChange(e)}
-        defaultChecked={isOpen}
         type='checkbox'
+        checked={isOpen}
         className={clsx(Styles.CheckedBox, 'hidden')}
       />
       <div
