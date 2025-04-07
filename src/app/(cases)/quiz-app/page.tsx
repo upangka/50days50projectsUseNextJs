@@ -24,7 +24,10 @@ export default function QuizAppPage() {
 
   return (
     <section
-      className={clsx(zcoolKuaiLe.className, 'flex h-screen w-screen items-center justify-center')}
+      className={clsx(
+        zcoolKuaiLe.className,
+        'flex h-screen w-screen items-center justify-center select-none'
+      )}
     >
       {isOver ? (
         <OverCard

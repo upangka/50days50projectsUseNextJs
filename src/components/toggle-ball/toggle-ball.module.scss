@@ -1,0 +1,49 @@
+$slide-right: slide-right;
+$slide-left: slide-left;
+
+// 使用Sass的mixin定义动画
+@mixin slide($direction) {
+  @if $direction == 'right' {
+    @keyframes #{$slide-right} {
+      0% {
+        transform: translateX(0) scale(1);
+      }
+      50% {
+        transform: translateX(100%) scale(1.2);
+      }
+
+      100% {
+        transform: translateX(200%) scale(1);
+      }
+    }
+  } @else if $direction == 'left' {
+    @keyframes #{$slide-left} {
+      0% {
+        transform: translateX(200%) scale(1);
+      }
+
+      50% {
+        transform: translateX(100%) scale(1.2);
+      }
+
+      100% {
+        transform: translateX(0) scale(1);
+      }
+    }
+  }
+}
+
+.ToggleBallContainer {
+  .Ball {
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-name: $slide-left;
+    @include slide('right');
+  }
+
+  .CheckedBox:checked + .Ball {
+    animation-name: $slide-right;
+    @include slide('left');
+  }
+}
