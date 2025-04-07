@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react'
 import ToggleBall from '@/components/toggle-ball/toggle-ball'
 import clsx from 'clsx'
+import Styles from './styles.module.scss'
 import { ZCOOL_KuaiLe } from 'next/font/google'
 const zcoolKuaiLe = ZCOOL_KuaiLe({
   weight: '400', // 该字体只有一个权重
@@ -62,7 +63,9 @@ export default function GoodCheapFastPage() {
         const firstIndex = indexQueue.current.shift()
         // 加入此时的true下标
         indexQueue.current.push(index)
-        history.current.push(`移除 ${firstIndex} ,并更新队列 [ ${indexQueue.current} ] `)
+        history.current.push(
+          `移除 ${firstIndex} ,并更新队列 <span class='${Styles.HistoryText}'>[ ${indexQueue.current} ] </span>`
+        )
 
         setChooseStates(prevStates => {
           const newStates = [...prevStates]
@@ -78,7 +81,9 @@ export default function GoodCheapFastPage() {
           return newStates
         })
         indexQueue.current.push(index)
-        history.current.push(`新增 ${index} , 此时队列 [ ${indexQueue.current} ] `)
+        history.current.push(
+          `新增 ${index} , 此时队列 <span class='${Styles.HistoryText}'>[ ${indexQueue.current} ]</span> `
+        )
       }
     } else {
       // 处理关闭的开关
@@ -98,7 +103,7 @@ export default function GoodCheapFastPage() {
       className={clsx(zcoolKuaiLe.className, 'flex h-screen w-screen items-center justify-center')}
     >
       <div className='relative -translate-x-1/2 rounded-lg bg-white p-10 text-black shadow-lg shadow-white'>
-        <h1 className='mb-3 text-2xl font-bold'>
+        <h1 className='mb-3 text-xl font-bold'>
           甲方の终极难题：
           <br /> 快、好、省，您想放弃哪一个？
         </h1>
@@ -118,7 +123,12 @@ export default function GoodCheapFastPage() {
 
         {/* 操作日志start */}
         {history.current.length >= 0 && (
-          <section className='absolute top-0 -right-[130%] flex h-full w-full flex-col border border-white shadow-md shadow-white'>
+          <section
+            className={clsx(
+              Styles.HistoryContainer,
+              'absolute top-0 -right-[130%] flex h-full w-full flex-col border border-white shadow-md shadow-white'
+            )}
+          >
             {/* 头部start */}
             <ul className='flex w-full items-center justify-start gap-1 p-3.5'>
               <li className='h-[15px] w-[15px] rounded-full bg-red-500'></li>
@@ -139,7 +149,11 @@ export default function GoodCheapFastPage() {
               {history.current.map((item, index) => (
                 <li key={index} className='flex gap-2'>
                   <span>{'>'}</span>
-                  <p>{item}</p>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: item
+                    }}
+                  ></p>
                 </li>
               ))}
             </ul>
