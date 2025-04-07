@@ -142,27 +142,7 @@ export default function GoodCheapFastPage() {
         </ul>
 
         {/* 操作日志start */}
-        {history.current.length >= 0 && (
-          <section
-            className={clsx(
-              Styles.HistoryContainer,
-              'absolute top-0 -right-[130%] flex h-full w-full flex-col border border-white shadow-md shadow-white'
-            )}
-          >
-            {/* 头部start */}
-            <ul className='flex w-full items-center justify-start gap-1 p-3.5'>
-              <li className='h-[15px] w-[15px] rounded-full bg-red-500'></li>
-              <li className='h-[15px] w-[15px] rounded-full bg-green-500'></li>
-              <li className='h-[15px] w-[15px] rounded-full bg-blue-500'></li>
-              <li className='text-md flex-1 text-center text-white'>操作日志</li>
-            </ul>
-            {/* 头部end */}
-            <hr className='text-white' />
-            {/* 日志start */}
-            <HistoryTerminal ref={ulRef} history={history.current} />
-            {/* 日志end */}
-          </section>
-        )}
+        {history.current.length >= 0 && <HistoryTerminal ref={ulRef} history={history.current} />}
         {/* 操作日志end */}
       </div>
     </section>
@@ -185,13 +165,37 @@ const ProjectMsgPrompt: React.FC<ProjectMsgPromptProps> = ({ msg }) => {
 }
 ProjectMsgPrompt.displayName = 'ProjectMsgPrompt'
 // ==========History terminal================
-
 interface HistoryTerminalProps {
   ref?: Ref<HTMLUListElement>
   history: string[]
 }
-
 const HistoryTerminal: React.FC<HistoryTerminalProps> = ({ ref, history }) => {
+  return (
+    <section
+      className={clsx(
+        Styles.HistoryContainer,
+        'absolute top-0 -right-[130%] flex h-full w-full flex-col border border-white shadow-md shadow-white'
+      )}
+    >
+      {/* 头部start */}
+      <ul className='flex w-full items-center justify-start gap-1 p-3.5'>
+        <li className='h-[15px] w-[15px] rounded-full bg-red-500'></li>
+        <li className='h-[15px] w-[15px] rounded-full bg-green-500'></li>
+        <li className='h-[15px] w-[15px] rounded-full bg-blue-500'></li>
+        <li className='text-md flex-1 text-center text-white'>操作日志</li>
+      </ul>
+      {/* 头部end */}
+      <hr className='text-white' />
+      {/* 日志start */}
+      <HistoryTerminalContent ref={ref} history={history} />
+      {/* 日志end */}
+    </section>
+  )
+}
+
+HistoryTerminal.displayName = 'HistoryTerminal'
+
+const HistoryTerminalContent: React.FC<HistoryTerminalProps> = ({ ref, history }) => {
   return (
     <ul
       ref={ref}
@@ -214,4 +218,4 @@ const HistoryTerminal: React.FC<HistoryTerminalProps> = ({ ref, history }) => {
   )
 }
 
-HistoryTerminal.displayName = 'HistoryTerminal'
+HistoryTerminalContent.displayName = 'HistoryTerminal'
