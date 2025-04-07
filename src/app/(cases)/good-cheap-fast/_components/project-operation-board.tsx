@@ -7,14 +7,12 @@ interface ProjectOperationBoardProps {
   chooseStates: boolean[]
   projectPriorities: string[]
   history: string[]
-  ref?: Ref<HTMLUListElement>
   onToggleBallChange: (isOpen: boolean, index: number) => void
 }
 const ProjectOperationBoard: React.FC<ProjectOperationBoardProps> = ({
   chooseStates,
   projectPriorities,
   history,
-  ref,
   onToggleBallChange
 }) => {
   const ulRef = useRef<HTMLUListElement | null>(null)
@@ -50,7 +48,7 @@ const ProjectOperationBoard: React.FC<ProjectOperationBoardProps> = ({
       </ul>
 
       {/* 操作日志start */}
-      {history.length >= 0 && <HistoryTerminal ref={ref} history={history} />}
+      {history.length >= 0 && <HistoryTerminal ref={ulRef} history={history} />}
       {/* 操作日志end */}
     </div>
   )
