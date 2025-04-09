@@ -37,7 +37,7 @@ export const projects: ProjectDemo[] = [
   { id: 24, title: 'Content Placeholder', route: 'content-placeholder', finished: false },
   { id: 25, title: 'Sticky Navbar', route: 'sticky-navbar', finished: true },
   { id: 26, title: 'Double Vertical Slider', route: 'double-vertical-slider', finished: false },
-  { id: 27, title: 'Toast Notification', route: 'toast-notification', finished: false },
+  { id: 27, title: 'Toast Notification', route: 'toast-notification', finished: true },
   { id: 28, title: 'Github Profiles', route: 'github-profiles', finished: true },
   { id: 29, title: 'Double Click Heart', route: 'double-click-heart', finished: true },
   { id: 30, title: 'Auto Text Effect', route: 'auto-text-effect', finished: true },
