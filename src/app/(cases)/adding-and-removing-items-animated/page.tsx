@@ -1,18 +1,22 @@
 'use client'
 import { Button } from '@/components/pkmer-button'
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import ItemsMove from './items-move'
 import clsx from 'clsx'
 import ToggleBall from '@/components/toggle-ball/toggle-ball'
 type Item = {
+  /**
+   * 唯一标识
+   */
   id: string
-  name: string
+  /**
+   * 内容
+   */
+  content: React.ReactElement | string
   /**
    * 主要用于逻辑删除
    */
   visiable: boolean
-  height: number
-  backgroundColor: string
 }
 
 const bgColors = ['#1e3a8a', '#581c87', '#14532d', '#7c2d12']
@@ -35,6 +39,7 @@ export default function AddingAndRemovingItemsAnimatedPage() {
   async function clear() {
     for (let i = items.length - 1; i >= 0; i--) {
       const it = items[i]
+      // 间隔300ms进行删除
       setTimeout(
         () => {
           removeItem(it.id)
@@ -46,12 +51,20 @@ export default function AddingAndRemovingItemsAnimatedPage() {
 
   function addItem() {
     console.log(unikey)
+
+    const content = (
+      <div
+        style={{
+          backgroundColor: bgColors[unikey % bgColors.length]
+        }}
+        className='mx-auto w-[300px] rounded-md border border-white px-3 py-6 text-center text-lg'
+      >{`Item ${unikey}`}</div>
+    )
+
     const newItem = {
       id: `${idPrefix}${unikey++}`,
-      name: `Item ${unikey}`,
-      visiable: false,
-      height: 0,
-      backgroundColor: bgColors[unikey % bgColors.length]
+      content: content,
+      visiable: false
     } satisfies Item
 
     setItems([newItem, ...items])
@@ -90,8 +103,8 @@ export default function AddingAndRemovingItemsAnimatedPage() {
   return (
     <section className='relative flex h-screen w-screen items-center justify-center gap-3'>
       {/* items start */}
-      <ItemsMove onRemove={removeItem} data={items} direction={direction}>
-        {item => <div>{item.name}</div>}
+      <ItemsMove onRemove={removeItem} width={350} data={items} direction={direction}>
+        {item => <>{item.content}</>}
       </ItemsMove>
       {/* items end */}
 

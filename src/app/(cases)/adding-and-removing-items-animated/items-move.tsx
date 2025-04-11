@@ -3,20 +3,45 @@ import { clsx } from 'clsx'
 import Styles from './item.module.scss'
 
 export interface Item {
+  /**
+   * 唯一标识
+   */
   id: React.Key
   visiable: boolean
-  height: number
   [name: string]: any
 }
 
 interface ItemsProps {
+  /**
+   * 数据集
+   */
   data: Item[]
+  /**
+   * 横向还是竖向
+   */
   direction?: 'row' | 'column'
+  /**
+   * 容器宽度
+   * 默认300px
+   */
+  width?: number
+  /**
+   * 删除
+   */
   onRemove: (key: React.Key) => void
+  /**
+   * 要渲染的children
+   */
   children: (item: Item) => React.ReactElement
 }
 
-const ItemsMove: React.FC<ItemsProps> = ({ data, onRemove, direction = 'row', children }) => {
+const ItemsMove: React.FC<ItemsProps> = ({
+  data,
+  onRemove,
+  direction = 'row',
+  width = 300,
+  children
+}) => {
   // 收集所有的真实dom节点，用于计算高度
   const divRef = useRef<
     {
@@ -46,14 +71,14 @@ const ItemsMove: React.FC<ItemsProps> = ({ data, onRemove, direction = 'row', ch
   }, [])
 
   return (
-    <ul className='flex w-[300px] flex-col items-center justify-center overflow-hidden p-3.5'>
+    <ul className='flex w-fit flex-col items-center justify-center overflow-hidden p-3.5'>
       {data.map(item => (
         // list-container
         <li
           onClick={() => handleRemove(item.id)}
           style={{
             height: item.visiable ? `${getHeight(item.id)}px` : '0',
-            width: '200px'
+            minWidth: `${width}px`
           }}
           className={clsx(
             'relative cursor-pointer transition-all duration-500 [:not(:first-child)]:mt-[20px]',
@@ -83,7 +108,7 @@ const ItemsMove: React.FC<ItemsProps> = ({ data, onRemove, direction = 'row', ch
               Styles.Item,
               direction === 'row' ? Styles.ItemShowRow : Styles.ItemShowColumn,
               item.visiable && Styles.Show,
-              'absolute top-0 left-0 w-[200px] rounded-md border border-white p-3 text-white transition-all duration-700'
+              'absolute top-0 left-0 w-fit transition-all duration-700'
             )}
           >
             {/* 用children function 来进行循环渲染 */}
