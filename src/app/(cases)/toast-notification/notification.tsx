@@ -88,7 +88,7 @@ const Notification: React.FC<NotificationProps> = ({ notification, children, onC
           {...iconSize}
         />
       </div>
-      <hr className='m-0.5 w-full text-gray-200' />
+      <hr className='m-1 w-full text-gray-200' />
       {/* content start */}
       <div>{children ? children : defaultContent}</div>
       {/* content end */}

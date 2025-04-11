@@ -68,6 +68,9 @@ const Notifications: React.FC<NotificationsProps> = ({ ref }) => {
     }
   })
 
+  /**
+   * 关闭通知
+   */
   function notificationClose(key: React.Key) {
     // 找到目标对象
     const noticeIndex = notifications.findIndex(it => it.id === key)

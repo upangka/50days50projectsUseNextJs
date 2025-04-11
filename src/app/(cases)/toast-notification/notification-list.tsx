@@ -3,6 +3,8 @@ import { useRef, useImperativeHandle, type Ref, useMemo } from 'react'
 import type { Placement, NotificationConfig } from './types'
 import { default as NotificationComp } from './notification'
 import { default as ItemsMove, type API, type Direction } from '@/components/transition/items-move'
+import { zcoolKuaiLe } from '@/app/config'
+
 export type NotificationListApi = {
   removeNotification: (id: React.Key) => void
 }
@@ -54,7 +56,9 @@ const NotificationList: React.FC<NotificationListProps> = ({
             <>
               {/* 具体的class */}
               <NotificationComp notification={noticeConfig} onClose={onNotificationClose}>
-                <div className='w-[250px] break-words'>{config.content}</div>
+                <div className={clsx('text-md w-[250px] break-words', zcoolKuaiLe.className)}>
+                  {config.content}
+                </div>
               </NotificationComp>
             </>
           )

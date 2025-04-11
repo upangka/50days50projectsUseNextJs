@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect, useImperativeHandle, type Ref } from 'react'
+import { useRef, useCallback, useEffect, useImperativeHandle, type Ref, useMemo } from 'react'
 import { clsx } from 'clsx'
 import Styles from './item.module.scss'
 
@@ -88,9 +88,19 @@ const ItemsMove: React.FC<ItemsProps> = ({
     cleanUp: handleRemove
   }))
 
+  // 找到第一个可见的元素
+  let firstVisiableIndex = useMemo<number>(() => {
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].visiable) {
+        return i
+      }
+    }
+    return -1
+  }, [data])
+
   return (
     <ul className='flex w-fit flex-col items-center justify-center overflow-hidden'>
-      {data.map(item => (
+      {data.map((item, index) => (
         // list-container
         <li
           style={{
@@ -99,7 +109,8 @@ const ItemsMove: React.FC<ItemsProps> = ({
           }}
           className={clsx(
             'relative transition-all duration-500 [:not(:first-child)]:mt-[20px]',
-            !item.visiable && '!mt-0'
+            !item.visiable && '!mt-0', // 本身不可见了，就取消margin-top
+            firstVisiableIndex === index && '!mt-0' // 第一个可见的元素，取消margin-top
           )}
           key={item.id}
         >
