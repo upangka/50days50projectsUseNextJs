@@ -1,5 +1,6 @@
 import { useRef, useMemo } from 'react'
 import Notifications from './notifications'
+
 import type { NotificationsInstance, NotificationConfig } from './types'
 export default function useNavigation(): readonly [NotificationsInstance, React.ReactElement] {
   const notificationRef = useRef<NotificationsInstance>(null)

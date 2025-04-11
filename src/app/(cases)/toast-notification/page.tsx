@@ -15,23 +15,25 @@ export default function ToastNotificationPage() {
       type: 'info'
     })
 
-    api.open({
-      message: 'success text',
-      duration: 3000,
-      type: 'success'
-    })
+    // api.open({
+    //   message: 'success text',
+    //   duration: 3000,
+    //   type: 'success',
+    //   placement: 'bottom-right'
+    // })
 
-    api.open({
-      message: 'error text',
-      duration: 3000,
-      type: 'error'
-    })
+    // api.open({
+    //   message: 'error text',
+    //   duration: 3000,
+    //   type: 'error'
+    // })
 
-    api.open({
-      message: 'warning text',
-      duration: 3000,
-      type: 'warning'
-    })
+    // api.open({
+    //   message: 'warning text',
+    //   duration: 3000,
+    //   type: 'warning',
+    //   placement: 'top-left'
+    // })
   }
   return (
     <section className='flex h-screen w-screen items-center justify-center'>

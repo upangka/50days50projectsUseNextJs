@@ -5,6 +5,7 @@ export type NotificationConfig = {
   message: string
   placement?: Placement
   type: NotificationType
+  onClose?: VoidFunction
 }
 
 export type Notification = NotificationConfig & {

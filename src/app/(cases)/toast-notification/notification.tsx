@@ -2,8 +2,10 @@ import type { Notification as N, NotificationType } from './types'
 
 import { clsx } from 'clsx'
 import { Icon } from '@iconify/react'
+import Styles from './notice.module.scss'
 interface NotificationProps {
   notification: N
+  onClose: (key: React.Key) => void
 }
 
 const iconObj: Record<
@@ -36,12 +38,13 @@ const iconSize = {
   height: 25
 }
 
-const Notification: React.FC<NotificationProps> = ({ notification }) => {
+const Notification: React.FC<NotificationProps> = ({ notification, onClose }) => {
   const iconHolder = iconObj[notification.type]
 
   return (
     <li
       className={clsx(
+        Styles.ItemTopRight,
         'min-w-[260px] rounded-lg border bg-white p-3 text-black shadow-md',
         notification.type === 'success' && 'border-green-500 shadow-green-500/50',
         notification.type === 'info' && 'border-blue-500 shadow-blue-500/50',
@@ -59,7 +62,11 @@ const Notification: React.FC<NotificationProps> = ({ notification }) => {
           {...iconSize}
         />
 
-        <Icon icon='material-symbols-light:close' {...iconSize} />
+        <Icon
+          onClick={() => onClose(notification.id)}
+          icon='material-symbols-light:close'
+          {...iconSize}
+        />
       </div>
       {/* content start */}
       <div className='py-3.5'>{notification.message}</div>

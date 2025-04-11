@@ -28,16 +28,26 @@ const Notifications: React.FC<NotificationsProps> = ({ ref }) => {
       message: config.message,
       placement: config.placement,
       type: config.type,
-      duration: config.duration ?? 3000
+      duration: config.duration ?? 3000,
+      onClose: config.onClose ?? noop
     }
     setNotifications(prev => [notification, ...prev])
   }
+
   // 暴露的API
   useImperativeHandle(ref, () => {
     return {
       open
     }
   })
+
+  function notificationClose(key: React.Key) {
+    const noticeIndex = notifications.findIndex(it => it.id === key)
+    if (noticeIndex === -1) return
+    const notice = notifications[noticeIndex]!
+    setNotifications(prev => prev.filter(it => it.id !== key))
+    notice?.onClose && notice.onClose()
+  }
 
   useEffect(() => {
     const nextPlacements: Placements = {}
@@ -68,6 +78,7 @@ const Notifications: React.FC<NotificationsProps> = ({ ref }) => {
         key={placement}
         placement={placement}
         notifications={notificationsOfPlacecment}
+        onNotificationClose={notificationClose}
       />
     )
   })
