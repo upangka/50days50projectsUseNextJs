@@ -3,6 +3,7 @@ import { useEffect, useState, useRef, useImperativeHandle, type Ref } from 'reac
 import { createPortal } from 'react-dom'
 import NotificationList from './notification-list'
 import { noop } from '@/utils'
+
 import type {
   Notification,
   NotificationConfig,
@@ -10,31 +11,38 @@ import type {
   NotificationType,
   Placements,
   NotificationMethods,
-  NotificationsInstance
+  NotificationsInstanceApi
 } from './types'
 
 interface NotificationsProps {
-  ref?: Ref<NotificationsInstance>
+  ref?: Ref<NotificationsInstanceApi>
 }
 let unikey = 0
 const Notifications: React.FC<NotificationsProps> = ({ ref }) => {
-  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [notifications, setNotifications] = useState<NotificationConfig[]>([])
   const [placements, setPlacements] = useState<Placements>({})
   const [container, setContainer] = useState<HTMLElement | null>(null)
 
-  const open = (config: NotificationConfig) => {
-    const notification: Notification = {
+  /**
+   * todo useCallback
+   * @param config
+   */
+  const open = (config: Notification) => {
+    const noticeConfig: NotificationConfig = {
       id: `pkmer-notification-${unikey++}`,
-      message: config.message,
+      content: <>config.message</>,
       placement: config.placement,
       type: config.type,
       duration: config.duration ?? 3000,
-      onClose: config.onClose ?? noop
+      onClose: config.onClose ?? noop,
+      visiable: false
     }
-    setNotifications(prev => [notification, ...prev])
+    setNotifications(prev => [noticeConfig, ...prev])
   }
 
-  // 暴露的API
+  /**
+   * 暴露的API
+   */
   useImperativeHandle(ref, () => {
     return {
       open
@@ -49,6 +57,10 @@ const Notifications: React.FC<NotificationsProps> = ({ ref }) => {
     notice?.onClose && notice.onClose()
   }
 
+  /**
+   * 分组转换成不同的位置
+   * 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+   */
   useEffect(() => {
     const nextPlacements: Placements = {}
     let count = 0

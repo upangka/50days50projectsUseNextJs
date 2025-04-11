@@ -1,10 +1,10 @@
-import type { Notification as N, NotificationType } from './types'
+import type { NotificationConfig, NotificationType } from './types'
 
 import { clsx } from 'clsx'
 import { Icon } from '@iconify/react'
 import Styles from './notice.module.scss'
-interface NotificationProps {
-  notification: N
+interface NotificationProps extends React.PropsWithChildren {
+  notification: NotificationConfig
   onClose: (key: React.Key) => void
 }
 
@@ -38,7 +38,9 @@ const iconSize = {
   height: 25
 }
 
-const Notification: React.FC<NotificationProps> = ({ notification, onClose }) => {
+const defaultContent = <div className='bg-green-500 text-white'>Nothing</div>
+
+const Notification: React.FC<NotificationProps> = ({ notification, children, onClose }) => {
   const iconHolder = iconObj[notification.type]
 
   return (
@@ -69,7 +71,7 @@ const Notification: React.FC<NotificationProps> = ({ notification, onClose }) =>
         />
       </div>
       {/* content start */}
-      <div className='py-3.5'>{notification.message}</div>
+      <div>{children ? children : defaultContent}</div>
       {/* content end */}
     </li>
   )

@@ -1,10 +1,11 @@
 import clsx from 'clsx'
-import type { Placement, Notification } from './types'
+import { useRef } from 'react'
+import type { Placement, NotificationConfig } from './types'
 import { default as NotificationComp } from './notification'
-
+import { default as ItemsMove, type API } from '@/components/transition/items-move'
 interface NotificationListProps {
   placement: Placement
-  notifications: Notification[]
+  notifications: NotificationConfig[]
   onNotificationClose: (id: React.Key) => void
 }
 
@@ -13,8 +14,10 @@ const NotificationList: React.FC<NotificationListProps> = ({
   notifications,
   onNotificationClose
 }) => {
+  const itemsMoveRef = useRef<API>(null)
+
   return (
-    <ul
+    <section
       className={clsx(
         'fixed z-[2050] flex flex-col items-center justify-center gap-3 text-xl text-white',
         placement === 'top-right' && 'top-10 right-10',
@@ -23,10 +26,22 @@ const NotificationList: React.FC<NotificationListProps> = ({
         placement === 'bottom-left' && 'bottom-10 left-10'
       )}
     >
-      {notifications.map(n => (
-        <NotificationComp key={n.id} notification={n} onClose={onNotificationClose} />
-      ))}
-    </ul>
+      {/* 使用动画效果 */}
+      <ItemsMove ref={itemsMoveRef} data={notifications} direction='row'>
+        {config => {
+          const noticeConfig = config as NotificationConfig
+
+          return (
+            <>
+              {/* 具体的class */}
+              <NotificationComp notification={noticeConfig} onClose={onNotificationClose}>
+                {config.content}
+              </NotificationComp>
+            </>
+          )
+        }}
+      </ItemsMove>
+    </section>
   )
 }
 
