@@ -112,7 +112,7 @@ export default function AddingAndRemovingItemsAnimatedPage() {
   }
 
   return (
-    <section className='relative flex h-screen w-screen items-center justify-center gap-3'>
+    <section className='relative flex h-screen w-screen items-center justify-center gap-3 overflow-auto'>
       {/* items start */}
       <ItemsMove ref={itemListRef} width={350} data={items} direction={direction}>
         {item => <>{item.content}</>}
