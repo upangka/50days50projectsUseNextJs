@@ -9,3 +9,9 @@ https://react.dev/reference/react-dom/createPortal
 # 动画效果
 
 https://css-tricks.com/animation-techniques-for-adding-and-removing-items-from-a-stack/
+
+https://github.com/react-component/motion
+
+1. 正常的动画效果
+2. motion组件的封装
+3. https://react-component.github.io/badgeboard/
