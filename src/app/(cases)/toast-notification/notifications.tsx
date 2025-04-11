@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState, useRef, useImperativeHandle, type Ref } from 'react'
 import { createPortal } from 'react-dom'
-import NotificationList from './notification-list'
+import { default as NotificationList, type NotificationListApi } from './notification-list'
 import { noop } from '@/utils'
 
 import type {
@@ -18,10 +18,15 @@ interface NotificationsProps {
   ref?: Ref<NotificationsInstanceApi>
 }
 let unikey = 0
+
+/**
+ * 所有通知的管理中心
+ */
 const Notifications: React.FC<NotificationsProps> = ({ ref }) => {
   const [notifications, setNotifications] = useState<NotificationConfig[]>([])
   const [placements, setPlacements] = useState<Placements>({})
   const [container, setContainer] = useState<HTMLElement | null>(null)
+  const notificationListRef = useRef<NotificationListApi>(null)
 
   /**
    * todo useCallback
@@ -62,11 +67,27 @@ const Notifications: React.FC<NotificationsProps> = ({ ref }) => {
   })
 
   function notificationClose(key: React.Key) {
+    // 找到目标对象
     const noticeIndex = notifications.findIndex(it => it.id === key)
     if (noticeIndex === -1) return
-    const notice = notifications[noticeIndex]!
-    setNotifications(prev => prev.filter(it => it.id !== key))
-    notice?.onClose && notice.onClose()
+    const targetNotice = notifications[noticeIndex]!
+
+    // 做逻辑删除
+    setNotifications(prev =>
+      prev.filter(it => {
+        if (it.id === targetNotice.id) {
+          it.visiable = false
+        }
+        return it
+      })
+    )
+    targetNotice?.onClose && targetNotice.onClose()
+
+    // 2s之后逻辑删除后，做物理删除
+    setTimeout(() => {
+      setNotifications(prev => prev.filter(it => it.id !== key))
+      notificationListRef.current?.removeNotification(targetNotice.id)
+    }, 2000)
   }
 
   /**
@@ -100,6 +121,7 @@ const Notifications: React.FC<NotificationsProps> = ({ ref }) => {
     return (
       <NotificationList
         key={placement}
+        ref={notificationListRef}
         placement={placement}
         notifications={notificationsOfPlacecment}
         onNotificationClose={notificationClose}

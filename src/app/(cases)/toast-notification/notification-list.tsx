@@ -1,20 +1,35 @@
 import clsx from 'clsx'
-import { useRef } from 'react'
+import { useRef, useImperativeHandle, type Ref } from 'react'
 import type { Placement, NotificationConfig } from './types'
 import { default as NotificationComp } from './notification'
 import { default as ItemsMove, type API } from '@/components/transition/items-move'
+
+export type NotificationListApi = {
+  removeNotification: (id: React.Key) => void
+}
+
 interface NotificationListProps {
   placement: Placement
   notifications: NotificationConfig[]
+  ref: Ref<NotificationListApi>
   onNotificationClose: (id: React.Key) => void
 }
 
 const NotificationList: React.FC<NotificationListProps> = ({
   placement,
   notifications,
+  ref,
   onNotificationClose
 }) => {
   const itemsMoveRef = useRef<API>(null)
+
+  useImperativeHandle(ref, () => {
+    return {
+      removeNotification(id: React.Key) {
+        itemsMoveRef.current?.cleanUp(id)
+      }
+    }
+  })
 
   return (
     <section

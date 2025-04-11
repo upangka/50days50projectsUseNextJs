@@ -68,7 +68,11 @@ const ItemsMove: React.FC<ItemsProps> = ({
   }, [])
 
   const handleRemove = useCallback((id: React.Key) => {
-    divRef.current = divRef.current.filter(it => it.key !== id)
+    setTimeout(() => {
+      console.log('handleRemove执行之前', divRef.current.length)
+      divRef.current = divRef.current.filter(it => it.key !== id)
+      console.log('handleRemove执行之后', divRef.current.length)
+    }, 2000)
   }, [])
 
   /**
