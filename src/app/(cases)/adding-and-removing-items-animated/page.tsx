@@ -8,19 +8,15 @@ type Item = {
   name: string
   visiable: boolean
   height: number
+  backgroundColor: string
 }
+
+const bgColors = ['#1e3a8a', '#581c87', '#14532d', '#7c2d12']
+
 let unikey = 0
 let idPrefix = 'item-'
 function initItems(): Item[] {
   return []
-  // return [
-  //   {
-  //     id: `${idPrefix}${++unikey}`,
-  //     name: `Item ${unikey}`,
-  //     visiable: true,
-  //     height: 0
-  //   }
-  // ]
 }
 
 export default function AddingAndRemovingItemsAnimatedPage() {
@@ -36,9 +32,10 @@ export default function AddingAndRemovingItemsAnimatedPage() {
     console.log(unikey)
     const newItem = {
       id: `${idPrefix}${unikey++}`,
-      name: `Item List`,
+      name: `Item ${unikey}`,
       visiable: false,
-      height: 0
+      height: 0,
+      backgroundColor: bgColors[unikey % bgColors.length]
     } satisfies Item
 
     setItems([newItem, ...items])
@@ -123,10 +120,13 @@ export default function AddingAndRemovingItemsAnimatedPage() {
                 }
               }}
               suppressHydrationWarning={true}
+              style={{
+                backgroundColor: item.backgroundColor
+              }}
               className={clsx(
                 Styles.Item,
                 item.visiable && Styles.Show,
-                'absolute top-0 left-0 w-[200px] rounded-md border border-white p-3 transition-all duration-700'
+                'absolute top-0 left-0 w-[200px] rounded-md border border-white p-3 text-white transition-all duration-700'
               )}
             >
               {' '}
