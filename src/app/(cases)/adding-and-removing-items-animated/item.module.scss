@@ -1,11 +1,28 @@
 .Item {
   opacity: 0;
   background-color: transparent;
-  transform: translateY(-300px);
+  transform: translateX(300px);
   transition: all 0.6s ease-in-out;
 }
 
-.Item.Show {
+.Item.ItemShowRow {
+  transform: translateX(300px);
+}
+.Item.ItemShowRow.Show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.Item.ItemShowColumn {
+  transform: translateY(-300px);
+}
+
+.Item.ItemShowColumn.Show {
   opacity: 1;
   transform: translateY(0);
 }
+
+// .Item.Show {
+//   opacity: 1;
+//   transform: translateX(0);
+// }

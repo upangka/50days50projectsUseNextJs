@@ -3,6 +3,7 @@ import { Button } from '@/components/pkmer-button'
 import { useState, useRef, useEffect } from 'react'
 import Styles from './item.module.scss'
 import clsx from 'clsx'
+import ToggleBall from '@/components/toggle-ball/toggle-ball'
 type Item = {
   id: string
   name: string
@@ -22,7 +23,10 @@ function initItems(): Item[] {
   return []
 }
 
+type Direction = 'row' | 'column'
+
 export default function AddingAndRemovingItemsAnimatedPage() {
+  const [direction, setDirection] = useState<Direction>('column')
   const [items, setItems] = useState<Item[]>(initItems)
   // 收集所有的真实dom节点，用于计算高度
   const divRef = useRef<
@@ -93,7 +97,7 @@ export default function AddingAndRemovingItemsAnimatedPage() {
   }, [items])
 
   return (
-    <section className='flex h-screen w-screen items-center justify-center gap-3'>
+    <section className='relative flex h-screen w-screen items-center justify-center gap-3'>
       <ul className='flex w-[300px] flex-col items-center justify-center overflow-hidden border border-red-500 p-3.5'>
         {items.map(item => (
           // list-container
@@ -129,6 +133,7 @@ export default function AddingAndRemovingItemsAnimatedPage() {
               }}
               className={clsx(
                 Styles.Item,
+                direction === 'row' ? Styles.ItemShowRow : Styles.ItemShowColumn,
                 item.visiable && Styles.Show,
                 'absolute top-0 left-0 w-[200px] rounded-md border border-white p-3 text-white transition-all duration-700'
               )}
@@ -139,7 +144,29 @@ export default function AddingAndRemovingItemsAnimatedPage() {
           </li>
         ))}
       </ul>
-      <Button onClick={addItem}>Add Items</Button>
+      {/* 控制面板 */}
+      <section className='absolute right-20 bottom-20 flex flex-col items-start justify-center gap-3'>
+        <Button onClick={addItem}>Add Items</Button>
+        <div>
+          <ToggleBall
+            isOpen={direction === 'row'}
+            bgColorClose='#f0b100'
+            bgColorOpen='green'
+            onChange={() => setDirection(prev => (prev === 'row' ? 'column' : 'row'))}
+          />
+        </div>
+        <div>
+          Current Style:{' '}
+          <span
+            className={clsx(
+              'text-xl font-bold italic',
+              direction === 'row' ? 'text-green-500' : 'text-yellow-500'
+            )}
+          >
+            {direction}
+          </span>
+        </div>
+      </section>
     </section>
   )
 }
