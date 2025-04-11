@@ -48,7 +48,7 @@ const Notification: React.FC<NotificationProps> = ({ notification, children, onC
       suppressHydrationWarning={true}
       className={clsx(
         Styles.ItemTopRight,
-        'w-fit rounded-lg border bg-white p-3 text-black shadow-md',
+        'w-fit rounded-lg border bg-white p-3 text-black shadow-lg',
         notification.type === 'success' && 'border-green-500 shadow-green-500/50',
         notification.type === 'info' && 'border-blue-500 shadow-blue-500/50',
         notification.type === 'error' && 'border-red-500 shadow-red-500/50',

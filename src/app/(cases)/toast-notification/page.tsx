@@ -13,6 +13,21 @@ export default function ToastNotificationPage() {
       message: 'info text',
       placement: 'top-right'
     })
+
+    api.error({
+      message: 'error text',
+      placement: 'top-right'
+    })
+
+    api.warning({
+      message: 'warning text',
+      placement: 'top-right'
+    })
+
+    api.success({
+      message: 'success text',
+      placement: 'top-right'
+    })
   }
   return (
     <section className='flex h-screen w-screen items-center justify-center'>
