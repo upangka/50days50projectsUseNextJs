@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState, useRef, useImperativeHandle, type Ref } from 'react'
 import { createPortal } from 'react-dom'
+import NotificationList from './notification-list'
 import { noop } from '@/utils'
 import type {
   Notification,
@@ -63,21 +64,15 @@ const Notifications: React.FC<NotificationsProps> = ({ ref }) => {
     const notificationsOfPlacecment = placements[placement] || []
 
     return (
-      <ul key={placement} className='fixed top-10 right-10 z-20 flex flex-col text-xl text-white'>
-        {notificationsOfPlacecment.map(n => (
-          <li key={n.id}>{n.message}</li>
-        ))}
-      </ul>
+      <NotificationList
+        key={placement}
+        placement={placement}
+        notifications={notificationsOfPlacecment}
+      />
     )
   })
 
-  return createPortal(
-    <section>
-      hello world
-      {content}
-    </section>,
-    container
-  )
+  return createPortal(<section>{content}</section>, container)
 }
 
 Notifications.displayName = 'Notifications'

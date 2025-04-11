@@ -14,6 +14,12 @@ export default function ToastNotificationPage() {
       duration: 3000,
       type: 'info'
     })
+
+    api.open({
+      message: 'Hello World',
+      duration: 3000,
+      type: 'success'
+    })
   }
   return (
     <section className='flex h-screen w-screen items-center justify-center'>
