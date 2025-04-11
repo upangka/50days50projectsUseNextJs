@@ -1,6 +1,10 @@
-import { useRef, useCallback, useEffect } from 'react'
+import { useRef, useCallback, useEffect, useImperativeHandle, type Ref } from 'react'
 import { clsx } from 'clsx'
 import Styles from './item.module.scss'
+
+export type API = {
+  cleanUp: (id: React.Key) => void
+}
 
 export interface Item {
   /**
@@ -25,10 +29,11 @@ interface ItemsProps {
    * 默认300px
    */
   width?: number
+
   /**
-   * 删除
+   * 强制引用，需要暴露一个清理方法
    */
-  onRemove: (key: React.Key) => void
+  ref: Ref<API>
   /**
    * 要渲染的children
    */
@@ -37,9 +42,9 @@ interface ItemsProps {
 
 const ItemsMove: React.FC<ItemsProps> = ({
   data,
-  onRemove,
   direction = 'row',
   width = 300,
+  ref,
   children
 }) => {
   // 收集所有的真实dom节点，用于计算高度
@@ -63,25 +68,27 @@ const ItemsMove: React.FC<ItemsProps> = ({
   }, [])
 
   const handleRemove = useCallback((id: React.Key) => {
-    onRemove(id)
-    // 2秒之后进行清理,清除不需要在维护的dom节点
-    setTimeout(() => {
-      divRef.current = divRef.current.filter(it => it.key !== id)
-    }, 2000)
+    divRef.current = divRef.current.filter(it => it.key !== id)
   }, [])
+
+  /**
+   * 暴露清理方法
+   */
+  useImperativeHandle(ref, () => ({
+    cleanUp: handleRemove
+  }))
 
   return (
     <ul className='flex w-fit flex-col items-center justify-center overflow-hidden p-3.5'>
       {data.map(item => (
         // list-container
         <li
-          onClick={() => handleRemove(item.id)}
           style={{
             height: item.visiable ? `${getHeight(item.id)}px` : '0',
             minWidth: `${width}px`
           }}
           className={clsx(
-            'relative cursor-pointer transition-all duration-500 [:not(:first-child)]:mt-[20px]',
+            'relative transition-all duration-500 [:not(:first-child)]:mt-[20px]',
             !item.visiable && '!mt-0'
           )}
           key={item.id}
