@@ -25,7 +25,13 @@ export default function ToastNotificationPage() {
     api.success({
       message: '订单提交成功，正在跳转支付页面',
       placement: 'top-left',
-      duration: 4000
+      duration: 2000
+    })
+
+    api.info({
+      message: '系统更新提示：新增多项实用功能',
+      placement: 'top-right',
+      duration: 3900
     })
   }
 

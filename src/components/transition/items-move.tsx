@@ -5,6 +5,12 @@ import Styles from './item.module.scss'
 export type API = {
   cleanUp: (id: React.Key) => void
 }
+/**
+ * row 往右边
+ * column 往上
+ * row-reverse 往左边
+ */
+export type Direction = 'row' | 'column' | 'row-reverse'
 
 export interface Item {
   /**
@@ -23,7 +29,7 @@ interface ItemsProps {
   /**
    * 横向还是竖向
    */
-  direction?: 'row' | 'column'
+  direction?: Direction
   /**
    * 容器宽度
    * 默认300px
@@ -117,9 +123,11 @@ const ItemsMove: React.FC<ItemsProps> = ({
             }}
             className={clsx(
               Styles.Item,
-              direction === 'row' ? Styles.ItemShowRow : Styles.ItemShowColumn,
+              direction === 'row' && Styles.ItemShowRow,
+              direction === 'column' && Styles.ItemShowColumn,
+              direction === 'row-reverse' && Styles.ItemShowRowReverse,
               item.visiable && Styles.Show,
-              'absolute top-0 left-0 w-fit transition-all duration-700'
+              'absolute top-0 left-0 w-fit'
             )}
           >
             {/* 用children function 来进行循环渲染 */}

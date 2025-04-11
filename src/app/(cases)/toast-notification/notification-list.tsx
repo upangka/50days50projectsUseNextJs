@@ -1,9 +1,8 @@
 import clsx from 'clsx'
-import { useRef, useImperativeHandle, type Ref } from 'react'
+import { useRef, useImperativeHandle, type Ref, useMemo } from 'react'
 import type { Placement, NotificationConfig } from './types'
 import { default as NotificationComp } from './notification'
-import { default as ItemsMove, type API } from '@/components/transition/items-move'
-
+import { default as ItemsMove, type API, type Direction } from '@/components/transition/items-move'
 export type NotificationListApi = {
   removeNotification: (id: React.Key) => void
 }
@@ -31,6 +30,11 @@ const NotificationList: React.FC<NotificationListProps> = ({
     }
   })
 
+  const direction = useMemo<Direction>(
+    () => (placement === 'top-left' || placement === 'bottom-left' ? 'row-reverse' : 'row'),
+    []
+  )
+
   return (
     <section
       className={clsx(
@@ -42,7 +46,7 @@ const NotificationList: React.FC<NotificationListProps> = ({
       )}
     >
       {/* 使用动画效果 */}
-      <ItemsMove ref={itemsMoveRef} width={280} data={notifications} direction='row'>
+      <ItemsMove ref={itemsMoveRef} width={280} data={notifications} direction={direction}>
         {config => {
           const noticeConfig = config as NotificationConfig
 
