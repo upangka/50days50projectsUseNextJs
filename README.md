@@ -90,3 +90,7 @@
 ## [19 Good Cheap Fast](<./src/app/(cases)/good-cheap-fast>)
 
 <img src="./attachments/images/good-cheap-fast.gif" alt="示例图片" />
+
+## [20 adding-and-removing-items-animated](<./src/app/(cases)/adding-and-removing-items-animated>)
+
+<img src="./attachments/images/adding-and-removing-items-animated.gif" alt="示例图片" />
