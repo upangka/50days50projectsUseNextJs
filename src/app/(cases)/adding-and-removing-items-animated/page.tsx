@@ -1,12 +1,13 @@
 'use client'
 import { Button } from '@/components/pkmer-button'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Styles from './item.module.scss'
 import clsx from 'clsx'
 type Item = {
   id: string
   name: string
   visiable: boolean
+  height: number
 }
 let unikey = 0
 let idPrefix = 'item-'
@@ -15,20 +16,28 @@ function initItems(): Item[] {
     {
       id: `${idPrefix}${++unikey}`,
       name: `Item ${unikey}`,
-      visiable: true
+      visiable: true,
+      height: 0
     }
   ]
 }
 
 export default function AddingAndRemovingItemsAnimatedPage() {
   const [items, setItems] = useState<Item[]>(initItems)
+  const divRef = useRef<
+    {
+      el: HTMLDivElement
+      id: string
+    }[]
+  >([])
 
   function addItem() {
     console.log(unikey)
     const newItem = {
       id: `${idPrefix}${unikey++}`,
       name: `Item ${unikey}`,
-      visiable: false
+      visiable: false,
+      height: 0
     } satisfies Item
 
     setItems([newItem, ...items])
@@ -45,6 +54,23 @@ export default function AddingAndRemovingItemsAnimatedPage() {
     }, 15)
   }
 
+  useEffect(() => {
+    // 判断是否需要更新高度
+    const needUpdate = items.some(item => item.height === 0)
+    // 设置容器的高度
+    if (divRef.current.length && needUpdate) {
+      const clone = [...items]
+      divRef.current.forEach(item => {
+        const target = clone.find(it => it.id === item.id)
+        if (target) {
+          target.height = item.el.clientHeight
+        }
+      })
+
+      setItems(clone)
+    }
+  }, [items])
+
   return (
     <section className='flex h-screen w-screen items-center justify-center'>
       <ul>
@@ -52,13 +78,20 @@ export default function AddingAndRemovingItemsAnimatedPage() {
           // list-container
           <li
             style={{
-              height: '50px'
+              height: `${item.height}px`
             }}
             className='relative cursor-pointer [:not(:first-child)]:mt-10'
             key={item.id}
           >
             {/* list-item */}
             <div
+              ref={dom => {
+                dom &&
+                  divRef.current.push({
+                    el: dom,
+                    id: item.id
+                  })
+              }}
               suppressHydrationWarning={true}
               className={clsx(
                 Styles.Item,
