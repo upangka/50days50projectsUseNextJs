@@ -1,0 +1,10 @@
+.Item {
+  opacity: 0;
+  transform: translateY(-300px);
+  transition: all 0.6s ease-in-out;
+}
+
+.Item.Show {
+  opacity: 1;
+  transform: translateY(0);
+}
