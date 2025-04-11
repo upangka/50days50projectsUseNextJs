@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/components/pkmer-button'
 import { useState, useRef } from 'react'
-import { default as ItemsMove, type API } from './items-move'
+import { default as ItemsMove, type API } from '@/components/transition/items-move'
 import clsx from 'clsx'
 import ToggleBall from '@/components/toggle-ball/toggle-ball'
 type Item = {
