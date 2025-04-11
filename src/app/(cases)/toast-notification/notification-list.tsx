@@ -35,9 +35,7 @@ const NotificationList: React.FC<NotificationListProps> = ({
             <>
               {/* 具体的class */}
               <NotificationComp notification={noticeConfig} onClose={onNotificationClose}>
-                <div className='w-[300px] bg-red-500 p-2 text-center text-white'>
-                  {config.content}
-                </div>
+                <div className='w-[300px] bg-red-500 text-center text-white'>{config.content}</div>
               </NotificationComp>
             </>
           )

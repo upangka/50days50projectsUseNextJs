@@ -14,6 +14,9 @@ export type Notification = {
 export type NotificationConfig = Pretty<
   {
     id: React.Key
+    /**
+     * 逻辑删除与显示
+     */
     visiable: boolean
     content: React.ReactElement | string
   } & Omit<Notification, 'message'>

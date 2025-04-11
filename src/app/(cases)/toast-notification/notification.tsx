@@ -56,7 +56,7 @@ const Notification: React.FC<NotificationProps> = ({ notification, children, onC
       )}
     >
       {/* logo start*/}
-      <div className='flex w-full justify-between'>
+      <div className='flex h-[26px] w-full justify-between'>
         <Icon
           style={{
             color: iconHolder.color

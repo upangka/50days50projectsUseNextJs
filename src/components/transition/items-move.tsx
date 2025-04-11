@@ -79,7 +79,7 @@ const ItemsMove: React.FC<ItemsProps> = ({
   }))
 
   return (
-    <ul className='flex w-fit flex-col items-center justify-center overflow-hidden p-3.5'>
+    <ul className='flex w-fit flex-col items-center justify-center overflow-hidden border-2 border-amber-500 p-3.5'>
       {data.map(item => (
         // list-container
         <li

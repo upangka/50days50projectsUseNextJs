@@ -38,6 +38,18 @@ const Notifications: React.FC<NotificationsProps> = ({ ref }) => {
       visiable: false
     }
     setNotifications(prev => [noticeConfig, ...prev])
+
+    // 触发动画的一个效果
+    setTimeout(() => {
+      setNotifications(prevItems =>
+        prevItems.map(item => {
+          if (item.id === noticeConfig.id) {
+            item.visiable = true
+          }
+          return item
+        })
+      )
+    }, 15)
   }
 
   /**

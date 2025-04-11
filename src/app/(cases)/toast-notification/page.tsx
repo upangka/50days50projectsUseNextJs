@@ -11,7 +11,7 @@ export default function ToastNotificationPage() {
   function handleClick() {
     api.info({
       message: 'info text',
-      placement: 'bottom-right'
+      placement: 'top-right'
     })
   }
   return (
