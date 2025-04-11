@@ -1,5 +1,7 @@
 import clsx from 'clsx'
 import type { Placement, Notification } from './types'
+import { default as NotificationComp } from './notification'
+
 interface NotificationListProps {
   placement: Placement
   notifications: Notification[]
@@ -17,18 +19,7 @@ const NotificationList: React.FC<NotificationListProps> = ({ placement, notifica
       )}
     >
       {notifications.map(n => (
-        <li
-          key={n.id}
-          className={clsx(
-            'rounded-lg border p-3',
-            n.type === 'success' && 'border-green-500',
-            n.type === 'info' && 'border-blue-500',
-            n.type === 'error' && 'border-red-500',
-            n.type === 'warning' && 'border-amber-500'
-          )}
-        >
-          {n.message}
-        </li>
+        <NotificationComp key={n.id} notification={n} />
       ))}
     </ul>
   )
