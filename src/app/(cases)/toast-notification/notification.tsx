@@ -1,8 +1,11 @@
+'use client'
 import type { NotificationConfig, NotificationType } from './types'
-
+import { useEffect } from 'react'
 import { clsx } from 'clsx'
 import { Icon } from '@iconify/react'
 import Styles from './notice.module.scss'
+import { defaultDuration } from './notifications'
+
 interface NotificationProps extends React.PropsWithChildren {
   notification: NotificationConfig
   onClose: (key: React.Key) => void
@@ -43,6 +46,19 @@ const defaultContent = <div className='bg-green-500 text-white'>Nothing</div>
 const Notification: React.FC<NotificationProps> = ({ notification, children, onClose }) => {
   const iconHolder = iconObj[notification.type]
 
+  useEffect(() => {
+    if (notification.duration === 0) return
+    else {
+      const timeoutId = window.setTimeout(() => {
+        onClose(notification.id)
+      }, notification.duration ?? defaultDuration)
+
+      return () => {
+        window.clearTimeout(timeoutId)
+      }
+    }
+  }, [])
+
   return (
     <section
       suppressHydrationWarning={true}
@@ -68,10 +84,11 @@ const Notification: React.FC<NotificationProps> = ({ notification, children, onC
         <Icon
           onClick={() => onClose(notification.id)}
           icon='material-symbols-light:close'
+          className='cursor-pointer transition-all duration-300 ease-linear hover:scale-150 hover:text-red-600'
           {...iconSize}
         />
       </div>
-      <hr className='mt-0.5 w-full text-gray-200' />
+      <hr className='m-0.5 w-full text-gray-200' />
       {/* content start */}
       <div>{children ? children : defaultContent}</div>
       {/* content end */}

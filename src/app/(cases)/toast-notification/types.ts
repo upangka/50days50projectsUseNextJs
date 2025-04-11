@@ -4,6 +4,10 @@ export type NotificationType = 'success' | 'error' | 'warning' | 'info'
 export type Placement = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 
 export type Notification = {
+  /**
+   * 持续时间，默认3000
+   * 传入0则不自动关闭
+   */
   duration?: number
   message: string
   placement?: Placement
