@@ -37,13 +37,13 @@ export default function AddingAndRemovingItemsAnimatedPage() {
   >([])
 
   async function clear() {
-    for (let i = 0; i < items.length; i++) {
+    for (let i = items.length - 1; i >= 0; i--) {
       const it = items[i]
       setTimeout(
         () => {
           removeItem(it.id)
         },
-        300 * (i + 1)
+        300 * (items.length - 1 - i)
       )
     }
   }
@@ -110,7 +110,7 @@ export default function AddingAndRemovingItemsAnimatedPage() {
 
   return (
     <section className='relative flex h-screen w-screen items-center justify-center gap-3'>
-      <ul className='flex w-[300px] flex-col items-center justify-center overflow-hidden border border-red-500 p-3.5'>
+      <ul className='flex w-[300px] flex-col items-center justify-center overflow-hidden p-3.5'>
         {items.map(item => (
           // list-container
           <li
@@ -120,7 +120,7 @@ export default function AddingAndRemovingItemsAnimatedPage() {
               width: '200px'
             }}
             className={clsx(
-              'relative cursor-pointer border border-yellow-200 [:not(:first-child)]:mt-[20px]',
+              'relative cursor-pointer transition-all duration-500 [:not(:first-child)]:mt-[20px]',
               !item.visiable && '!mt-0'
             )}
             key={item.id}
