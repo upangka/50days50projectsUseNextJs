@@ -36,6 +36,18 @@ export default function AddingAndRemovingItemsAnimatedPage() {
     }[]
   >([])
 
+  async function clear() {
+    for (let i = 0; i < items.length; i++) {
+      const it = items[i]
+      setTimeout(
+        () => {
+          removeItem(it.id)
+        },
+        300 * (i + 1)
+      )
+    }
+  }
+
   function addItem() {
     console.log(unikey)
     const newItem = {
@@ -147,6 +159,7 @@ export default function AddingAndRemovingItemsAnimatedPage() {
       {/* 控制面板 */}
       <section className='absolute right-20 bottom-20 flex flex-col items-start justify-center gap-3'>
         <Button onClick={addItem}>Add Items</Button>
+        <Button onClick={clear}>Clear</Button>
         <div>
           <ToggleBall
             isOpen={direction === 'row'}
