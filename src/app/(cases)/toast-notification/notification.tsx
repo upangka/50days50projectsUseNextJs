@@ -44,10 +44,11 @@ const Notification: React.FC<NotificationProps> = ({ notification, children, onC
   const iconHolder = iconObj[notification.type]
 
   return (
-    <li
+    <section
+      suppressHydrationWarning={true}
       className={clsx(
         Styles.ItemTopRight,
-        'min-w-[260px] rounded-lg border bg-white p-3 text-black shadow-md',
+        'w-fit rounded-lg border bg-white p-3 text-black shadow-md',
         notification.type === 'success' && 'border-green-500 shadow-green-500/50',
         notification.type === 'info' && 'border-blue-500 shadow-blue-500/50',
         notification.type === 'error' && 'border-red-500 shadow-red-500/50',
@@ -55,7 +56,7 @@ const Notification: React.FC<NotificationProps> = ({ notification, children, onC
       )}
     >
       {/* logo start*/}
-      <div className='flex justify-between'>
+      <div className='flex w-full justify-between'>
         <Icon
           style={{
             color: iconHolder.color
@@ -73,7 +74,7 @@ const Notification: React.FC<NotificationProps> = ({ notification, children, onC
       {/* content start */}
       <div>{children ? children : defaultContent}</div>
       {/* content end */}
-    </li>
+    </section>
   )
 }
 

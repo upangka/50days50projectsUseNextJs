@@ -27,7 +27,7 @@ const NotificationList: React.FC<NotificationListProps> = ({
       )}
     >
       {/* 使用动画效果 */}
-      <ItemsMove ref={itemsMoveRef} data={notifications} direction='row'>
+      <ItemsMove ref={itemsMoveRef} width={350} data={notifications} direction='row'>
         {config => {
           const noticeConfig = config as NotificationConfig
 
@@ -35,7 +35,9 @@ const NotificationList: React.FC<NotificationListProps> = ({
             <>
               {/* 具体的class */}
               <NotificationComp notification={noticeConfig} onClose={onNotificationClose}>
-                {config.content}
+                <div className='w-[300px] bg-red-500 p-2 text-center text-white'>
+                  {config.content}
+                </div>
               </NotificationComp>
             </>
           )

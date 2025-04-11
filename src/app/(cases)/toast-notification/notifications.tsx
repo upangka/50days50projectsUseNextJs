@@ -30,7 +30,7 @@ const Notifications: React.FC<NotificationsProps> = ({ ref }) => {
   const open = (config: Notification) => {
     const noticeConfig: NotificationConfig = {
       id: `pkmer-notification-${unikey++}`,
-      content: <>config.message</>,
+      content: config.message,
       placement: config.placement,
       type: config.type,
       duration: config.duration ?? 3000,

@@ -16,12 +16,12 @@ type BasicAPI = Record<NotificationType, (notification: NotificationTypeNotInclu
 export type API = Pretty<BasicAPI & NotificationsInstanceApi>
 
 // 导出默认函数useNavigation，返回一个只读的数组，包含NotificationsInstanceApi和React.ReactElement
-export default function useNavigation(): readonly [NotificationsInstanceApi, React.ReactElement] {
+export default function useNavigation(): readonly [API, React.ReactElement] {
   const notificationRef = useRef<NotificationsInstanceApi>(null)
 
   const notficationHolder = <Notifications ref={notificationRef} />
 
-  const instanceApi = useMemo<API>(() => {
+  const wrapperApi = useMemo<API>(() => {
     const open = (notification: Notification) => {
       // 可以实时访问到最新的值
       if (notificationRef.current) {
@@ -47,5 +47,5 @@ export default function useNavigation(): readonly [NotificationsInstanceApi, Rea
     return api
   }, [])
 
-  return [instanceApi, notficationHolder] as const
+  return [wrapperApi, notficationHolder] as const
 }
