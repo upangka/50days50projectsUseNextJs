@@ -6,6 +6,9 @@ import clsx from 'clsx'
 type Item = {
   id: string
   name: string
+  /**
+   * 主要用于逻辑删除
+   */
   visiable: boolean
   height: number
   backgroundColor: string
@@ -21,6 +24,7 @@ function initItems(): Item[] {
 
 export default function AddingAndRemovingItemsAnimatedPage() {
   const [items, setItems] = useState<Item[]>(initItems)
+  // 收集所有的真实dom节点，用于计算高度
   const divRef = useRef<
     {
       el: HTMLDivElement
