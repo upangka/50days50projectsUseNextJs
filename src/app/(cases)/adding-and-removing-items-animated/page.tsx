@@ -12,14 +12,15 @@ type Item = {
 let unikey = 0
 let idPrefix = 'item-'
 function initItems(): Item[] {
-  return [
-    {
-      id: `${idPrefix}${++unikey}`,
-      name: `Item ${unikey}`,
-      visiable: true,
-      height: 0
-    }
-  ]
+  return []
+  // return [
+  //   {
+  //     id: `${idPrefix}${++unikey}`,
+  //     name: `Item ${unikey}`,
+  //     visiable: true,
+  //     height: 0
+  //   }
+  // ]
 }
 
 export default function AddingAndRemovingItemsAnimatedPage() {
@@ -35,7 +36,7 @@ export default function AddingAndRemovingItemsAnimatedPage() {
     console.log(unikey)
     const newItem = {
       id: `${idPrefix}${unikey++}`,
-      name: `Item ${unikey}`,
+      name: `Item List`,
       visiable: false,
       height: 0
     } satisfies Item
@@ -54,6 +55,24 @@ export default function AddingAndRemovingItemsAnimatedPage() {
     }, 15)
   }
 
+  function removeItem(id: string) {
+    setItems(prevItems => {
+      return prevItems.filter(item => {
+        if (item.id === id) {
+          item.visiable = false
+        }
+        return item
+      })
+    })
+
+    setTimeout(() => {
+      divRef.current = divRef.current.filter(item => item.id !== id)
+      setItems(prevItems => {
+        return prevItems.filter(item => item.id !== id)
+      })
+    }, 1000)
+  }
+
   useEffect(() => {
     // 判断是否需要更新高度
     const needUpdate = items.some(item => item.height === 0)
@@ -62,8 +81,9 @@ export default function AddingAndRemovingItemsAnimatedPage() {
       const clone = [...items]
       divRef.current.forEach(item => {
         const target = clone.find(it => it.id === item.id)
-        if (target) {
+        if (target && target.height === 0) {
           target.height = item.el.clientHeight
+          console.log(target.height)
         }
       })
 
@@ -72,31 +92,41 @@ export default function AddingAndRemovingItemsAnimatedPage() {
   }, [items])
 
   return (
-    <section className='flex h-screen w-screen items-center justify-center'>
-      <ul>
+    <section className='flex h-screen w-screen items-center justify-center gap-3'>
+      <ul className='flex w-[300px] flex-col items-center justify-center overflow-hidden border border-red-500 p-3.5'>
         {items.map(item => (
           // list-container
           <li
+            onClick={() => removeItem(item.id)}
             style={{
-              height: `${item.height}px`
+              height: item.visiable ? `${item.height}px` : '0',
+              width: '200px'
             }}
-            className='relative cursor-pointer [:not(:first-child)]:mt-10'
+            className={clsx(
+              'relative cursor-pointer border border-yellow-200 [:not(:first-child)]:mt-[20px]',
+              !item.visiable && '!mt-0'
+            )}
             key={item.id}
           >
             {/* list-item */}
             <div
               ref={dom => {
-                dom &&
-                  divRef.current.push({
-                    el: dom,
-                    id: item.id
-                  })
+                if (dom) {
+                  if (divRef.current.find(it => it.id === item.id)) {
+                    return
+                  } else {
+                    divRef.current.push({
+                      el: dom,
+                      id: item.id
+                    })
+                  }
+                }
               }}
               suppressHydrationWarning={true}
               className={clsx(
                 Styles.Item,
                 item.visiable && Styles.Show,
-                'absolute top-0 left-0 rounded-md border border-white p-3 transition-all duration-700'
+                'absolute top-0 left-0 w-[200px] rounded-md border border-white p-3 transition-all duration-700'
               )}
             >
               {' '}
@@ -104,10 +134,8 @@ export default function AddingAndRemovingItemsAnimatedPage() {
             </div>
           </li>
         ))}
-        <li>
-          <Button onClick={addItem}>Add Items</Button>
-        </li>
       </ul>
+      <Button onClick={addItem}>Add Items</Button>
     </section>
   )
 }
